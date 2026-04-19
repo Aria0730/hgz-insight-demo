@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧋 CHAGEE霸王茶姬 · 合作广场内容洞察</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif; background: #f5f5f7; color: #1d1d1f; }
+
+  /* Header */
+  .header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 0 32px; display: flex; align-items: center; height: 56px; gap: 12px; position: sticky; top: 0; z-index: 100; }
+  .header-logo { font-size: 15px; font-weight: 600; color: #1d1d1f; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .logo-icon { width: 28px; height: 28px; background: #FF2442; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .logo-icon svg { width: 16px; height: 16px; fill: white; }
+  .search-bar { flex: 1; max-width: 280px; position: relative; }
+  .search-bar input { width: 100%; height: 36px; border: 1.5px solid #e5e5e5; border-radius: 8px; padding: 0 12px 0 36px; font-size: 14px; outline: none; background: #f8f8f8; transition: all .2s; }
+  .search-bar input:focus { border-color: #FF2442; background: #fff; box-shadow: 0 0 0 3px rgba(255,36,66,.08); }
+  .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: #999; font-size: 14px; }
+  .search-btn { height: 36px; padding: 0 16px; background: #FF2442; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; flex-shrink: 0; }
+  .industry-select { height: 36px; padding: 0 10px; border: 1.5px solid #e5e5e5; border-radius: 8px; font-size: 14px; color: #555; background: #fff; cursor: pointer; outline: none; flex-shrink: 0; }
+
+  /* Tabs */
+  .tabs { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 0 32px; display: flex; }
+  .tab { padding: 16px 20px 14px; font-size: 14px; color: #666; cursor: pointer; border-bottom: 2px solid transparent; transition: all .2s; font-weight: 500; }
+  .tab.active { color: #FF2442; border-bottom-color: #FF2442; }
+  .tab:hover:not(.active) { color: #333; }
+
+  /* Content */
+  .content { padding: 24px 32px; max-width: 1200px; margin: 0 auto; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ===== TAB 1: 推荐笔记 ===== */
+  .weight-config { background: #fff; border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; border: 1px solid #eee; }
+  .weight-config-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .weight-config h3 { font-size: 14px; font-weight: 600; color: #333; }
+  .weight-hint { font-size: 12px; color: #999; }
+  .weight-items { display: flex; flex-direction: column; gap: 0; margin-top: 14px; }
+  .weight-item { display: flex; align-items: center; gap: 14px; padding: 11px 12px; border-radius: 8px; cursor: grab; transition: background .15s, box-shadow .15s; user-select: none; border: 1.5px solid transparent; }
+  .weight-item:active { cursor: grabbing; }
+  .weight-item.dragging { opacity: .5; }
+  .weight-item.drag-over { border-color: #FF2442; background: #fff8f9; }
+  .weight-num { width: 28px; height: 28px; background: #FF2442; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; transition: background .2s; }
+  .weight-num.dim2 { background: #f59e0b; }
+  .weight-num.dim3 { background: #34a853; }
+  .weight-num.dim4 { background: #9c27b0; }
+  .weight-info { flex: 1; }
+  .weight-info .name { font-size: 14px; font-weight: 600; color: #1d1d1f; margin-bottom: 2px; }
+  .weight-info .desc { font-size: 12px; color: #999; }
+  .weight-pct { padding: 3px 12px; background: #fff0f2; color: #FF2442; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid #ffd0d8; min-width: 48px; text-align: center; transition: all .3s; }
+  .weight-pct.p30 { background: #fff8e1; color: #f59e0b; border-color: #ffe082; }
+  .weight-pct.p20 { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; }
+  .weight-pct.p10 { background: #f3e5f5; color: #7b1fa2; border-color: #ce93d8; }
+  .drag-handle { color: #ccc; font-size: 16px; cursor: grab; padding: 0 4px; }
+  .apply-btn { margin-top: 14px; height: 36px; padding: 0 20px; background: #FF2442; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: background .2s; }
+  .apply-btn:hover { background: #e01f3a; }
+  .apply-toast { display: none; margin-left: 12px; font-size: 13px; color: #34a853; font-weight: 500; }
+
+  /* Note cards */
+  .section-title { font-size: 15px; font-weight: 600; color: #1d1d1f; margin-bottom: 16px; }
+  .note-card { background: #fff; border-radius: 12px; border: 1px solid #eee; margin-bottom: 12px; overflow: hidden; transition: box-shadow .2s; cursor: pointer; }
+  .note-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+  .note-card.expanded .note-detail { display: block; }
+  .note-card.hidden-card { display: none; }
+  .note-main { display: flex; gap: 16px; padding: 16px 20px; align-items: flex-start; }
+  .note-thumb { width: 80px; height: 80px; border-radius: 8px; flex-shrink: 0; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 24px; overflow: hidden; position: relative; }
+  .note-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
+  .note-thumb .thumb-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+  .note-thumb img.loaded + .thumb-fallback { display: none; }
+  .note-body { flex: 1; min-width: 0; }
+  .note-title { font-size: 15px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px; }
+  .note-id { font-size: 12px; color: #999; margin-bottom: 8px; }
+  .note-summary { font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 10px; }
+  .rec-score { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+  .star { color: #FF2442; font-size: 15px; }
+  .star.grey { color: #ddd; }
+  .rec-label { font-size: 13px; font-weight: 600; color: #FF2442; }
+  .rec-label.amber { color: #f59e0b; }
+  .note-signals { display: flex; gap: 12px; flex-wrap: wrap; }
+  .signal-block { }
+  .signal-label { font-size: 11px; color: #999; margin-bottom: 5px; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+  .tag-hot { background: #fff3e0; color: #e65100; }
+  .tag-blue { background: #e8f0fe; color: #1a73e8; }
+  .tag-green { background: #e8f5e9; color: #2e7d32; }
+  .tag-grey { background: #f5f5f5; color: #666; }
+  .tags-wrap { display: flex; flex-wrap: wrap; gap: 5px; }
+  .fire-tag { background: #fff3e0; color: #e65100; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .empty-hot { color: #bbb; font-size: 12px; }
+  .score-bar { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .score-num { font-size: 13px; font-weight: 700; color: #FF2442; min-width: 36px; }
+  .score-track { flex: 1; height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #FF2442, #ff6b6b); transition: width .5s ease; }
+
+  /* Detail panel */
+  .note-detail { display: none; border-top: 1px solid #f5f5f5; padding: 20px; background: #fafafa; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .detail-section { background: #fff; border-radius: 10px; padding: 16px; border: 1px solid #eee; }
+  .detail-section h4 { font-size: 13px; font-weight: 600; color: #333; margin-bottom: 12px; }
+  .dim-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f5f5f5; gap: 8px; }
+  .dim-row:last-child { border-bottom: none; }
+  .dim-name { font-size: 13px; color: #666; flex-shrink: 0; }
+  .scene-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; align-items: flex-start; }
+  .scene-row:last-child { border-bottom: none; }
+  .scene-label { font-size: 12px; color: #999; width: 60px; flex-shrink: 0; padding-top: 3px; }
+  .detail-summary { margin-top: 14px; padding: 12px 16px; background: #fff8f9; border-left: 3px solid #FF2442; border-radius: 0 8px 8px 0; font-size: 13px; color: #444; line-height: 1.6; }
+
+  /* ===== TAB 2: 热点追踪 ===== */
+  .hot-section { background: #fff; border-radius: 12px; border: 1px solid #eee; margin-bottom: 20px; overflow: hidden; }
+  .hot-section-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 12px; border-bottom: 1px solid #f5f5f5; }
+  .hot-section-title { font-size: 14px; font-weight: 600; color: #1d1d1f; display: flex; align-items: center; gap: 8px; }
+  .hot-section-badge { font-size: 11px; color: #999; padding: 2px 8px; background: #f5f5f5; border-radius: 20px; }
+  .hot-section-body { padding: 16px 20px; }
+  .hot-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .hot-chip { background: #fff; border-radius: 10px; padding: 14px 14px 12px; border: 1px solid #eee; position: relative; }
+  .hot-chip .rank { position: absolute; top: 10px; right: 10px; width: 22px; height: 22px; background: #bbb; color: #fff; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .hot-chip .rank.top3 { background: #FF2442; }
+  .hot-chip .hot-icon { font-size: 18px; margin-bottom: 6px; }
+  .hot-chip .hot-name { font-size: 13px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px; }
+  .hot-chip .hot-heat { font-size: 12px; color: #999; }
+  .hot-chip.matched { border-color: #FF2442; background: #fff8f9; }
+  .hot-chip.matched .hot-name { color: #FF2442; }
+  .hot-empty { padding: 32px; text-align: center; color: #bbb; font-size: 13px; }
+  .hot-empty-icon { font-size: 28px; margin-bottom: 8px; }
+  .hot-empty-text { color: #ccc; }
+  .match-stat { padding: 0 0 4px; }
+  .stat-text { font-size: 14px; color: #555; margin-bottom: 16px; }
+  .stat-text strong { color: #FF2442; }
+  .note-hot-list { display: flex; flex-direction: column; gap: 8px; }
+  .note-hot-item { background: #fafafa; border-radius: 10px; padding: 12px 16px; border: 1px solid #eee; display: flex; align-items: center; gap: 12px; }
+  .note-hot-item .nhi-title { font-size: 14px; font-weight: 500; color: #1d1d1f; flex: 1; }
+
+  /* ===== TAB 3: 内容洞察 ===== */
+  .insight-filter-bar { background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; border: 1px solid #eee; }
+  .insight-filter-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .insight-filter-row:last-child { margin-bottom: 0; }
+  .insight-filter-label { font-size: 13px; font-weight: 500; color: #666; flex-shrink: 0; padding-top: 5px; width: 64px; white-space: nowrap; }
+  .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+  .filter-chip { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; border: 1.5px solid #e5e5e5; background: #fff; color: #666; cursor: pointer; transition: all .15s; }
+  .filter-chip:hover { border-color: #FF2442; color: #FF2442; }
+  .filter-chip.active { border-color: #FF2442; background: #fff0f2; color: #FF2442; font-weight: 600; }
+  .insight-search { display: flex; align-items: center; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f5f5f5; }
+  .insight-search label { font-size: 14px; font-weight: 500; color: #333; flex-shrink: 0; }
+  .insight-search input { flex: 1; height: 36px; border: 1.5px solid #e5e5e5; border-radius: 8px; padding: 0 12px 0 12px; font-size: 14px; outline: none; background: #f8f8f8; transition: all .2s; }
+  .insight-search input:focus { border-color: #FF2442; background: #fff; box-shadow: 0 0 0 3px rgba(255,36,66,.08); }
+  .insight-search-clear { font-size: 13px; color: #999; cursor: pointer; flex-shrink: 0; }
+  .insight-search-clear:hover { color: #FF2442; }
+  .insight-header { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .insight-card { background: #fff; border-radius: 12px; padding: 20px 24px; border: 1px solid #eee; }
+  .insight-card h3 { font-size: 13px; color: #999; margin-bottom: 14px; font-weight: 500; }
+  .dist-bars { display: flex; flex-direction: column; gap: 10px; }
+  .dist-bar-item { display: flex; align-items: center; gap: 10px; }
+  .dist-bar-label { font-size: 13px; color: #555; width: 72px; flex-shrink: 0; }
+  .dist-bar-track { flex: 1; height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; }
+  .dist-bar-fill { height: 100%; border-radius: 4px; background: #FF2442; }
+  .dist-bar-fill.blue { background: #1a73e8; }
+  .dist-bar-fill.green { background: #34a853; }
+  .dist-bar-fill.orange { background: #f59e0b; }
+  .dist-bar-fill.purple { background: #9c27b0; }
+  .dist-bar-pct { font-size: 12px; color: #999; width: 32px; text-align: right; }
+  .alert-hint { margin-top: 14px; padding: 10px 14px; background: #fff8f9; border-radius: 8px; font-size: 12px; color: #c2185b; }
+  .ok-hint { margin-top: 14px; padding: 10px 14px; background: #f0fff4; border-radius: 8px; font-size: 12px; color: #2e7d32; }
+  .time-filter-bar { display: flex; align-items: center; gap: 8px; }
+  .time-chip { padding: 4px 14px; border-radius: 20px; font-size: 13px; border: 1.5px solid #e5e5e5; background: #fff; color: #666; cursor: pointer; transition: all .15s; }
+  .time-chip:hover { border-color: #FF2442; color: #FF2442; }
+  .time-chip.active { border-color: #FF2442; background: #fff0f2; color: #FF2442; font-weight: 600; }
+  .time-filter-label { font-size: 13px; color: #999; flex-shrink: 0; }
+  .insight-note-list { display: flex; flex-direction: column; gap: 10px; }
+  .insight-note-item { background: #fff; border-radius: 10px; border: 1px solid #eee; overflow: hidden; cursor: pointer; transition: box-shadow .2s; }
+  .insight-note-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+  .insight-note-item.ini-hidden { display: none; }
+  .ini-main { display: flex; gap: 14px; padding: 14px 18px; align-items: flex-start; }
+  .ini-thumb { display: none; }
+  .ini-body { flex: 1; }
+  .ini-title { font-size: 14px; font-weight: 600; color: #1d1d1f; margin-bottom: 6px; }
+  .ini-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px; }
+  .ini-summary { font-size: 12px; color: #888; line-height: 1.5; }
+  .ini-detail { display: none; border-top: 1px solid #f5f5f5; padding: 16px 18px; background: #fafafa; }
+  .ini-detail.open { display: block; }
+  .no-result { padding: 40px; text-align: center; color: #bbb; font-size: 14px; }
+
+  /* 内容洞察子Tab */
+  .insight-sub-tabs { display: flex; gap: 0; background: #fff; border-radius: 12px 12px 0 0; border: 1px solid #eee; border-bottom: none; margin-bottom: 0; overflow: hidden; }
+  .insight-sub-tab { flex: 1; padding: 13px 20px; font-size: 14px; font-weight: 500; color: #888; cursor: pointer; text-align: center; border-bottom: 2px solid transparent; transition: all .15s; background: #fafafa; }
+  .insight-sub-tab:first-child { border-right: 1px solid #eee; }
+  .insight-sub-tab.active { color: #FF2442; background: #fff; border-bottom-color: #FF2442; }
+  .insight-sub-tab:hover:not(.active) { color: #333; background: #fff; }
+  .insight-sub-panel { background: #fff; border: 1px solid #eee; border-top: none; border-radius: 0 0 12px 12px; padding: 20px; margin-bottom: 20px; }
+  .insight-filter-bar { background: #f9f9f9; border-radius: 10px; padding: 14px 18px; margin-bottom: 14px; border: 1px solid #f0f0f0; }
+
+  /* 历史在投Tab */
+  .deployed-pattern-card { background: #fff8f9; border: 1.5px solid #ffd0d8; border-radius: 12px; padding: 20px 24px; }
+  .deployed-pattern-card h3 { font-size: 14px; font-weight: 600; color: #c62828; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .pattern-tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .pattern-tag { padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; background: #fff0f2; color: #FF2442; border: 1.5px solid #ffd0d8; }
+  .pattern-hint { font-size: 13px; color: #888; line-height: 1.6; }
+  .pattern-pending { font-size: 13px; color: #bbb; padding: 16px 0; text-align: center; }
+
+  /* 历史投放Case卡片 */
+  .deployed-case { background: #fff; border-radius: 10px; border: 1px solid #eee; margin-bottom: 10px; overflow: hidden; cursor: pointer; transition: box-shadow .2s; }
+  .deployed-case:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+  .dc-main { display: flex; gap: 14px; padding: 14px 18px; align-items: flex-start; }
+  .dc-body { flex: 1; }
+  .dc-title { font-size: 14px; font-weight: 600; color: #1d1d1f; margin-bottom: 6px; }
+  .dc-meta { font-size: 12px; color: #999; margin-bottom: 8px; }
+  .dc-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+  .dc-metrics { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+  .dc-metric { font-size: 12px; color: #666; }
+  .dc-metric strong { color: #1d1d1f; font-weight: 600; }
+  .dc-why { font-size: 12px; color: #888; line-height: 1.5; padding: 8px 12px; background: #fafafa; border-radius: 6px; border-left: 3px solid #FF2442; margin-top: 4px; }
+  .perf-badge { padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .perf-good { background: #e8f5e9; color: #2e7d32; }
+  .perf-ok { background: #fff8e1; color: #f59e0b; }
+  .perf-bad { background: #fff0f0; color: #c62828; }
+
+  /* 行业热点下拉 */
+  .industry-hot-select { height: 32px; padding: 0 10px; border: 1.5px solid #e5e5e5; border-radius: 8px; font-size: 13px; color: #555; background: #fff; cursor: pointer; outline: none; }
+  .industry-hot-select:focus { border-color: #FF2442; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+    </div>
+    合作广场内容洞察
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;padding:4px 14px;background:#fff0f2;border-radius:20px;border:1.5px solid #ffd0d8;flex-shrink:0">
+    <span style="font-size:18px">🧋</span>
+    <span style="font-size:14px;font-weight:600;color:#FF2442">CHAGEE霸王茶姬</span>
+  </div>
+  <!-- 笔记创建时间筛选 -->
+  <div style="display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0">
+    <span class="time-filter-label">📅 创建时间</span>
+    <div class="time-filter-bar" id="timeFilterBar">
+      <div class="time-chip active" data-period="all" onclick="setTimePeriod(this,'all')">全部</div>
+      <div class="time-chip" data-period="7" onclick="setTimePeriod(this,'7')">近7天</div>
+      <div class="time-chip" data-period="30" onclick="setTimePeriod(this,'30')">近30天</div>
+      <div class="time-chip" data-period="other" onclick="setTimePeriod(this,'other')">更早</div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab(0)">🌟 推荐笔记</div>
+  <div class="tab" onclick="switchTab(1)">🔥 热点追踪</div>
+  <div class="tab" onclick="switchTab(2)">🔍 内容洞察</div>
+</div>
+
+<div class="content">
+
+<!-- ==================== TAB 1: 推荐笔记 ==================== -->
+<div id="tab0" class="tab-panel active">
+
+  <div class="weight-config">
+    <div class="weight-config-header">
+      <h3>推荐维度优先级配置</h3>
+      <span class="weight-hint">拖拽调整顺序，系统按权重重新计算推荐得分</span>
+    </div>
+    <div class="weight-items" id="weightList">
+      <div class="weight-item" draggable="true" data-id="hot">
+        <span class="drag-handle">⠿</span>
+        <div class="weight-num" id="wn-hot">1</div>
+        <div class="weight-info">
+          <div class="name">🔥 热点匹配</div>
+          <div class="desc">笔记是否命中当前站内热点话题</div>
+        </div>
+        <div class="weight-pct" id="wp-hot">40%</div>
+      </div>
+      <div class="weight-item" draggable="true" data-id="quality">
+        <span class="drag-handle">⠿</span>
+        <div class="weight-num dim2" id="wn-quality">2</div>
+        <div class="weight-info">
+          <div class="name">📋 内容质量</div>
+          <div class="desc">基于互动数据（互动率/质量评估）综合评分</div>
+        </div>
+        <div class="weight-pct p30" id="wp-quality">30%</div>
+      </div>
+      <div class="weight-item" draggable="true" data-id="native">
+        <span class="drag-handle">⠿</span>
+        <div class="weight-num dim3" id="wn-native">3</div>
+        <div class="weight-info">
+          <div class="name">💚 笔记原生感</div>
+          <div class="desc">笔记营销感强弱，是否过度广告化</div>
+        </div>
+        <div class="weight-pct p20" id="wp-native">20%</div>
+      </div>
+      <div class="weight-item" draggable="true" data-id="history">
+        <span class="drag-handle">⠿</span>
+        <div class="weight-num dim4" id="wn-history">4</div>
+        <div class="weight-info">
+          <div class="name">📊 历史基准匹配</div>
+          <div class="desc">与该品牌历史投放爆款 pattern 相似度</div>
+        </div>
+        <div class="weight-pct p10" id="wp-history">10%</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;margin-top:14px;">
+      <button class="apply-btn" onclick="applyWeights()">应用权重，重新排序</button>
+      <span class="apply-toast" id="applyToast">✅ 已按新权重排序</span>
+    </div>
+  </div>
+
+  <div class="section-title" id="recListTitle">推荐笔记列表（加载中...）</div>
+  <div id="noteList">
+    <!-- note cards injected by JS -->
+  </div>
+</div>
+
+<!-- ==================== TAB 2: 热点追踪 ==================== -->
+<div id="tab1" class="tab-panel">
+  <div id="hotContent"><!-- 动态渲染 --></div>
+</div>
+
+<!-- ==================== TAB 3: 内容洞察 ==================== -->
+<div id="tab2" class="tab-panel">
+  <!-- 子Tab切换 -->
+  <div class="insight-sub-tabs" id="insightSubTabs">
+    <div class="insight-sub-tab active" data-sub="undeployed" onclick="switchInsightSub(this,'undeployed')">📝 未投笔记</div>
+    <div class="insight-sub-tab" data-sub="deployed" onclick="switchInsightSub(this,'deployed')">📊 历史在投 / 投过</div>
+  </div>
+
+  <!-- 子Tab A：未投笔记 -->
+  <div id="insightSubA" class="insight-sub-panel">
+    <div class="insight-filter-bar">
+      <div class="insight-filter-row">
+        <span class="insight-filter-label">消费场景</span>
+        <div class="filter-chips" id="sceneAChips"><!-- 动态填充 --></div>
+      </div>
+      <div class="insight-filter-row">
+        <span class="insight-filter-label">人群场景</span>
+        <div class="filter-chips" id="sceneBChips"><!-- 动态填充 --></div>
+      </div>
+      <div class="insight-filter-row">
+        <span class="insight-filter-label">功效需求</span>
+        <div class="filter-chips" id="sceneCChips"><!-- 动态填充 --></div>
+      </div>
+      <div class="insight-search">
+        <label>🔍 搜索</label>
+        <input type="text" id="insightSearch" placeholder="输入笔记标题关键词..." oninput="filterInsightNotes()" />
+        <span class="insight-search-clear" onclick="clearInsightFilters()">✕ 清空所有筛选</span>
+      </div>
+    </div>
+    <div id="insightOverview"><!-- 动态渲染分布概览 --></div>
+    <div class="section-title" style="margin-top:8px" id="insightListTitle">单篇内容分析</div>
+    <div class="insight-note-list" id="insightList"><!-- 动态渲染 --></div>
+    <div id="insightNoResult" class="no-result" style="display:none">😶 未找到匹配的笔记</div>
+  </div>
+
+  <!-- 子Tab B：历史在投/投过 -->
+  <div id="insightSubB" class="insight-sub-panel" style="display:none">
+    <div id="deployedPatternCard" class="deployed-pattern-card">
+      <!-- 爆款 pattern 汇总，由 renderDeployedTab() 填充 -->
+    </div>
+    <div class="section-title" style="margin-top:20px" id="deployedListTitle">历史在投 / 投过 Case 卡片</div>
+    <div id="deployedList" class="insight-note-list"><!-- 动态渲染 --></div>
+    <div id="deployedEmpty" class="no-result" style="display:none">😶 暂无历史投放笔记数据</div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ======= Data =======
+// CHAGEE霸王茶姬 | brand_id: 181252
+// isStrongMarketing: -1=UGC未投放, 0=弱营销感投放, 1=强营销感投放
+const NOTES = [
+  {id:'681326cf000000002202aa3e',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/0e4ec775191b0bb1d765315aa101adb5/spectrum/1040g0k031hdkhkvjj4005pq6m72g813u48l6r5o!nd_dft_wlteh_jpg_3',createTime:'2025-05-01T15:46:23',title:'喝不完真的喝不完！',summary:'曝光883万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:41,native:40,history:100},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验','场景代入','热点借势'],emotion:'中性',cover:'生活感'},sceneA:['外卖点单','节日限定'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光883万，中性内容，数据支撑不足',isStrongMarketing:1,estimatedMktLevel:null,investMetrics:null},
+  {id:'682590b80000000012006dd7',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/676b4286f759189c8d14678d1c24c8f4/spectrum/1040g34o31hgc42k9j40g5ndgb0j08vlsb9k858g!nd_dft_wlteh_jpg_3',createTime:'2025-05-15T14:59:04',title:'霸王茶姬你来真的啊！2.8😋',summary:'曝光840万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:42,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['外卖点单','促销薅羊毛'],sceneB:['日常饮用'],sceneC:['性价比'],detail:'曝光840万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_strong',investMetrics:null},
+  {id:'69a409d0000000000d00b1fc',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/c44cba4c8e7de0cdaf35727a7c3c058e/note_pre_post_uhdr/1040g3r831t5s9kct5m0041po92a57vqkcvvs47g!nd_dft_wlteh_jpg_3',createTime:'2026-03-01T17:41:36',title:'喝到了真奶茶！',summary:'曝光831万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:56,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'正向',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光831万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68c1a8d5000000001b036a3b',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/2c4fdb66f32974639d4c3fe449d249c5/1040g00831m8q2rnhlm004a5djig1oq745nhh518!nd_dft_wlteh_jpg_3',createTime:'2025-09-11T00:35:33',title:'笔记#68c1a8',summary:'曝光773万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:41,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['节日人群'],sceneC:['口感满足'],detail:'曝光773万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68039ce1000000001d01aef0',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/d4eb4345087c487f6d92b6ad1675424d/notes_pre_post/1040g3k831gf744fejok05nu7pj7g89k44b8bii0!nd_dft_wlteh_jpg_3',createTime:'2025-04-19T20:53:53',title:'笔记#68039c',summary:'曝光583万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:40,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光583万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69a1549c0000000022031548',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/4b78292c7cff0151f5d4c77eb5b83b18/notes_pre_post/1040g3k031t37p9qe560049pidqe6fqjp0s352s8!nd_dft_wlteh_jpg_3',createTime:'2026-02-27T16:23:56',title:'霸王茶姬最夯的一杯',summary:'曝光538万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:40,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光538万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69a6d6bc000000001a0365a3',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/c6ea97beb83b7a329c51900d1286f9a6/notes_uhdr/1040g3qo31t8juk185s705pcu73loivd25cjudg0!nd_dft_wlteh_jpg_3',createTime:'2026-03-03T20:40:28',title:'霸王茶姬最夯的奶茶出现了',summary:'曝光529万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:57,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','情绪共鸣','热点借势'],emotion:'正向',cover:'生活感'},sceneA:['节日限定'],sceneB:['闺蜜约会','健身轻食'],sceneC:['口感满足','低卡健康'],detail:'曝光529万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'686952790000000017032e22',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/28f64a51c92096a8058e231cc6a6dcce/notes_pre_post/1040g3k831jih983o32005o0sjgtg8a1v8gfqaag!nd_dft_wlteh_jpg_3',createTime:'2025-07-06T00:27:37',title:'这么小的概率都让我撞上了……',summary:'曝光518万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:42,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['上班族口粮'],sceneC:['口感满足'],detail:'曝光518万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'680476d4000000001c036eab',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/70e9a20a824c1ee9f0e2ead3f504ff88/1040g00831gg1nvtd34605n3471s416pnhhm2fm0!nd_dft_wlteh_jpg_3',createTime:'2025-04-20T12:23:48',title:'喝到自己死了都不知道',summary:'曝光514万，强正向内容，可作补充选材',hot:null,scores:{hot:0,quality:56,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','场景代入','情绪共鸣'],emotion:'强正向',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足','解压治愈'],detail:'曝光514万，强正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'6861efcb000000002201e190',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/b5f29cc7cca80b077ba1cf7402cdbab8/notes_pre_post/1040g3k831jbanpjo2ul05pdnik82fvc06hi314o!nd_dft_wlteh_jpg_3',createTime:'2025-06-30T10:00:43',title:'笔记#6861ef',summary:'曝光491万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:40,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光491万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'6836fb00000000002001f8d3',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/ad425cd10b77ccff6eef2c80816c4178/1040g2sg31i1caghs7ee05pimifdiufgq7go7n8o!nd_dft_wlteh_jpg_3',createTime:'2025-05-28T20:01:04',title:'此篇笔记用于收集姬姐的各种包装',summary:'曝光460万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:57,native:80,history:98},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'正向',cover:'生活感'},sceneA:['周边收藏'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光460万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'697388c1000000001a031f99',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/576abf9524416caa61ee6ae1a37ec574/1040g2sg31rmgf0t0ime048h2kdi822q7inuhfvo!nd_dft_wlteh_jpg_3',createTime:'2026-01-23T22:42:09',title:'霸王茶姬是不是得给点代言费哈哈哈哈😂',summary:'曝光419万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:40,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光419万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'685fc8a3000000002400d165',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/8c93cb78bb194a6ec41a8a87719ba6c2/notes_pre_post/1040g3k831j97crq12o6g5oukic0pt3961gjncp8!nd_dft_wlteh_jpg_3',createTime:'2025-06-28T18:49:07',title:'那款最丑一目了然🌝',summary:'曝光415万，负向内容，可作补充选材',hot:null,scores:{hot:0,quality:42,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'负向',cover:'生活感'},sceneA:['周边收藏'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光415万，负向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'685e13790000000012030b0b',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/fa054e527e1316e259a9537edd3116f6/1040g2sg31j7hve5m3470401149nc4n21omotor8!nd_dft_wlteh_jpg_3',createTime:'2025-06-27T11:43:53',title:'原来奶茶杯上的备注……只有这么短……',summary:'曝光385万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:41,native:80,history:99},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['外卖点单','周边收藏'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光385万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68b7cf79000000001b02243c',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/4da40256b254653a74a185fe98f6bc5e/notes_pre_post/1040g3k831lv69r1h58704a6b3ojnqsoqvfc0eo8!nd_dft_wlteh_jpg_3',createTime:'2025-09-03T13:17:45',title:'霸王茶姬猫窝终于到啦',summary:'曝光379万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:40,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光379万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68319ed70000000023016d11',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/89dd9a2cdd7a3f50dee772e104e7fb09/spectrum/1040g34o31hs4ppn8420g5ndgb0j08vls9dq6vuo!nd_dft_wlteh_jpg_3',createTime:'2025-05-24T18:26:31',title:'姬姐新品！畅喝！宝子快来',summary:'曝光372万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:42,native:80,history:77},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','场景代入','热点借势'],emotion:'中性',cover:'生活感'},sceneA:['外卖点单','节日限定','促销薅羊毛'],sceneB:['上班族口粮'],sceneC:['性价比'],detail:'曝光372万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_strong',investMetrics:null},
+  {id:'685f8fb30000000024008b8f',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/d1e6773f0248bfe85f292bd3b023bd06/1040g2sg31lj1el8j5ihg5pk8ug03uo3honu8268!nd_dft_wlteh_jpg_3',createTime:'2025-06-28T14:46:11',title:'肠子都快毁青了',summary:'曝光337万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:58,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','情绪共鸣','热点借势'],emotion:'正向',cover:'生活感'},sceneA:['周边收藏','节日限定'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光337万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_strong',investMetrics:null},
+  {id:'67ffb070000000001c037e54',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/58ff09a7a3e58a818a869f7e4195d5cf/1040g2sg31gbccrofja6g5ovfeqjk3j8nud6bm1o!nd_dft_wlteh_jpg_3',createTime:'2025-04-16T21:28:16',title:'霸王茶姬你快去申遗吧',summary:'曝光328万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:57,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'正向',cover:'摆拍感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光328万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69acf2ec000000001503afa6',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/bd5a5df6643f198bf79379e149a87286/notes_uhdr/1040g3qg31teism83m8005oo3pdhkg5lcu4nfo30!nd_dft_wlteh_jpg_3',createTime:'2026-03-08T11:54:20',title:'霸王茶姬研发！出来挨夸！！！',summary:'曝光325万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:56,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','情绪共鸣','热点借势'],emotion:'正向',cover:'摆拍感'},sceneA:['节日限定'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光325万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68772a810000000010024237',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/b62628626f0da119d72d6f187a142e8a/notes_pre_post/1040g3k031k0209cpk84g4bt5nn8fpdjlcgicjbg!nd_dft_wlteh_jpg_3',createTime:'2025-07-16T12:28:49',title:'山姆为什么要卖霸王茶姬的兑换卡?',summary:'曝光321万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:41,native:80,history:73},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','场景代入'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['性价比'],detail:'曝光321万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'6831bc7700000000220345bb',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/58aeab37d4933e2e49df5950f1b6ec84/1040g00831hs8dvv44q005n6e92jkik67di9ad6g!nd_dft_wlteh_jpg_3',createTime:'2025-05-24T20:32:55',title:'我们店也是用上高级货了嘻嘻',summary:'曝光312万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:57,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','热点借势'],emotion:'正向',cover:'生活感'},sceneA:['节日限定'],sceneB:['日常饮用'],sceneC:['口感满足','解压治愈'],detail:'曝光312万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'6844679100000000230159c5',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/aacba0be5eebc025ccbe1812e018a36d/1040g2sg31iefocrfnqdg5nq2k4k0bud6fvad5d8!nd_dft_wlteh_jpg_3',createTime:'2025-06-08T00:23:45',title:'有奶茶杯收集癖这种东西吗',summary:'曝光307万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:42,native:80,history:80},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['外卖点单'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光307万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68b1a22b000000001d01962c',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/ea7f6dd1e7dff766054ac5c7101ab56c/notes_pre_post/1040g3k831lp5783nlu2049cboes8oe7cbsck2b8!nd_dft_wlteh_jpg_3',createTime:'2025-08-29T20:50:51',title:'今天的好心情是霸王给的',summary:'曝光300万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:41,native:80,history:84},recLevel:2,recLabel:'条件推荐',tags:{express:['热点借势'],emotion:'中性',cover:'生活感'},sceneA:['节日限定'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光300万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'682ad4620000000021002cc9',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/d2048305d71acef1d4292c3a3fe79093/1040g00831hm0mfua3u605o8jrr60935grg90180!nd_dft_wlteh_jpg_3',createTime:'2025-05-19T14:49:06',title:'茶几你……',summary:'曝光295万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:57,native:80,history:69},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','场景代入','情绪共鸣','热点借势'],emotion:'正向',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光295万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'6818b0ca000000002300ee7f',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/d7a82dcf114efe71620e407e696bbac1/1040g2sg31h3pngf63aj05ou05c5pt47ah2gb28o!nd_dft_wlteh_jpg_3',createTime:'2025-05-05T20:36:26',title:'谁懂 中奖了但是不能兑换的心碎💔',summary:'曝光288万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:43,native:80,history:90},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','情绪共鸣','热点借势'],emotion:'中性',cover:'生活感'},sceneA:['节日限定'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光288万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_strong',investMetrics:null},
+  {id:'69ce66de000000002300413a',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/02eef41589814d9e85a00f35f5d199f0/1040g00831uf87pubii405o9hnc2gkoo1kihgd48!nd_dft_wlteh_jpg_3',createTime:'2026-04-02T20:53:50',title:'这个小碗是干嘛的？',summary:'曝光280万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:56,native:80,history:73},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'正向',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光280万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'6985a0c6000000000b011633',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/8649159b62f081b586b07dcb6d8aee62/1040g00831s862crklc005n4ibpbkh56cvfehldo!nd_dft_wlteh_jpg_3',createTime:'2026-02-06T16:05:26',title:'千问惹的祸',summary:'曝光264万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:40,native:80,history:71},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光264万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69d78c9d0000000023015588',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/064379b97a05837b9905a9a10dbf42de/1040g2sg31uo633tcige05p7rdeb14j7qondd0ag!nd_dft_wlteh_jpg_3',createTime:'2026-04-09T19:25:17',title:'为了让自己上好一个破班',summary:'曝光261万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:41,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['上班族口粮'],sceneC:['口感满足'],detail:'曝光261万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'6960b3030000000022009f93',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/e1684972db8a09a80d1ae5df449b9940/1040g2sg31r441km9g0eg5pk66um0ub70vc5l9po!nd_dft_wlteh_jpg_3',createTime:'2026-01-09T15:49:23',title:'用霸王茶姬的专用吸管喝了很久',summary:'曝光260万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:41,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光260万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'686fc4330000000015023981',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/c26e892c03ed670ab09b89eb6138379d/1040g00831joqskql2u505ouig3ipghndhkirttg!nd_dft_wlteh_jpg_3',createTime:'2025-07-10T21:46:27',title:'就是那个经典的蓝色纸杯 大杯的',summary:'曝光256万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:40,native:80,history:59},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光256万，中性内容，数据支撑不足',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68a3174c000000001d00c227',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/1a93ab1b98b1db46e0a516195e46b256/1040g00831lf19fn550105pc327ofen3eg28mefo!nd_dft_wlteh_jpg_3',createTime:'2025-08-18T20:06:36',title:'极简主义｜为了存钱，一直坚持的6件事！！',summary:'曝光256万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:42,native:80,history:62},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光256万，中性内容，数据支撑不足',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'6889f7f3000000002501f601',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/105e2908eeb8ea81d10661157b327ffc/1040g2sg31kidlojjiae05oe8bq8k1nmnei39ft0!nd_dft_wlteh_jpg_3',createTime:'2025-07-30T18:46:11',title:'其实我对一个奶茶的评判标准就是',summary:'曝光248万，强正向内容，可作补充选材',hot:null,scores:{hot:0,quality:57,native:80,history:61},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'强正向',cover:'摆拍感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光248万，强正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'694a4cbd000000001f00754d',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/f32e0f2e06d65532f19b21066f2f0daf/note_pre_post_uhdr/1040g3r031qe81g8bga605obctpngkof77e92gq0!nd_dft_wlteh_jpg_3',createTime:'2025-12-23T16:03:09',title:'霸王茶姬你再弄这种抠搜小杯我找人弄你',summary:'曝光244万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:41,native:80,history:86},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','热点借势'],emotion:'中性',cover:'摆拍感'},sceneA:['节日限定'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光244万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68a2ccc3000000001d02f253',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/021cd3c24f612fbf05370f2ebd2afe81/notes_pre_post/1040g3k831lalnldelmdg5p087g951qs6tou1kqo!nd_dft_wgth_jpg_3',createTime:'2025-08-18T14:48:35',title:'霸王茶姬这个冰箱贴好传神哈哈哈哈哈',summary:'曝光230万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:42,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['周边收藏'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光230万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69bcd4ab000000002202669b',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/b4e61c49845639e49b5f840ec0b7591e/note_pre_post_uhdr/1040g3r031tu35ahj7q005ndmpkl08vd57v5keug!nd_dft_wlteh_jpg_3',createTime:'2026-03-20T13:01:31',title:'抱歉 我喝晚了',summary:'曝光227万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:41,native:80,history:65},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验','热点借势'],emotion:'中性',cover:'生活感'},sceneA:['节日限定'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光227万，中性内容，数据支撑不足',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69d3bcaa000000001b0203d7',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:null,createTime:'2026-04-06T22:01:14',title:'霸王茶姬兼职！',summary:'曝光223万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:41,native:80,history:52},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光223万，中性内容，数据支撑不足',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'699e99820000000022038b64',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/be0ca913d47a3cbbb47cabbd7ca6e1a6/note_pre_post_uhdr/1040g3r031t0iedt25e705nf3ft2081p5sul39ho!nd_dft_wlteh_jpg_3',createTime:'2026-02-25T14:41:06',title:'此乃霸王真神',summary:'曝光221万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:56,native:80,history:78},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'正向',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光221万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'680476c7000000000b01de81',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/4301427f093656cf26e81239d87ead98/1040g00831gg1nokb3i005np0qpigbpnho78nql0!nd_dft_wlteh_jpg_3',createTime:'2025-04-20T12:23:35',title:'9.9的霸王茶姬还送了我一个华为平板😄',summary:'曝光221万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:40,native:80,history:80},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光221万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68e1bcc70000000004020252',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/84d9c6b58cec2765df95c3c5404fcb14/1040g00831n84f7k9li004bgepq1osqoofv9roq8!nd_dft_wlteh_jpg_3',createTime:'2025-10-05T08:33:11',title:'笔记#68e1bc',summary:'曝光219万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:56,native:80,history:53},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','情绪共鸣'],emotion:'正向',cover:'生活感'},sceneA:['周边收藏'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光219万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69a24fe00000000022032e5c',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/d7c32d31dd4af94d1c32832e6157cb3c/note_pre_post_uhdr/1040g3r831t46evvblc70401fg9od1npdrs41obo!nd_dft_wlteh_jpg_3',createTime:'2026-02-28T10:16:00',title:'拜见奶茶界真神',summary:'曝光214万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:40,native:80,history:79},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光214万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69a65c01000000001a024e0b',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/33e97afddc3ba246aa0a9c09e88fdd6f/note_pre_post_uhdr/1040g3r031t83g0tcm2205n37eokkcu9snh4v208!nd_dft_wlteh_jpg_3',createTime:'2026-03-03T11:56:49',title:'霸王茶姬新品超好喝',summary:'曝光211万，强正向内容，可作补充选材',hot:null,scores:{hot:0,quality:59,native:80,history:80},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','情绪共鸣','热点借势'],emotion:'强正向',cover:'生活感'},sceneA:['外卖点单','节日限定'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光211万，强正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68230c0b000000000303d31c',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/8e690f276dde6845b3b15c06ec13ad72/1040g00831hdtem0v3u005nblqut08m5lnkdt70g!nd_dft_wlteh_jpg_3',createTime:'2025-05-13T17:08:27',title:'近期爱喝果味奶茶强推合集：',summary:'曝光209万，强正向内容，可作补充选材',hot:null,scores:{hot:0,quality:62,native:80,history:60},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验','热点借势'],emotion:'强正向',cover:'摆拍感'},sceneA:['节日限定'],sceneB:['健身轻食'],sceneC:['口感满足','颜值出片','低卡健康','解压治愈'],detail:'曝光209万，强正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69353a0a000000001b0333ca',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/881fe0edbfcc2bfe98d4e98b57f9298f/notes_pre_post/1040g3k031ppfm31r4m005p4c6vv75fpm5asthv8!nd_dft_wgth_jpg_3',createTime:'2025-12-07T16:25:46',title:'求助❗️霸王茶姬和瑞幸中间应该开什么店❓',summary:'曝光208万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:41,native:80,history:45},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光208万，中性内容，数据支撑不足',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'682c3b9d00000000210031f1',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/53719213a37a9c70488e1530b16613c5/notes_pre_post/1040g3k031hmsgkd93u605n1bh1o1mn5dtjjkib8!nd_dft_wgth_jpg_3',createTime:'2025-05-20T16:21:49',title:'清华又进来一个没用的品牌',summary:'曝光207万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:41,native:80,history:46},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光207万，中性内容，数据支撑不足',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68258976000000000f0339e1',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/3bbbcedfbece39f2b45d2d20d2fa917d/1040g2sg31hgb8i953icg5p7sbn4h4ka2i6kp7so!nd_dft_wlteh_jpg_3',createTime:'2025-05-15T14:28:06',title:'到底还有谁不知道',summary:'曝光206万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:57,native:80,history:81},recLevel:2,recLabel:'条件推荐',tags:{express:['情绪共鸣'],emotion:'正向',cover:'摆拍感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光206万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69b65aa40000000023014f13',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/32c3050873f01b4874b9a3f1e4f59092/note_pre_post_uhdr/1040g3r031tnook89nq205na3hvjkib5pb93vlv8!nd_dft_wlteh_jpg_3',createTime:'2026-03-15T15:07:16',title:'霸王茶姬你配享太庙',summary:'曝光201万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:41,native:80,history:54},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光201万，中性内容，数据支撑不足',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'68a542da000000001c036237',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/1aa74de91e189e934587232510a04639/notes_pre_post/1040g3k031ld2jb1fl2jg5ojkrhlod7hho21qn1g!nd_dft_wlteh_jpg_3',createTime:'2025-08-20T11:36:58',title:'喝霸王茶姬，过敏浑身痒，打开一看天塌了。',summary:'曝光198万，中性内容，数据支撑不足',hot:null,scores:{hot:0,quality:41,native:80,history:44},recLevel:0,recLabel:'暂不推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['上班族口粮'],sceneC:['口感满足'],detail:'曝光198万，中性内容，数据支撑不足',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69de477f000000001a0379a0',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/8dcee5b1060e19a680f8dfe96fae45c2/1040g00831uuocf98ii005ovb44upt6nlevb7dfg!nd_dft_wlteh_jpg_3',createTime:'2026-04-14T21:56:15',title:'霸王茶姬味！',summary:'曝光197万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:41,native:80,history:72},recLevel:2,recLabel:'条件推荐',tags:{express:['干货攻略'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光197万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'692c2272000000001e00c0d7',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/f289e3218e76867d145d5166d96c6d51/notes_pre_post/1040g3k831pghiei6jkd05pqllii087p5feurv20!nd_dft_wgth_jpg_3',createTime:'2025-11-30T18:54:42',title:'笔记#692c22',summary:'曝光194万，中性内容，可作补充选材',hot:null,scores:{hot:0,quality:42,native:80,history:100},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['外卖点单'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光194万，中性内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69c1eefb000000002301de94',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/97ae2be7a8ecd71b8fbcf63fd9b40f09/notes_pre_post/1040g3k031u32ek9gnegg5pjoum91ovm9sldrn70!nd_dft_wlteh_jpg_3',createTime:'2026-03-24T09:55:07',title:'谁说这玩意跟三倍厚抹一样的😅差远了',summary:'曝光194万，正向内容，可作补充选材',hot:null,scores:{hot:0,quality:57,native:80,history:52},recLevel:2,recLabel:'条件推荐',tags:{express:['真实体验'],emotion:'正向',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'曝光194万，正向内容，可作补充选材',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69de1ecb000000001b003f9b',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/9c1bf4619690d3fbf699fddea330e391/1040g2sg31uujcsprj4e05o73vffgbprt4ivtjb0!nd_dft_wlteh_jpg_3',createTime:'2026-04-14T19:02:36',title:'上海街头偶遇朴宝剑喝霸王茶姬',summary:'热点命中，曝光85万，正向内容，强推荐投放',hot:'#上海偶遇朴宝剑',scores:{hot:40,quality:57,native:80,history:40},recLevel:3,recLabel:'强推荐',tags:{express:['干货攻略'],emotion:'正向',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'热点命中，曝光85万，正向内容，强推荐投放',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69b551f90000000021006f8d',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/411e56e32004e62894eda24298ed5777/1040g2sg31tmof3nd7u705n583ohlpgm0jpc3dd0!nd_dft_wlteh_jpg_3',createTime:'2026-03-14T20:18:01',title:'画舫听夜雨 我和你逐玉～',summary:'热点命中，曝光27万，中性内容，强推荐投放',hot:'#这些创意拼豆也太会了吧',scores:{hot:40,quality:42,native:80,history:27},recLevel:3,recLabel:'强推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'热点命中，曝光27万，中性内容，强推荐投放',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69de31570000000021012316',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/6d07feff132ea5d2fa1a7e525329689f/notes_pre_post/1040g3k831uulla4eiicg5n8qpj8k7m9r5br29e0!nd_dft_wlteh_jpg_3',createTime:'2026-04-14T20:21:43',title:'阿泽今天这身依旧松弛又帅🔥',summary:'热点命中，曝光26万，正向内容，强推荐投放',hot:'#上海偶遇朴宝剑',scores:{hot:40,quality:57,native:80,history:8},recLevel:3,recLabel:'强推荐',tags:{express:['真实体验','场景代入'],emotion:'正向',cover:'生活感'},sceneA:['探店打卡'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'热点命中，曝光26万，正向内容，强推荐投放',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69c23770000000001d018d0d',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/eee8feabf093102bf07e289d383905fc/1040g2sg31u3bam88hme05p7cje2g9l9toqlk6j0!nd_dft_wlteh_jpg_3',createTime:'2026-03-24T15:04:16',title:'低成本💰城中村厨房改造',summary:'热点命中，曝光13万，中性内容，强推荐投放',hot:'#我还原了漫画里的厨房',scores:{hot:40,quality:42,native:80,history:13},recLevel:3,recLabel:'强推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['日常饮用'],sceneC:['口感满足'],detail:'热点命中，曝光13万，中性内容，强推荐投放',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69de0fc6000000002200ce7b',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/f6408351f57a4bd5720fc8ab0bcf713e/notes_pre_post/1040g3k031uuhi7e81u105ojs2fboderccgru2b8!nd_dft_wlteh_jpg_3',createTime:'2026-04-14T17:58:30',title:'官方认领！朴宝剑同款奶茶🫢来get',summary:'热点命中，曝光10万，中性内容，强推荐投放',hot:'#上海偶遇朴宝剑',scores:{hot:40,quality:42,native:80,history:5},recLevel:3,recLabel:'强推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['闺蜜约会'],sceneC:['口感满足'],detail:'热点命中，曝光10万，中性内容，强推荐投放',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69de5654000000001e00d536',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/5e4880eec28bb68d54c86f3290acb545/notes_pre_post/1040g3k831uuq91gkiad05pau0hpkflvfou6dgv8!nd_dft_wlteh_jpg_3',createTime:'2026-04-14T22:59:32',title:'连续两天在霸王茶姬店里遇到朴宝剑欧巴',summary:'热点命中，曝光10万，中性内容，强推荐投放',hot:'#上海偶遇朴宝剑',scores:{hot:40,quality:41,native:80,history:7},recLevel:3,recLabel:'强推荐',tags:{express:['真实体验','情绪共鸣'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['闺蜜约会'],sceneC:['口感满足'],detail:'热点命中，曝光10万，中性内容，强推荐投放',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69d729360000000020038f03',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/7f8e096f8a94d036dc76a5edee50435b/note_pre_post_uhdr/1040g3r031unprgoj2q004a39jpg35mut6p3bddo!nd_dft_wlteh_jpg_3',createTime:'2026-04-09T12:21:10',title:'谢谢霸王茶姬让我拥有了春天',summary:'热点命中，曝光5万，中性内容，强推荐投放',hot:'#春日立体花瓶把春天摆在家里吧',scores:{hot:40,quality:41,native:80,history:2},recLevel:3,recLabel:'强推荐',tags:{express:['真实体验','场景代入'],emotion:'中性',cover:'生活感'},sceneA:['日常饮用'],sceneB:['节日人群'],sceneC:['口感满足'],detail:'热点命中，曝光5万，中性内容，强推荐投放',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null},
+  {id:'69847775000000000a02e493',emoji:'🧋',brand:'CHAGEE霸王茶姬',industry:'food',industryFirst:'餐饮',industrySecond:'饮料及冲饮',trackName:'餐饮',coverUrl:'http://sns-webpic-qc.xhscdn.com/202604171734/ce81b117239fa35addf32d726f50e1b2/notes_uhdr/1040g3qg31s71qcq75c0g4a58v8vqm6b5qrkffso!nd_dft_wlteh_jpg_3',createTime:'2026-02-05T18:56:53',title:'今天的双月湾日落美得要命',summary:'热点命中，曝光4万，中性内容，强推荐投放',hot:'#海边日落赴一场温柔约会',scores:{hot:40,quality:43,native:80,history:2},recLevel:3,recLabel:'强推荐',tags:{express:['真实体验'],emotion:'中性',cover:'生活感'},sceneA:['促销薅羊毛'],sceneB:['日常饮用'],sceneC:['颜值出片'],detail:'热点命中，曝光4万，中性内容，强推荐投放',isStrongMarketing:-1,estimatedMktLevel:'estimated_weak',investMetrics:null}
+];
+
+const COMMUNITY_HOT = [
+  {rank:1,name:'赌王何鸿燊女儿何超蕸去世'},
+  {rank:2,name:'Lululemon回应疑含致癌物被调查'},
+  {rank:3,name:'心愿便利贴 万通筋骨贴'},
+  {rank:4,name:'何润东将助阵苏超宿迁队'},
+  {rank:5,name:'警方抓获全红婵遭网暴案嫌疑人'},
+  {rank:6,name:'超日常美食教程速来get'},
+  {rank:7,name:'蜜语纪里朱珠好妩媚'},
+  {rank:8,name:'春天在家就这么吃'},
+  {rank:9,name:'逐玉庆功宴'},
+  {rank:10,name:'我在现场观看苏超比赛'}
+];
+const SEARCH_HOT = [
+  {rank:1,name:'蜜语纪里朱珠好妩媚',searchReads:0},
+  {rank:2,name:'SBTI解读来了',searchReads:0},
+  {rank:3,name:'心愿便利贴 万通筋骨贴',searchReads:0},
+  {rank:4,name:'SBTI作者最新回应',searchReads:0},
+  {rank:5,name:'湖北省考笔试成绩出了',searchReads:0},
+  {rank:6,name:'SBTI人格测试刷屏朋友圈',searchReads:0},
+  {rank:7,name:'在浪姐看到了蓬勃的共情力',searchReads:0},
+  {rank:8,name:'孙怡声音好治愈',searchReads:0},
+  {rank:9,name:'IU边佑锡时隔十年二搭',searchReads:0},
+  {rank:10,name:'孙怡哭得让人好心疼',searchReads:0}
+];
+const INDUSTRY_HOT_ALL = {
+  '美食': [{rank:1,name:'超日常美食教程速来get'},{rank:2,name:'春天在家就这么吃'},{rank:3,name:'五一美食攻略'}],
+  '生活': [{rank:1,name:'心愿便利贴 万通筋骨贴'},{rank:2,name:'逐玉庆功宴'},{rank:3,name:'我在现场观看苏超比赛'}],
+  '娱乐': [{rank:1,name:'赌王何鸿燊女儿何超蕸去世'},{rank:2,name:'蜜语纪里朱珠好妩媚'},{rank:3,name:'IU边佑锡时隔十年二搭'}],
+  '健康': [{rank:1,name:'Lululemon回应疑含致癌物被调查'},{rank:2,name:'SBTI人格测试刷屏朋友圈'},{rank:3,name:'SBTI解读来了'}],
+  '运动': [{rank:1,name:'何润东将助阵苏超宿迁队'},{rank:2,name:'我在现场观看苏超比赛'},{rank:3,name:'苏超精彩时刻'}]
+};
+
+
+// ======= State =======
+let weightOrder = ['hot','quality','native','history'];
+const WEIGHTS = [0.4, 0.3, 0.2, 0.1];
+const PCT_LABELS = ['40%','30%','20%','10%'];
+const PCT_CLASSES = ['','p30','p20','p10'];
+let currentTimePeriod = 'all';
+let activeSceneA = new Set();
+let activeSceneB = new Set();
+let activeSceneC = new Set();
+let currentInsightSub = 'undeployed';
+
+// ======= Score calculation =======
+function calcScore(note) {
+  let total = 0;
+  weightOrder.forEach((dim, idx) => {
+    total += (note.scores[dim] || 0) * WEIGHTS[idx];
+  });
+  return Math.round(total);
+}
+
+// ======= 创建时间筛选 =======
+function setTimePeriod(el, period) {
+  currentTimePeriod = period;
+  document.querySelectorAll('#timeFilterBar .time-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderNotes(getFilteredNotes());
+  filterInsightNotes();
+}
+
+// ======= Note filter (Tab1: only UGC, i.e. isStrongMarketing === -1) =======
+function getFilteredNotes() {
+  const now = Date.now();
+  return NOTES.filter(n => {
+    const notDeployedOk = n.isStrongMarketing === -1;
+    let timeOk = true;
+    if (currentTimePeriod !== 'all' && n.createTime) {
+      const ct = new Date(n.createTime).getTime();
+      const dayMs = 86400000;
+      if (currentTimePeriod === '7') timeOk = (now - ct) <= 7 * dayMs;
+      else if (currentTimePeriod === '30') timeOk = (now - ct) <= 30 * dayMs;
+      else if (currentTimePeriod === 'other') timeOk = (now - ct) > 30 * dayMs;
+    }
+    return notDeployedOk && timeOk;
+  });
+}
+
+// ======= 营销感标签 helper =======
+function mktTag(n) {
+  if (n.isStrongMarketing === 1) return '<span class="tag" style="background:#fff0f0;color:#c62828">强营销感</span>';
+  if (n.isStrongMarketing === 0) return '<span class="tag tag-green">弱营销感</span>';
+  if (n.estimatedMktLevel === 'estimated_strong') return '<span class="tag" style="background:#fff3e0;color:#e65100">预估强营销</span>';
+  return '<span class="tag tag-grey" style="color:#555">预估弱营销</span>';
+}
+function mktTagPlain(n) {
+  if (n.isStrongMarketing === 1) return '<span style="color:#c62828;font-weight:500">强营销感</span>';
+  if (n.isStrongMarketing === 0) return '<span style="color:#2e7d32;font-weight:500">弱营销感</span>';
+  if (n.estimatedMktLevel === 'estimated_strong') return '<span style="color:#e65100;font-weight:500">预估强营销</span>';
+  return '<span style="color:#555">预估弱营销</span>';
+}
+
+function historyLevel(score) {
+  if (score >= 70) return '<span style="color:#2e7d32;font-weight:600">高</span>';
+  if (score >= 40) return '<span style="color:#f59e0b;font-weight:600">中</span>';
+  return '<span style="color:#e53935;font-weight:600">低</span>';
+}
+
+// ======= Render note list (Tab1) =======
+function renderNotes(notes) {
+  const list = document.getElementById('noteList');
+  if (!notes.length) {
+    list.innerHTML = '<div class="no-result">😶 暂无符合条件的笔记</div>';
+    document.getElementById('recListTitle').textContent = '推荐笔记列表（0 篇）';
+    return;
+  }
+  notes = [...notes].sort((a,b) => calcScore(b) - calcScore(a));
+  list.innerHTML = notes.map(n => {
+    const score = calcScore(n);
+    const hotTag = n.hot
+      ? `<span class="fire-tag">🔥 ${n.hot}</span>`
+      : `<span class="empty-hot">— 未命中热点</span>`;
+    const exprTags = (n.tags.express||[]).map(t=>`<span class="tag tag-blue">${t}</span>`).join('');
+    const titleLink = `<a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none" onclick="event.stopPropagation()">${n.title || '[无标题]'}</a>`;
+    return `
+    <div class="note-card" onclick="toggleNote(this)">
+      <div class="note-main">
+        <div class="note-thumb" data-note-id="${n.id}">
+          <div class="thumb-fallback">${n.emoji}</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">${titleLink}</div>
+          <div class="note-id"><a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:#FF2442;text-decoration:none;font-size:12px" onclick="event.stopPropagation()">🔗 ${n.id}</a> · ${n.brand} · <span style="color:#888">${n.trackName}</span></div>
+          <div class="note-summary">${n.summary}</div>
+          <div class="score-bar">
+            <span class="score-num">${score}分</span>
+            <div class="score-track"><div class="score-fill" style="width:${score}%"></div></div>
+          </div>
+          <div class="rec-score" style="margin-top:8px">
+            <span style="color:${n.recLevel>0?'#FF2442':'#ddd'};font-size:15px">★</span>
+            <span style="color:${n.recLevel>1?'#FF2442':'#ddd'};font-size:15px">★</span>
+            <span style="color:${n.recLevel>2?'#FF2442':'#ddd'};font-size:15px">★</span>
+            <span class="rec-label ${n.recLevel===2?'amber':''}" style="${n.recLevel===0?'color:#999':''}">${n.recLabel}</span>
+          </div>
+          <div class="note-signals">
+            <div class="signal-block"><div class="signal-label">🔥 热点命中</div><div class="tags-wrap">${hotTag}</div></div>
+            <div class="signal-block"><div class="signal-label">📋 表达方式</div><div class="tags-wrap">${exprTags}</div></div>
+            <div class="signal-block"><div class="signal-label">💚 情绪 / 封面</div><div class="tags-wrap"><span class="tag tag-green">${n.tags.emotion}</span><span class="tag tag-green">${n.tags.cover}</span></div></div>
+            <div class="signal-block"><div class="signal-label">📊 历史基准</div><div class="tags-wrap"><span style="font-size:13px">${historyLevel(n.scores.history)}</span></div></div>
+            <div class="signal-block"><div class="signal-label">📢 营销感</div><div class="tags-wrap">${mktTag(n)}</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="note-detail">
+        <div class="detail-grid">
+          <div class="detail-section">
+            <h4>📋 维度A · 内容画像</h4>
+            <div class="dim-row"><span class="dim-name">表达方式</span><div class="tags-wrap">${exprTags}</div></div>
+            <div class="dim-row"><span class="dim-name">情绪极性</span><span style="color:#2e7d32;font-size:13px;font-weight:500">${n.tags.emotion}</span></div>
+            <div class="dim-row"><span class="dim-name">封面真实感</span><span style="font-size:13px">${n.tags.cover}</span></div>
+            <div class="dim-row"><span class="dim-name">营销感</span><span style="font-size:13px">${mktTagPlain(n)}</span></div>
+            <div class="dim-row"><span class="dim-name">赛道</span><span style="font-size:13px">${n.industryFirst} · ${n.industrySecond}</span></div>
+            <div class="dim-row"><span class="dim-name">创建时间</span><span style="font-size:13px;color:#888">${n.createTime || '—'}</span></div>
+          </div>
+          <div class="detail-section">
+            <h4>🏷️ 维度B · 行业需求场景</h4>
+            <div class="scene-row"><span class="scene-label">消费场景</span><div class="tags-wrap">${(n.sceneA||[]).map(t=>`<span class="tag tag-grey">${t}</span>`).join('')}</div></div>
+            <div class="scene-row"><span class="scene-label">人群场景</span><div class="tags-wrap">${(n.sceneB||[]).map(t=>`<span class="tag tag-grey">${t}</span>`).join('')}</div></div>
+            <div class="scene-row"><span class="scene-label">功效/需求</span><div class="tags-wrap">${(n.sceneC||[]).map(t=>`<span class="tag tag-grey">${t}</span>`).join('')}</div></div>
+          </div>
+        </div>
+        <div class="detail-summary">💡 <strong>一句话结论：</strong>${n.detail}</div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('recListTitle').textContent = `推荐笔记列表（共 ${notes.length} 篇，已按权重排序）`;
+}
+
+// ======= Weight drag & apply =======
+const wList = document.getElementById('weightList');
+let dragSrc = null;
+wList.addEventListener('dragstart', e => {
+  dragSrc = e.target.closest('.weight-item');
+  dragSrc.classList.add('dragging');
+});
+wList.addEventListener('dragend', e => {
+  document.querySelectorAll('.weight-item').forEach(el => el.classList.remove('dragging','drag-over'));
+});
+wList.addEventListener('dragover', e => {
+  e.preventDefault();
+  const target = e.target.closest('.weight-item');
+  if (target && target !== dragSrc) {
+    document.querySelectorAll('.weight-item').forEach(el => el.classList.remove('drag-over'));
+    target.classList.add('drag-over');
+  }
+});
+wList.addEventListener('drop', e => {
+  e.preventDefault();
+  const target = e.target.closest('.weight-item');
+  if (target && target !== dragSrc) {
+    const items = [...wList.querySelectorAll('.weight-item')];
+    const srcIdx = items.indexOf(dragSrc);
+    const tgtIdx = items.indexOf(target);
+    if (srcIdx < tgtIdx) wList.insertBefore(dragSrc, target.nextSibling);
+    else wList.insertBefore(dragSrc, target);
+    refreshWeightUI();
+  }
+});
+
+function refreshWeightUI() {
+  const items = [...wList.querySelectorAll('.weight-item')];
+  weightOrder = items.map(el => el.dataset.id);
+  const NUM_COLORS_MAP = ['','dim2','dim3','dim4'];
+  items.forEach((el, idx) => {
+    const numEl = el.querySelector('.weight-num');
+    const pctEl = el.querySelector('.weight-pct');
+    numEl.textContent = idx + 1;
+    numEl.className = 'weight-num' + (idx > 0 ? ' dim'+(idx+1) : '');
+    pctEl.textContent = PCT_LABELS[idx];
+    pctEl.className = 'weight-pct' + (PCT_CLASSES[idx] ? ' '+PCT_CLASSES[idx] : '');
+  });
+}
+
+function applyWeights() {
+  refreshWeightUI();
+  renderNotes(getFilteredNotes());
+  const toast = document.getElementById('applyToast');
+  if (toast) { toast.style.display = 'inline'; setTimeout(() => { toast.style.display = 'none'; }, 1500); }
+}
+
+// ======= Tab switch =======
+function switchTab(idx) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+}
+
+function toggleNote(card) { card.classList.toggle('expanded'); }
+function toggleIni(item) { item.querySelector('.ini-detail').classList.toggle('open'); }
+
+// ======= Tab2: 热点追踪 =======
+function renderHotTab() {
+  const hotNotes = NOTES.filter(n => n.hot);
+  const total = NOTES.length;
+  const hotCount = hotNotes.length;
+
+  // Section 1: 社区热点 Top10 - 只显示排名+名称
+  const sec1 = `<div class="hot-section">
+    <div class="hot-section-header">
+      <div class="hot-section-title">🌐 近7天社区热点 Top10</div>
+      <span class="hot-section-badge">Top 10</span>
+    </div>
+    <div class="hot-section-body">
+      <div class="hot-grid">${COMMUNITY_HOT.map((item,i) => `
+        <div class="hot-chip">
+          <div class="rank ${i<3?'top3':''}">${item.rank}</div>
+          <div class="hot-icon">🔥</div>
+          <div class="hot-name">${item.name}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+
+  // Section 2: 类目热点 Top10 - 下拉筛选，默认美食
+  const industryOptions = Object.keys(INDUSTRY_HOT_ALL).map(name =>
+    `<option value="${name}"${name==='美食'?' selected':''}>${name}</option>`
+  ).join('');
+  
+  const sec2 = `<div class="hot-section">
+    <div class="hot-section-header">
+      <div class="hot-section-title">🏭 近7天类目热点 Top10</div>
+      <select class="industry-hot-select" id="industryHotSelect" onchange="switchIndustryHot(this.value)">
+        ${industryOptions}
+      </select>
+    </div>
+    <div class="hot-section-body">
+      <div class="hot-grid" id="industryHotGrid">${renderIndustryHotGrid('美食')}</div>
+    </div>
+  </div>`;
+
+  // Section 3: 搜发热点 Top10 - 只显示排名+名称
+  const sec3 = `<div class="hot-section">
+    <div class="hot-section-header">
+      <div class="hot-section-title">🔍 搜发热点 Top10</div>
+      <span class="hot-section-badge">Top 10</span>
+    </div>
+    <div class="hot-section-body">
+      <div class="hot-grid">${SEARCH_HOT.map((item,i) => `
+        <div class="hot-chip">
+          <div class="rank ${i<3?'top3':''}">${item.rank}</div>
+          <div class="hot-icon">🔍</div>
+          <div class="hot-name">${item.name}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+
+  // Section 4: 命中热点及笔记 - 合并全量标签命中+Top10匹配，去重
+  const matchPct = total ? Math.round(hotCount/total*100) : 0;
+  // Collect unique hot names
+  const hotNameSet = {};
+  hotNotes.forEach(n => {
+    const h = n.hot;
+    if (h) { hotNameSet[h] = (hotNameSet[h]||0)+1; }
+  });
+  const hitList = Object.entries(hotNameSet).sort((a,b)=>b[1]-a[1]);
+
+  const hitGridHtml = hitList.length
+    ? `<div class="hot-grid">${hitList.map(([name, cnt], i) => `
+        <div class="hot-chip matched">
+          <div class="rank ${i<3?'top3':''}">${i+1}</div>
+          <div class="hot-icon">🔥</div>
+          <div class="hot-name">${name}</div>
+          <div class="hot-heat">命中 ${cnt} 篇</div>
+        </div>`).join('')}</div>`
+    : `<div class="hot-empty"><div class="hot-empty-icon">😶</div><div class="hot-empty-text">本批笔记暂无热点命中</div></div>`;
+
+  const hotNoteListHtml = hotNotes.map(n => {
+    const titleLink = n.title
+      ? `<a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">${n.title}</a>`
+      : `<a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:#FF2442;text-decoration:none">${n.id}</a>`;
+    return `<div class="note-hot-item">
+      <div style="font-size:22px;width:36px;flex-shrink:0">🧋</div>
+      <div class="nhi-title">${titleLink}</div>
+      <span class="fire-tag">🔥 ${n.hot}</span>
+    </div>`;
+  }).join('');
+
+  const sec4 = `<div class="hot-section">
+    <div class="hot-section-header">
+      <div class="hot-section-title">🎯 命中热点及笔记</div>
+      <span class="hot-section-badge">共 ${hotCount} 篇命中（${matchPct}%）</span>
+    </div>
+    <div class="hot-section-body">
+      ${hitGridHtml}
+      <div class="note-hot-list" style="margin-top:${hitList.length?'16px':'0'}">
+        <div style="font-size:13px;color:#999;margin-bottom:8px">
+          以下为本品牌全量热点命中笔记（含全量标签命中+Top10热点交叉匹配，去重）
+        </div>
+        ${hotNoteListHtml}
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('hotContent').innerHTML = sec1 + sec2 + sec3 + sec4;
+}
+
+function renderIndustryHotGrid(industry) {
+  const items = INDUSTRY_HOT_ALL[industry] || [];
+  return items.map((item,i) => `
+    <div class="hot-chip">
+      <div class="rank ${i<3?'top3':''}">${item.rank}</div>
+      <div class="hot-icon">🏭</div>
+      <div class="hot-name">${item.name}</div>
+    </div>`).join('');
+}
+
+window.switchIndustryHot = function(industry) {
+  const grid = document.getElementById('industryHotGrid');
+  if (grid) grid.innerHTML = renderIndustryHotGrid(industry);
+};
+
+// ======= Tab3: 内容洞察 =======
+function buildSceneChips() {
+  const setA = new Set(), setB = new Set(), setC = new Set();
+  const ugcNotes = NOTES.filter(n => n.isStrongMarketing === -1);
+  ugcNotes.forEach(n => {
+    (n.sceneA||[]).forEach(t => setA.add(t));
+    (n.sceneB||[]).forEach(t => setB.add(t));
+    (n.sceneC||[]).forEach(t => setC.add(t));
+  });
+  function buildChips(container, tags, type) {
+    container.innerHTML = [...tags].sort().map(t =>
+      `<div class="filter-chip" data-tag="${t}" data-type="${type}" onclick="toggleSceneChip(this,'${type}')">${t}</div>`
+    ).join('');
+  }
+  buildChips(document.getElementById('sceneAChips'), setA, 'A');
+  buildChips(document.getElementById('sceneBChips'), setB, 'B');
+  buildChips(document.getElementById('sceneCChips'), setC, 'C');
+}
+
+function toggleSceneChip(el, type) {
+  const tag = el.dataset.tag;
+  const map = { A: activeSceneA, B: activeSceneB, C: activeSceneC };
+  const s = map[type];
+  if (s.has(tag)) { s.delete(tag); el.classList.remove('active'); }
+  else { s.add(tag); el.classList.add('active'); }
+  filterInsightNotes();
+}
+
+function clearInsightFilters() {
+  activeSceneA.clear(); activeSceneB.clear(); activeSceneC.clear();
+  document.querySelectorAll('.filter-chip.active').forEach(c => c.classList.remove('active'));
+  document.getElementById('insightSearch').value = '';
+  filterInsightNotes();
+}
+
+function renderInsightTab() {
+  const notes = NOTES.filter(n => n.isStrongMarketing === -1);
+  const total = notes.length;
+
+  const EXPRESS_TYPES = ['真实体验','场景代入','干货攻略','情绪共鸣','热点借势'];
+  const EXPRESS_COLORS = ['','blue','blue','purple','orange'];
+  const exprCount = {};
+  EXPRESS_TYPES.forEach(t => exprCount[t] = 0);
+  notes.forEach(n => (n.tags.express||[]).forEach(t => { if(exprCount[t]!==undefined) exprCount[t]++; }));
+
+  const exprBars = EXPRESS_TYPES.map((t,i) => {
+    const pct = total ? Math.round(exprCount[t]/total*100) : 0;
+    return `<div class="dist-bar-item">
+      <span class="dist-bar-label">${t}</span>
+      <div class="dist-bar-track"><div class="dist-bar-fill ${EXPRESS_COLORS[i]}" style="width:${pct}%"></div></div>
+      <span class="dist-bar-pct">${pct}%</span>
+    </div>`;
+  }).join('');
+  const missingExpress = EXPRESS_TYPES.filter(t => exprCount[t] === 0);
+  const exprHint = missingExpress.length
+    ? `<div class="alert-hint">⚠️ 「${missingExpress.join('」「')}」类型缺失，建议补充</div>`
+    : `<div class="ok-hint">✅ 表达方式覆盖均衡</div>`;
+
+  const posStrong = notes.filter(n=>n.tags.emotion==='强正向').length;
+  const pos = notes.filter(n=>n.tags.emotion==='正向').length;
+  const neg = notes.filter(n=>n.tags.emotion==='负向').length;
+  const life = notes.filter(n=>n.tags.cover==='生活感').length;
+  const strongMkt = notes.filter(n=>n.isStrongMarketing===1||(n.isStrongMarketing===-1&&n.estimatedMktLevel==='estimated_strong')).length;
+  const weakMkt = notes.filter(n=>n.isStrongMarketing===0||(n.isStrongMarketing===-1&&n.estimatedMktLevel==='estimated_weak')).length;
+  const pct = v => total ? Math.round(v/total*100) : 0;
+
+  const emotionBars = `
+    <div class="dist-bar-item"><span class="dist-bar-label">强正向</span><div class="dist-bar-track"><div class="dist-bar-fill green" style="width:${pct(posStrong)}%"></div></div><span class="dist-bar-pct">${pct(posStrong)}%</span></div>
+    <div class="dist-bar-item"><span class="dist-bar-label">正向</span><div class="dist-bar-track"><div class="dist-bar-fill green" style="width:${pct(pos)}%"></div></div><span class="dist-bar-pct">${pct(pos)}%</span></div>
+    <div class="dist-bar-item"><span class="dist-bar-label">负向</span><div class="dist-bar-track"><div class="dist-bar-fill" style="width:${pct(neg)}%;background:#e53935"></div></div><span class="dist-bar-pct">${pct(neg)}%</span></div>
+    <div class="dist-bar-item"><span class="dist-bar-label">生活感封面</span><div class="dist-bar-track"><div class="dist-bar-fill blue" style="width:${pct(life)}%"></div></div><span class="dist-bar-pct">${pct(life)}%</span></div>
+    <div class="dist-bar-item"><span class="dist-bar-label">预估弱营销</span><div class="dist-bar-track"><div class="dist-bar-fill green" style="width:${pct(weakMkt)}%"></div></div><span class="dist-bar-pct">${pct(weakMkt)}%</span></div>
+    <div class="dist-bar-item"><span class="dist-bar-label">预估强营销</span><div class="dist-bar-track"><div class="dist-bar-fill" style="width:${pct(strongMkt)}%;background:#c62828"></div></div><span class="dist-bar-pct">${pct(strongMkt)}%</span></div>
+  `;
+  const overallOk = (posStrong+pos)/total > 0.6 && strongMkt/total < 0.3;
+  const emotionHint = overallOk
+    ? `<div class="ok-hint">✅ 整体情绪正向、营销感可控，原生感良好</div>`
+    : `<div class="alert-hint">⚠️ 注意情绪或营销感分布，建议优化筛选策略</div>`;
+
+  document.getElementById('insightOverview').innerHTML = `
+    <div class="insight-header">
+      <div class="insight-card">
+        <h3>📋 表达方式分布（共 ${total} 篇未投笔记）</h3>
+        <div class="dist-bars">${exprBars}</div>
+        ${exprHint}
+      </div>
+      <div class="insight-card">
+        <h3>🌡️ 情绪 & 营销感分布</h3>
+        <div class="dist-bars">${emotionBars}</div>
+        ${emotionHint}
+      </div>
+    </div>`;
+
+  const listHtml = notes.map(n => {
+    const allTags = [
+      ...(n.tags.express||[]).map(t=>`<span class="tag tag-blue">${t}</span>`),
+      `<span class="tag tag-green">${n.tags.emotion}</span>`,
+      n.hot ? `<span class="fire-tag">🔥 ${n.hot}</span>` : '',
+      mktTag(n)
+    ].join('');
+    const sceneAStr = (n.sceneA||[]).join('|');
+    const sceneBStr = (n.sceneB||[]).join('|');
+    const sceneCStr = (n.sceneC||[]).join('|');
+    const titleLink = n.title
+      ? `<a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none" onclick="event.stopPropagation()">${n.title}</a>`
+      : `<a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:#FF2442;text-decoration:none" onclick="event.stopPropagation()">${n.id}</a>`;
+    return `
+      <div class="insight-note-item" data-title="${(n.title||'').replace(/"/g,'&quot;')}" data-scene-a="${sceneAStr}" data-scene-b="${sceneBStr}" data-scene-c="${sceneCStr}" onclick="toggleIni(this)">
+        <div class="ini-main">
+          <div class="ini-body">
+            <div class="ini-title">${titleLink}</div>
+            <div class="ini-tags">${allTags}</div>
+            <div class="ini-summary">${n.detail}</div>
+          </div>
+        </div>
+        <div class="ini-detail">
+          <div class="detail-grid">
+            <div class="detail-section">
+              <h4>📋 维度A · 内容画像</h4>
+              <div class="dim-row"><span class="dim-name">表达方式</span><div class="tags-wrap">${(n.tags.express||[]).map(t=>`<span class="tag tag-blue">${t}</span>`).join('')}</div></div>
+              <div class="dim-row"><span class="dim-name">情绪极性</span><span style="color:#2e7d32;font-size:13px;font-weight:500">${n.tags.emotion}</span></div>
+              <div class="dim-row"><span class="dim-name">封面真实感</span><span style="font-size:13px">${n.tags.cover}</span></div>
+              <div class="dim-row"><span class="dim-name">营销感</span><span style="font-size:13px">${mktTagPlain(n)}</span></div>
+              <div class="dim-row"><span class="dim-name">赛道</span><span style="font-size:13px">${n.industryFirst} · ${n.industrySecond}</span></div>
+            </div>
+            <div class="detail-section">
+              <h4>🏷️ 维度B · 行业需求场景</h4>
+              <div class="scene-row"><span class="scene-label">消费场景</span><div class="tags-wrap">${(n.sceneA||[]).map(t=>`<span class="tag tag-grey">${t}</span>`).join('')}</div></div>
+              <div class="scene-row"><span class="scene-label">人群场景</span><div class="tags-wrap">${(n.sceneB||[]).map(t=>`<span class="tag tag-grey">${t}</span>`).join('')}</div></div>
+              <div class="scene-row"><span class="scene-label">功效/需求</span><div class="tags-wrap">${(n.sceneC||[]).map(t=>`<span class="tag tag-grey">${t}</span>`).join('')}</div></div>
+            </div>
+          </div>
+          <div class="detail-summary">💡 <strong>一句话结论：</strong>${n.detail}</div>
+        </div>
+      </div>`;
+  }).join('');
+  document.getElementById('insightList').innerHTML = listHtml;
+}
+
+function filterInsightNotes() {
+  const kw = (document.getElementById('insightSearch')?.value || '').trim().toLowerCase();
+  const now = Date.now();
+  const items = document.querySelectorAll('#insightList .insight-note-item');
+  let visible = 0;
+  items.forEach(el => {
+    const titleMatch = !kw || (el.dataset.title||'').toLowerCase().includes(kw);
+    const aArr = el.dataset.sceneA ? el.dataset.sceneA.split('|') : [];
+    const bArr = el.dataset.sceneB ? el.dataset.sceneB.split('|') : [];
+    const cArr = el.dataset.sceneC ? el.dataset.sceneC.split('|') : [];
+    const aOk = activeSceneA.size === 0 || [...activeSceneA].some(t => aArr.includes(t));
+    const bOk = activeSceneB.size === 0 || [...activeSceneB].some(t => bArr.includes(t));
+    const cOk = activeSceneC.size === 0 || [...activeSceneC].some(t => cArr.includes(t));
+    const match = titleMatch && aOk && bOk && cOk;
+    el.classList.toggle('ini-hidden', !match);
+    if (match) visible++;
+  });
+  const noResult = document.getElementById('insightNoResult');
+  if (noResult) noResult.style.display = visible===0 ? 'block' : 'none';
+  const title = document.getElementById('insightListTitle');
+  if (title) title.textContent = `单篇内容分析（${visible} 篇）`;
+}
+
+// ======= Tab3 Sub Tab B: 历史在投 =======
+function switchInsightSub(el, sub) {
+  currentInsightSub = sub;
+  document.querySelectorAll('.insight-sub-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('insightSubA').style.display = sub === 'undeployed' ? '' : 'none';
+  document.getElementById('insightSubB').style.display = sub === 'deployed' ? '' : 'none';
+  if (sub === 'deployed') renderDeployedTab();
+}
+
+function renderDeployedTab() {
+  const deployed = []; // 历史投放数据待从数据集11161接入（当前无行权限）
+  const patternCard = document.getElementById('deployedPatternCard');
+  const listEl = document.getElementById('deployedList');
+  const emptyEl = document.getElementById('deployedEmpty');
+  const titleEl = document.getElementById('deployedListTitle');
+
+  const highPerf = deployed.filter(n => n.scores && n.scores.quality >= 60);
+  const patternTags = {};
+  highPerf.forEach(n => (n.tags.express||[]).forEach(t => { patternTags[t] = (patternTags[t]||0)+1; }));
+  const topPatterns = Object.entries(patternTags).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+
+  if (deployed.length === 0) {
+    patternCard.innerHTML = '';
+    patternCard.style.display = 'none';
+    emptyEl.style.display = 'block';
+    listEl.innerHTML = '';
+    if (titleEl) titleEl.textContent = '历史在投 / 投过 Case 卡片（0 篇）';
+    return;
+  }
+  emptyEl.style.display = 'none';
+  if (titleEl) titleEl.textContent = `历史在投 / 投过 Case 卡片（${deployed.length} 篇）`;
+
+  // Sort by invest imp desc
+  const sorted = [...deployed].sort((a,b) => {
+    const aImp = a.investMetrics ? a.investMetrics.totalImp : 0;
+    const bImp = b.investMetrics ? b.investMetrics.totalImp : 0;
+    return bImp - aImp;
+  });
+
+  listEl.innerHTML = sorted.map(n => {
+    const exprTags = (n.tags.express||[]).map(t=>`<span class="tag tag-blue">${t}</span>`).join('');
+    const hotTag = n.hot ? `<span class="fire-tag">🔥 ${n.hot}</span>` : '';
+    const mktBadge = n.isStrongMarketing === 1
+      ? '<span class="perf-badge" style="background:#fff0f0;color:#c62828">强营销感</span>'
+      : '<span class="perf-badge perf-ok">弱营销感</span>';
+    
+    let metrics = '';
+    if (n.investMetrics) {
+      const imp = n.investMetrics.totalImp;
+      const impStr = imp >= 10000 ? (imp/10000).toFixed(1)+'万' : imp.toString();
+      const ctrPct = (n.investMetrics.ctr * 100).toFixed(2);
+      const days = n.investMetrics.investDays;
+      const campaigns = n.investMetrics.campaignCount;
+      metrics = `
+        <div class="dc-metric">曝光 <strong>${impStr}</strong></div>
+        <div class="dc-metric">CTR <strong>${ctrPct}%</strong></div>
+        <div class="dc-metric">投放天数 <strong>${days}天</strong></div>
+        <div class="dc-metric">计划数 <strong>${campaigns}</strong></div>`;
+    } else {
+      metrics = `<div class="dc-metric">效果数据 <strong>待接入</strong></div>`;
+    }
+    
+    const titleLink = n.title
+      ? `<a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none" onclick="event.stopPropagation()">${n.title}</a>`
+      : `<a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:#FF2442;text-decoration:none" onclick="event.stopPropagation()">${n.id}</a>`;
+    
+    return `<div class="deployed-case" onclick="this.querySelector('.ini-detail')?.classList.toggle('open')">
+      <div class="dc-main">
+        <div class="dc-body">
+          <div class="dc-title">${titleLink}</div>
+          <div class="dc-meta"><a href="https://www.xiaohongshu.com/explore/${n.id}" target="_blank" rel="noopener" style="color:#FF2442;text-decoration:none" onclick="event.stopPropagation()">🔗 ${n.id}</a> · ${n.createTime||'—'}</div>
+          <div class="dc-tags">${exprTags}${hotTag}${mktBadge}</div>
+          <div class="dc-metrics">${metrics}</div>
+          <div class="dc-why">💡 ${n.detail}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ======= Init =======
+renderNotes(getFilteredNotes());
+renderHotTab();
+renderInsightTab();
+buildSceneChips();
+filterInsightNotes();
+</script>
+</body>
+</html>
