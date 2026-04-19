@@ -224,6 +224,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .sf-arr{font-size:10px;color:#aaa}
 .rpt-nb{background:#fafafa;border-radius:10px;padding:13px;margin-bottom:11px;border:1.5px solid #f0f0f0}
 
+.fee-input-row{background:#f8f9ff;border-radius:9px;padding:10px 12px;margin-bottom:10px;border:1px solid #e0e8ff}
+.fee-input-lbl{font-size:12px;font-weight:600;color:#1565c0;display:block;margin-bottom:6px}
+.fee-input-wrap{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.fee-input{width:64px;height:32px;border-radius:8px;border:1.5px solid #bbdefb;padding:0 8px;font-size:15px;font-weight:700;color:#1565c0;font-family:inherit;text-align:center}
+.fee-input:focus{outline:none;border-color:#1565c0}
+.fee-pct{font-size:16px;font-weight:700;color:#1565c0}
+.fee-note{font-size:10px;color:#90a4ae;display:block}
+
 </style>
 </head>
 <body>
@@ -442,18 +450,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 
 
 <div class="mask" id="previewMask" style="align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:16px;width:420px;height:82vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25)">
-    <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+  <div style="background:#fff;border-radius:16px;width:430px;max-width:95vw;height:84vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.28)">
+    <div style="padding:13px 16px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
       <div>
         <div style="font-size:14px;font-weight:700">👀 客户视角预览</div>
-        <div style="font-size:11px;color:#aaa;margin-top:2px">以下是客户收到分享链接后看到的效果</div>
+        <div style="font-size:11px;color:#aaa;margin-top:1px">以下是客户收到分享链接后看到的效果（仅含已Pick笔记）</div>
       </div>
       <button class="m-x" onclick="closePreview()">×</button>
     </div>
-    <iframe id="previewFrame" src="share.html" style="flex:1;border:none;display:block" loading="lazy"></iframe>
-    <div style="padding:11px 14px;border-top:1px solid #eee;display:flex;gap:8px;flex-shrink:0">
+    <iframe id="previewFrame" src="" style="flex:1;border:none;display:block" loading="lazy"></iframe>
+    <div style="padding:10px 14px;border-top:1px solid #eee;display:flex;gap:8px;flex-shrink:0">
       <button class="btn-copy" style="flex:1" onclick="copyShareUrl()">📋 复制分享链接</button>
-      <button class="btn-copy" style="flex:1;background:#e8f7ee;color:#1e8a3c;border-color:#1e8a3c" onclick="window.open('share.html','_blank')">🔗 新窗口打开</button>
+      <button class="btn-copy" style="flex:1;background:#e8f7ee;color:#1e8a3c;border-color:#1e8a3c" onclick="window.open(document.getElementById('previewFrame').src,'_blank')">🔗 新窗口打开</button>
     </div>
   </div>
 </div>
@@ -762,7 +770,7 @@ function buildRadar(notes){
   return s+"</svg>";
 }
 
-const SHARE_URL="https://aria0730.github.io/hgz-insight-demo/share.html";
+const SHARE_BASE="https://aria0730.github.io/hgz-insight-demo/share/";
 
 function openReport(){
   if(PKD.size===0){showToast("请先 Pick 至少一篇笔记 💅");return;}
@@ -775,7 +783,7 @@ function openReport(){
   const spus=[...new Set(tns.map(n=>n.spu))].join("、");
   const ctrAvg=Math.round(tns.reduce((s,n)=>s+parseFloat(n.ctr),0)/tns.length);
   const shareId="SZP-"+Date.now().toString(36).toUpperCase();
-  const shareUrl=SHARE_URL;
+  const shareUrl=SHARE_BASE+shareId;
 
   const noteHtml=tns.map(n=>"<div class=\"rpt-nb\">"
     +"<div style=\"display:flex;gap:10px;align-items:flex-start;margin-bottom:8px\">"
@@ -829,17 +837,29 @@ function openReport(){
   const btn=document.getElementById("btnSync");btn.className="btn-sync";btn.textContent="💡 一键同步至合作广场后台";
   document.getElementById("rptMask").classList.add("open");
 }
-function copyShare(url){navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>showToast("链接已复制！发给客户 📋"));}
+function copyShare(url){navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>showToast("分享链接已复制 📋"));}
 function doSync(){const btn=document.getElementById("btnSync");btn.className="btn-sync done";btn.textContent="✅ 已同步 · 前往合作内容管理查看";showToast("已同步到「合作广场 > 合作内容管理 > 我的精选」🎉");}
 
 document.getElementById("bannerLink").addEventListener("click",function(){switchRight("rec");});
 
+
+
+function refreshShareUrl(){
+  const fee=(document.getElementById("feeInput")||{}).value||"10";
+  const url=buildShareUrl(fee.trim()||"10");
+  _shareUrl=url;
+  const box=document.getElementById("shareUrlBox");
+  if(box)box.textContent=url;
+}
+function openPreview(){
+  const url=_shareUrl||buildShareUrl("10");
+  document.getElementById("previewFrame").src=url;
+  document.getElementById("previewMask").classList.add("open");
+}
+function closePreview(){document.getElementById("previewMask").classList.remove("open");}
+function copyShareUrl(){navigator.clipboard&&navigator.clipboard.writeText(_shareUrl||buildShareUrl("10")).then(()=>showToast("分享链接已复制 📋"));}
 renderNotes();renderRec();renderHot();
 
-
-function openPreview(){document.getElementById("previewMask").classList.add("open");}
-function closePreview(){document.getElementById("previewMask").classList.remove("open");}
-function copyShareUrl(){navigator.clipboard&&navigator.clipboard.writeText("https://aria0730.github.io/hgz-insight-demo/share.html").then(()=>showToast("分享链接已复制！发给客户 📋"));}
 </script>
 </body>
 </html>
