@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>山楂饼家 · 投放精选笔记 · 客户预览</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;background:#f5f5f7;color:#1a1a1a;min-height:100vh}
+.shdr{background:#fff;border-bottom:1px solid #eee;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.shdr-l{display:flex;align-items:center;gap:10px}
+.logo{width:32px;height:32px;background:#FF2442;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:700}
+.shdr-title{font-size:15px;font-weight:700}
+.shdr-sub{font-size:12px;color:#aaa;margin-left:6px}
+.brand-pill{background:#fff0f2;border-radius:20px;padding:5px 13px;font-size:13px;color:#FF2442;font-weight:600}
+.hero{background:linear-gradient(135deg,#FF2442,#ff6b8a);color:#fff;padding:24px 20px 20px;text-align:center}
+.hero-logo{font-size:32px;margin-bottom:8px}
+.hero-title{font-size:20px;font-weight:700;margin-bottom:4px}
+.hero-sub{font-size:13px;opacity:.85;margin-bottom:12px}
+.hero-note{font-size:11px;background:rgba(255,255,255,.2);border-radius:20px;padding:5px 14px;display:inline-block}
+.wrap{max-width:540px;margin:0 auto;padding:16px}
+.sec-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.note-list{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.ncard{background:#fff;border-radius:12px;border:1.5px solid #eee;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.ncard:hover{box-shadow:0 4px 14px rgba(255,36,66,.1)}
+.ncard.pked{border-color:#FF2442}
+.cvr{position:relative;overflow:hidden}
+.cvr svg{width:100%;display:block;max-height:180px}
+.rec-badge{position:absolute;top:0;left:0;background:#FF2442;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:0 0 8px 0}
+.spu-badge{position:absolute;top:8px;right:40px;background:rgba(230,81,0,.85);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+.ck-wrap{position:absolute;top:8px;right:8px}
+.ck-btn{width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.9);background:rgba(255,255,255,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;backdrop-filter:blur(4px);transition:all .15s}
+.ck-btn.pked{background:#FF2442;border-color:#FF2442;color:#fff}
+.cbody{padding:12px 14px}
+.ctitle{font-size:14px;font-weight:600;line-height:1.45;margin-bottom:5px}
+.cauthor{font-size:12px;color:#aaa;margin-bottom:8px}
+.sbars{margin-bottom:8px}
+.sbar-row{display:flex;align-items:center;gap:6px;font-size:11px;color:#bbb;margin-bottom:4px}
+.sbar-lbl{width:40px;flex-shrink:0}
+.sbar-t{flex:1;height:4px;background:#f0f0f0;border-radius:2px;overflow:hidden}
+.sbar-f{height:100%;border-radius:2px}
+.ctags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.tag{padding:3px 8px;border-radius:9px;font-size:11px;font-weight:500}
+.t-blue{background:#e8f4ff;color:#1e6bb8}.t-pink{background:#ffe8f0;color:#c0335a}
+.t-green{background:#e8f7ee;color:#1e8a3c}.t-purple{background:#f0e8ff;color:#6b3ac0}
+.t-orange{background:#fff3e0;color:#e65100}.t-gray{background:#f5f5f5;color:#666}
+.reason-box{font-size:12px;color:#888;line-height:1.55;background:#fff8f9;padding:7px 10px;border-radius:7px;border-left:3px solid #FF2442;margin-bottom:10px}
+.btn-pk{width:100%;height:38px;border-radius:10px;border:1.5px solid #FF2442;background:#fff;color:#FF2442;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-pk.pked{background:#e8f7ee;border-color:#1e8a3c;color:#1e8a3c}
+.sticky-ft{position:sticky;bottom:0;background:#fff;border-top:1px solid #eee;padding:14px 20px;z-index:100;max-width:540px;margin:0 auto}
+.pk-status{font-size:13px;color:#aaa;margin-bottom:10px;text-align:center}
+.pk-status span{color:#FF2442;font-weight:700;font-size:16px}
+.btn-submit{width:100%;height:46px;border-radius:12px;background:linear-gradient(135deg,#FF2442,#ff6b8a);color:#fff;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-submit:disabled{opacity:.4;cursor:not-allowed}
+.submit-note{text-align:center;font-size:11px;color:#bbb;margin-top:6px}
+.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:900}
+.modal-mask.open{display:flex}
+.modal-sheet{background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:540px;padding:24px 20px 36px}
+.modal-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:6px}
+.modal-sub{font-size:13px;color:#aaa;text-align:center;margin-bottom:20px;line-height:1.5}
+.modal-check{display:flex;align-items:flex-start;gap:10px;background:#f9f9f9;border-radius:10px;padding:12px;margin-bottom:10px}
+.modal-check-em{font-size:20px;flex-shrink:0}
+.modal-check-txt{font-size:12px;color:#555;line-height:1.6}
+.modal-check-txt strong{color:#1a1a1a}
+.btn-confirm{width:100%;height:46px;border-radius:12px;background:linear-gradient(135deg,#34c759,#30b050);color:#fff;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:14px}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(0,0,0,.78);color:#fff;padding:10px 20px;border-radius:22px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="shdr">
+  <div class="shdr-l">
+    <div class="logo">薯</div>
+    <span class="shdr-title">合作广场</span>
+    <span class="shdr-sub">客户精选预览</span>
+  </div>
+  <div class="brand-pill">🍡 山楂饼家</div>
+</div>
+
+<div class="hero">
+  <div class="hero-logo">🍡</div>
+  <div class="hero-title">山楂饼家 · 投放精选笔记</div>
+  <div class="hero-sub">共 12 篇 · 代理已为你精选推荐，可浏览并选择心仪笔记</div>
+  <div class="hero-note">✨ 选好后点「确认Pick」→ 代理设置分成 → 发起授权</div>
+</div>
+
+<div class="wrap">
+  <div class="sec-title">📋 精选笔记列表</div>
+  <div class="note-list" id="noteList"></div>
+</div>
+
+<div class="sticky-ft">
+  <div class="pk-status">已选 <span id="pkCnt">0</span> 篇笔记</div>
+  <button class="btn-submit" id="btnSubmit" disabled onclick="openSubmit()">确认Pick · 同步至代理后台</button>
+  <div class="submit-note">Pick后代理将为你设置授权分成并发起合作申请</div>
+</div>
+
+<div class="modal-mask" id="submitMask">
+  <div class="modal-sheet">
+    <div class="modal-title">确认Pick笔记</div>
+    <div class="modal-sub" id="modalSub">你已选择 0 篇笔记，确认后将同步至代理后台</div>
+    <div class="modal-check">
+      <div class="modal-check-em">🔗</div>
+      <div class="modal-check-txt"><strong>授权流程说明</strong><br>Pick确认后，代理将在1个工作日内设置分成比例并向笔记作者发起授权申请，授权成功后笔记即可在合作广场投放。</div>
+    </div>
+    <div class="modal-check">
+      <div class="modal-check-em">💰</div>
+      <div class="modal-check-txt"><strong>分成说明</strong><br>授权分成由代理与作者协商，一般为消耗金额的5%-15%，代理将在发起授权前与你确认。</div>
+    </div>
+    <div class="modal-check">
+      <div class="modal-check-em">📱</div>
+      <div class="modal-check-txt"><strong>后续跟进</strong><br>授权申请发出后，代理将通过Hi通讯或邮件通知你进度，授权成功后可在聚光平台直接投放。</div>
+    </div>
+    <button class="btn-confirm" onclick="doSubmit()">✅ 确认，同步给代理</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const NOTES=[{"id": "n01", "spu": "青梅酥饼", "title": "酸甜得刚刚好！青梅酥饼让我找回了小时候的味道", "author": "小酸梅子", "fans_raw": 3200, "fans": "3200", "date": "2026-04-10", "crowd": "学生党", "need": "情绪共鸣", "tags": ["真实体验", "情绪共鸣"], "sc": {"hot": 88, "q": 85, "nat": 90, "his": 82}, "rec": true, "ctr": "+34%", "reason": "情绪共鸣强，记忆点清晰，原生感极佳，历史相似内容CTR高", "hot_match": ["#五一出游零食"]}, {"id": "n02", "spu": "玫瑰云朵糕", "title": "七夕送这个！玫瑰云朵糕颜值高到不像真的", "author": "礼物研究所", "fans_raw": 8600, "fans": "8600", "date": "2026-04-05", "crowd": "约会人群", "need": "颜值出片", "tags": ["节日送礼", "颜值出片"], "sc": {"hot": 95, "q": 88, "nat": 85, "his": 78}, "rec": true, "ctr": "+41%", "reason": "节日节点+高颜值，CTR历史峰值，送礼场景转化极强", "hot_match": ["#节日礼盒推荐", "#中式点心颜值"]}, {"id": "n03", "spu": "核桃脆饼", "title": "健身er也能吃的饼干？核桃脆饼热量表一看直接放心", "author": "健康星人丸子", "fans_raw": 5800, "fans": "5800", "date": "2026-04-12", "crowd": "健身人群", "need": "性价比", "tags": ["干货攻略", "健康轻食"], "sc": {"hot": 62, "q": 70, "nat": 68, "his": 55}, "rec": false, "ctr": "+18%", "reason": "健康赛道有需求，但热点命中弱，适合精准人群投放", "hot_match": ["#健康零食清单"]}, {"id": "n04", "spu": "芋泥麻薯", "title": "下午茶新宠！芋泥麻薯软糯程度把我惊到了", "author": "奶茶配点心", "fans_raw": 1200, "fans": "1200", "date": "2026-04-08", "crowd": "白领通勤", "need": "工艺展示", "tags": ["下午茶场景", "真实体验"], "sc": {"hot": 91, "q": 82, "nat": 80, "his": 72}, "rec": true, "ctr": "+29%", "reason": "下午茶高频场景，原生感强，芋泥元素持续热门", "hot_match": ["#下午茶好物推荐"]}, {"id": "n05", "spu": "抹茶流心饼", "title": "拍完就发！抹茶流心饼出片率太高了吧", "author": "摆拍日记本", "fans_raw": 900, "fans": "900", "date": "2026-03-28", "crowd": "追流行人群", "need": "颜值出片", "tags": ["颜值出片", "摆拍攻略"], "sc": {"hot": 45, "q": 72, "nat": 78, "his": 48}, "rec": false, "ctr": "+15%", "reason": "颜值内容互动好，受众偏摄影圈，规模化有限", "hot_match": []}, {"id": "n06", "spu": "桂花糯米糕", "title": "中秋不送月饼送这个！桂花糯米糕才是今年最惊艳的礼盒", "author": "节气生活家", "fans_raw": 4200, "fans": "4200", "date": "2026-04-02", "crowd": "新娘人群", "need": "节日氛围", "tags": ["节日送礼", "节气风情"], "sc": {"hot": 38, "q": 76, "nat": 85, "his": 70}, "rec": false, "ctr": "+12%", "reason": "节气内容原生感好，节日节点前复投效果佳，当前时机稍早", "hot_match": ["#国风好物"]}, {"id": "n07", "spu": "玫瑰云朵糕", "title": "手残党也能复刻的节日礼盒装法，送女朋友必入", "author": "精致生活Mia", "fans_raw": 7500, "fans": "7500", "date": "2026-04-14", "crowd": "约会人群", "need": "工艺展示", "tags": ["干货攻略", "节日送礼"], "sc": {"hot": 89, "q": 86, "nat": 82, "his": 75}, "rec": true, "ctr": "+38%", "reason": "礼盒教程+节日场景，引流效率高，覆盖广", "hot_match": ["#节日礼盒推荐"]}, {"id": "n08", "spu": "青梅酥饼", "title": "全职妈妈的零食清单，这款青梅饼让全家都爱上了", "author": "妈妈的零食柜", "fans_raw": 6700, "fans": "6700", "date": "2026-03-20", "crowd": "家庭人群", "need": "情绪共鸣", "tags": ["真实体验", "家庭场景"], "sc": {"hot": 52, "q": 74, "nat": 88, "his": 60}, "rec": false, "ctr": "+16%", "reason": "家庭场景原生感极强，适合长效投放", "hot_match": []}, {"id": "n09", "spu": "芋泥麻薯", "title": "办公室下午茶测评！芋泥麻薯吃一口就忘记下班了", "author": "打工人茶水间", "fans_raw": 9300, "fans": "9300", "date": "2026-04-11", "crowd": "白领通勤", "need": "性价比", "tags": ["办公室场景", "下午茶场景"], "sc": {"hot": 80, "q": 84, "nat": 78, "his": 68}, "rec": true, "ctr": "+33%", "reason": "办公室场景高频，打工人共鸣强，下午茶消费决策快", "hot_match": ["#下午茶好物推荐", "#办公室零食"]}, {"id": "n10", "spu": "核桃脆饼", "title": "囤货清单来了，核桃脆饼这个配方绝了", "author": "囤货控Vivian", "fans_raw": 2400, "fans": "2400", "date": "2026-03-15", "crowd": "追流行人群", "need": "性价比", "tags": ["囤货种草", "真实体验"], "sc": {"hot": 55, "q": 79, "nat": 87, "his": 65}, "rec": false, "ctr": "+22%", "reason": "囤货场景转化意愿强，适合大促节点复投", "hot_match": ["#囤货必买"]}, {"id": "n11", "spu": "抹茶流心饼", "title": "五一出游带什么零食？这款抹茶饼真的是出行神器", "author": "出游零食指南", "fans_raw": 5100, "fans": "5100", "date": "2026-04-16", "crowd": "学生党", "need": "节日氛围", "tags": ["出行场景", "热点借势"], "sc": {"hot": 85, "q": 80, "nat": 82, "his": 70}, "rec": true, "ctr": "+31%", "reason": "五一热点命中，出行场景高频，轻便零食刚需", "hot_match": ["#五一出游零食"]}, {"id": "n12", "spu": "桂花糯米糕", "title": "国风点心测评！桂花糯米糕真的是东方美学天花板", "author": "国风好物志", "fans_raw": 800, "fans": "800", "date": "2026-03-25", "crowd": "追流行人群", "need": "颜值出片", "tags": ["国风种草", "颜值出片"], "sc": {"hot": 60, "q": 71, "nat": 80, "his": 58}, "rec": false, "ctr": "+19%", "reason": "国风赛道互动好，颜值内容有传播力", "hot_match": ["#国风好物", "#中式点心颜值"]}];
+const COVERS={"n01": {"c1": "#c8f6c8", "c2": "#a8e6a8", "em": "🫐", "food": "<ellipse cx=\"150\" cy=\"95\" rx=\"70\" ry=\"52\" fill=\"#6dbf6d\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"88\" rx=\"60\" ry=\"44\" fill=\"#8fd48f\" opacity=\"0.8\"/><ellipse cx=\"150\" cy=\"82\" rx=\"48\" ry=\"34\" fill=\"#b2e8b2\"/><ellipse cx=\"150\" cy=\"78\" rx=\"36\" ry=\"22\" fill=\"#d4f5d4\"/><circle cx=\"120\" cy=\"60\" r=\"18\" fill=\"#6dbf6d\" opacity=\"0.5\"/><circle cx=\"180\" cy=\"65\" r=\"14\" fill=\"#6dbf6d\" opacity=\"0.4\"/>"}, "n02": {"c1": "#ffd6e8", "c2": "#e8b4d0", "em": "🌸", "food": "<circle cx=\"150\" cy=\"85\" r=\"38\" fill=\"#f8bbd0\"/><circle cx=\"110\" cy=\"75\" r=\"26\" fill=\"#f8bbd0\"/><circle cx=\"190\" cy=\"75\" r=\"26\" fill=\"#f8bbd0\"/><circle cx=\"130\" cy=\"55\" r=\"22\" fill=\"#f8bbd0\"/><circle cx=\"170\" cy=\"55\" r=\"22\" fill=\"#f8bbd0\"/><circle cx=\"150\" cy=\"85\" r=\"26\" fill=\"#fce4ec\"/><circle cx=\"150\" cy=\"85\" r=\"14\" fill=\"#f48fb1\" opacity=\"0.6\"/>"}, "n03": {"c1": "#f5deb3", "c2": "#deb887", "em": "🌰", "food": "<ellipse cx=\"150\" cy=\"90\" rx=\"65\" ry=\"45\" fill=\"#c8a06a\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"85\" rx=\"55\" ry=\"36\" fill=\"#dab87a\"/><ellipse cx=\"150\" cy=\"80\" rx=\"44\" ry=\"27\" fill=\"#e8c88a\"/><path d=\"M115,75 Q130,60 150,72 Q170,60 185,75\" fill=\"none\" stroke=\"#b8904a\" stroke-width=\"2.5\" opacity=\"0.6\"/>"}, "n04": {"c1": "#e8d5f5", "c2": "#c8a8e8", "em": "🟣", "food": "<ellipse cx=\"150\" cy=\"92\" rx=\"62\" ry=\"50\" fill=\"#9c6fc8\" opacity=\"0.5\"/><ellipse cx=\"150\" cy=\"88\" rx=\"54\" ry=\"44\" fill=\"#b48cd8\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"84\" rx=\"46\" ry=\"36\" fill=\"#c8a8e8\"/><ellipse cx=\"150\" cy=\"80\" rx=\"36\" ry=\"26\" fill=\"#dcc4f4\"/>"}, "n05": {"c1": "#d4f5d4", "c2": "#a8d8a8", "em": "🍵", "food": "<circle cx=\"150\" cy=\"88\" r=\"52\" fill=\"#5a9a5a\" opacity=\"0.5\"/><circle cx=\"150\" cy=\"85\" r=\"44\" fill=\"#6db86d\" opacity=\"0.65\"/><circle cx=\"150\" cy=\"82\" r=\"36\" fill=\"#88cc88\"/><circle cx=\"150\" cy=\"80\" r=\"26\" fill=\"#aadcaa\"/><circle cx=\"150\" cy=\"80\" r=\"16\" fill=\"#c2e8a0\" opacity=\"0.9\"/><circle cx=\"150\" cy=\"80\" r=\"8\" fill=\"#fff\" opacity=\"0.7\"/>"}, "n06": {"c1": "#fff3cd", "c2": "#ffd700", "em": "🌼", "food": "<rect x=\"90\" y=\"65\" width=\"120\" height=\"70\" rx=\"10\" fill=\"#e8b800\" opacity=\"0.6\"/><rect x=\"95\" y=\"68\" width=\"110\" height=\"62\" rx=\"8\" fill=\"#f5cc00\" opacity=\"0.8\"/><rect x=\"100\" y=\"72\" width=\"100\" height=\"54\" rx=\"6\" fill=\"#fff0a0\"/><circle cx=\"130\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/><circle cx=\"150\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/><circle cx=\"170\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/>"}, "n07": {"c1": "#fce4ec", "c2": "#f8bbd0", "em": "🎀", "food": "<rect x=\"95\" y=\"78\" width=\"110\" height=\"75\" rx=\"8\" fill=\"#f48fb1\" opacity=\"0.6\"/><rect x=\"100\" y=\"82\" width=\"100\" height=\"67\" rx=\"6\" fill=\"#f8bbd0\" opacity=\"0.9\"/><rect x=\"105\" y=\"86\" width=\"90\" height=\"58\" rx=\"5\" fill=\"#fce4ec\"/><path d=\"M150,82 Q135,65 118,72 Q130,82 150,78 Q170,82 182,72 Q165,65 150,82Z\" fill=\"#f48fb1\" opacity=\"0.8\"/>"}, "n08": {"c1": "#e8f5e9", "c2": "#c8e6c9", "em": "🍃", "food": "<ellipse cx=\"150\" cy=\"90\" rx=\"65\" ry=\"48\" fill=\"#66bb6a\" opacity=\"0.5\"/><ellipse cx=\"150\" cy=\"86\" rx=\"55\" ry=\"40\" fill=\"#81c784\" opacity=\"0.65\"/><ellipse cx=\"150\" cy=\"82\" rx=\"44\" ry=\"31\" fill=\"#a5d6a7\"/><ellipse cx=\"150\" cy=\"78\" rx=\"33\" ry=\"20\" fill=\"#c8e6c9\"/>"}, "n09": {"c1": "#ede7f6", "c2": "#d1c4e9", "em": "💜", "food": "<ellipse cx=\"118\" cy=\"95\" rx=\"42\" ry=\"40\" fill=\"#7b52ab\" opacity=\"0.55\"/><ellipse cx=\"182\" cy=\"95\" rx=\"42\" ry=\"40\" fill=\"#7b52ab\" opacity=\"0.55\"/><ellipse cx=\"150\" cy=\"88\" rx=\"44\" ry=\"42\" fill=\"#9575cd\" opacity=\"0.75\"/><ellipse cx=\"118\" cy=\"92\" rx=\"34\" ry=\"32\" fill=\"#ab87d4\"/><ellipse cx=\"182\" cy=\"92\" rx=\"34\" ry=\"32\" fill=\"#ab87d4\"/><ellipse cx=\"150\" cy=\"85\" rx=\"36\" ry=\"34\" fill=\"#c5aae8\"/>"}, "n10": {"c1": "#efebe9", "c2": "#d7ccc8", "em": "🤎", "food": "<rect x=\"88\" y=\"68\" width=\"124\" height=\"78\" rx=\"10\" fill=\"#8d6e63\" opacity=\"0.55\"/><rect x=\"93\" y=\"72\" width=\"114\" height=\"70\" rx=\"8\" fill=\"#a1887f\" opacity=\"0.75\"/><rect x=\"98\" y=\"76\" width=\"104\" height=\"62\" rx=\"6\" fill=\"#bcaaa4\"/><line x1=\"150\" y1=\"76\" x2=\"150\" y2=\"138\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.35\"/>"}, "n11": {"c1": "#f1f8e9", "c2": "#dcedc8", "em": "🍃", "food": "<circle cx=\"150\" cy=\"88\" r=\"50\" fill=\"#558b2f\" opacity=\"0.45\"/><circle cx=\"150\" cy=\"85\" r=\"42\" fill=\"#6a9e3f\" opacity=\"0.6\"/><circle cx=\"150\" cy=\"82\" r=\"34\" fill=\"#8bc34a\" opacity=\"0.75\"/><circle cx=\"150\" cy=\"80\" r=\"24\" fill=\"#aed581\"/><line x1=\"106\" y1=\"62\" x2=\"194\" y2=\"98\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.4\"/>"}, "n12": {"c1": "#fffde7", "c2": "#fff9c4", "em": "✨", "food": "<circle cx=\"150\" cy=\"90\" r=\"52\" fill=\"#f9a825\" opacity=\"0.45\"/><circle cx=\"150\" cy=\"87\" r=\"44\" fill=\"#fbc02d\" opacity=\"0.6\"/><circle cx=\"150\" cy=\"84\" r=\"36\" fill=\"#fdd835\" opacity=\"0.75\"/><circle cx=\"150\" cy=\"82\" r=\"26\" fill=\"#ffee58\"/><circle cx=\"150\" cy=\"67\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/><circle cx=\"130\" cy=\"72\" r=\"4\" fill=\"#f9a825\" opacity=\"0.6\"/><circle cx=\"170\" cy=\"72\" r=\"4\" fill=\"#f9a825\" opacity=\"0.6\"/>"}};
+const H_MAP={"n01": 162, "n02": 178, "n03": 148, "n04": 170, "n05": 155, "n06": 142, "n07": 185, "n08": 158, "n09": 165, "n10": 152, "n11": 172, "n12": 145};
+
+const TAG_CLR={"真实体验":"t-blue","情绪共鸣":"t-blue","干货攻略":"t-purple","健康轻食":"t-green","颜值出片":"t-pink","节日送礼":"t-pink","节气风情":"t-orange","摆拍攻略":"t-gray","家庭场景":"t-blue","下午茶场景":"t-orange","办公室场景":"t-purple","囤货种草":"t-orange","出行场景":"t-green","热点借势":"t-orange","国风种草":"t-purple"};
+function tc(t){return TAG_CLR[t]||"t-gray";}
+function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2300);}
+
+function makeSVG(n){
+  const cfg=COVERS[n.id]||{c1:"#ffd6e8",c2:"#f8bbd0",em:"🍡",food:""};
+  const h=H_MAP[n.id]||160;
+  const eid=n.id+"s";
+  return "<svg viewBox=\"0 0 300 "+h+"\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"g"+eid+"\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\""+cfg.c1+"\"/><stop offset=\"100%\" stop-color=\""+cfg.c2+"\"/></linearGradient></defs><rect width=\"300\" height=\""+h+"\" fill=\"url(#g"+eid+")\"\/>"+cfg.food+"<text x=\"150\" y=\""+Math.round(h*0.45)+"\" text-anchor=\"middle\" font-size=\"32\" dominant-baseline=\"middle\">"+cfg.em+"</text></svg>";
+}
+
+const PKD=new Set();
+
+function renderNotes(){
+  document.getElementById("noteList").innerHTML=NOTES.map(n=>{
+    const pk=PKD.has(n.id);
+    return "<div class=\"ncard"+(pk?" pked":"")+"\" id=\"card-"+n.id+"\">"
+      +"<div class=\"cvr\">"+makeSVG(n)
+      +(n.rec?"<div class=\"rec-badge\">✨ 代理力荐</div>":"")
+      +"<div class=\"spu-badge\">"+n.spu+"</div>"
+      +"<div class=\"ck-wrap\"><div class=\"ck-btn"+(pk?" pked":"")+"\" onclick=\"togglePk('"+n.id+"',event)\">✓</div></div>"
+      +"</div>"
+      +"<div class=\"cbody\">"
+      +"<div class=\"ctitle\">"+n.title+"</div>"
+      +"<div class=\"cauthor\">@"+n.author+" · "+n.fans+"粉 · "+n.date.slice(5)+"</div>"
+      +"<div class=\"sbars\">"
+      +"<div class=\"sbar-row\"><span class=\"sbar-lbl\">热点</span><div class=\"sbar-t\"><div class=\"sbar-f\" style=\"width:"+n.sc.hot+"%;background:linear-gradient(90deg,#FF2442,#ff6b8a)\"></div></div></div>"
+      +"<div class=\"sbar-row\"><span class=\"sbar-lbl\">质量</span><div class=\"sbar-t\"><div class=\"sbar-f\" style=\"width:"+n.sc.q+"%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)\"></div></div></div>"
+      +"</div>"
+      +"<div class=\"ctags\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\"\>"+t+"</span>").join("")+"<span class=\"tag t-orange\">👥 "+n.crowd+"</span><span class=\"tag t-green\">🎯 "+n.need+"</span></div>"
+      +"<div class=\"reason-box\">💬 "+n.reason+"（预估CTR "+n.ctr+"）</div>"
+      +"<button class=\"btn-pk"+(pk?" pked":"")+"\" id=\"pk-"+n.id+"\" onclick=\"togglePk('"+n.id+"',event)\">"+(pk?"已Pick ✓":"Pick 这篇 💅")+"</button>"
+      +"</div></div>";
+  }).join("");
+}
+
+function togglePk(id,e){
+  if(e)e.stopPropagation();
+  if(PKD.has(id))PKD.delete(id);else PKD.add(id);
+  const pk=PKD.has(id);
+  const card=document.getElementById("card-"+id);
+  if(card){
+    card.className="ncard"+(pk?" pked":"");
+    const cb=card.querySelector(".ck-btn");if(cb)cb.className="ck-btn"+(pk?" pked":"");
+    const pb=document.getElementById("pk-"+id);if(pb){pb.className="btn-pk"+(pk?" pked":"");pb.textContent=pk?"已Pick ✓":"Pick 这篇 💅";}
+  }
+  document.getElementById("pkCnt").textContent=PKD.size;
+  document.getElementById("btnSubmit").disabled=PKD.size===0;
+}
+
+function openSubmit(){
+  document.getElementById("modalSub").textContent="你已选择 "+PKD.size+" 篇笔记，确认后将同步至代理后台";
+  document.getElementById("submitMask").classList.add("open");
+}
+function doSubmit(){
+  document.getElementById("submitMask").classList.remove("open");
+  showToast("✅ 已同步！代理将在1个工作日内联系你确认分成 🎉");
+  setTimeout(()=>{
+    document.getElementById("btnSubmit").textContent="✅ 已提交 · 等待代理处理";
+    document.getElementById("btnSubmit").style.background="#34c759";
+    document.getElementById("btnSubmit").disabled=true;
+  },500);
+}
+document.getElementById("submitMask").addEventListener("click",function(e){if(e.target===this)this.classList.remove("open");});
+
+renderNotes();
+</script>
+</body>
+</html>
