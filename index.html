@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>合作广场 · 陈山楂的美甲店</title>
+<title>合作广场 · 山楂饼家</title>
 <style>
-
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;background:#f5f5f7;color:#1a1a1a;height:100vh;display:flex;flex-direction:column;overflow:hidden}
 .hdr{height:52px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0}
@@ -17,7 +16,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .banner{background:#fff0f2;padding:9px 20px;display:flex;align-items:center;gap:8px;flex-shrink:0;border-bottom:1px solid #ffd0d8}
 .banner-txt{font-size:13px;color:#c62828;flex:1}
 .banner-link{color:#FF2442;font-weight:600;cursor:pointer;text-decoration:underline;margin-left:4px}
-.banner-x{border:none;background:none;cursor:pointer;font-size:17px;color:#bbb;line-height:1;padding:0 2px}
+.banner-x{border:none;background:none;cursor:pointer;font-size:17px;color:#bbb;line-height:1}
 .main{display:flex;flex:1;overflow:hidden}
 .left{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}
 .mtabs{display:flex;background:#fff;border-bottom:2px solid #eee;padding:0 20px;flex-shrink:0}
@@ -35,18 +34,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .btn-ask{padding:8px 14px;background:linear-gradient(135deg,#FF2442,#ff6b8a);color:#fff;border:none;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:500;white-space:nowrap}
 .fdrawer{background:#fff;border-radius:12px;border:1.5px solid #ffd0d8;padding:14px 16px;display:none;flex-direction:column;gap:10px;flex-shrink:0}
 .fdrawer.open{display:flex}
-.fsec{font-size:11px;color:#aaa;font-weight:700;letter-spacing:.5px;margin-bottom:3px}
+.fsec{font-size:11px;color:#aaa;font-weight:700;letter-spacing:.5px;margin-bottom:4px}
+.fsub{font-size:12px;color:#888;margin:5px 0 4px}
 .frow{display:flex;flex-wrap:wrap;gap:6px}
-.ftag{padding:5px 11px;border-radius:16px;font-size:12px;border:1.5px solid #eee;background:#fafafa;cursor:pointer;color:#666;white-space:nowrap;user-select:none}
-.ftag:hover,.ftag.on{border-color:#FF2442;color:#FF2442;background:#fff0f2}
-.ftag.on{font-weight:600}
-.fdiv{border:none;border-top:1px dashed #f0f0f0}
+.ftag{padding:5px 11px;border-radius:16px;font-size:12px;border:1.5px solid #eee;background:#fafafa;cursor:pointer;color:#666;white-space:nowrap;user-select:none;transition:all .15s}
+.ftag:hover{border-color:#FF2442;color:#FF2442;background:#fff0f2}
+.ftag.on{border-color:#FF2442;color:#FF2442;background:#fff0f2;font-weight:600}
+.ftag.sel{border-color:#1e8a3c;color:#1e8a3c;background:#e8f7ee;font-weight:600}
+.fdiv{border:none;border-top:1px dashed #f0f0f0;margin:2px 0}
 .f-acts{display:flex;justify-content:flex-end;gap:8px}
 .btn-freset{padding:5px 12px;border-radius:14px;border:1.5px solid #eee;background:#fff;font-size:12px;color:#999;cursor:pointer;font-family:inherit}
 .btn-fapply{padding:5px 12px;border-radius:14px;border:none;background:#FF2442;color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
 .stb{display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.pool-title{font-size:15px;font-weight:700}
-.pool-cnt{font-size:13px;color:#999;margin-left:6px}
+.pool-title{font-size:15px;font-weight:700}.pool-cnt{font-size:13px;color:#999;margin-left:6px}
 .sort-btn{font-size:13px;color:#FF2442;cursor:pointer;font-weight:500}
 .chips{display:flex;gap:7px;flex-wrap:wrap;flex-shrink:0}
 .chip{padding:6px 13px;border-radius:20px;font-size:13px;border:1.5px solid #eee;background:#fff;cursor:pointer;color:#666;white-space:nowrap;user-select:none}
@@ -57,11 +57,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .ncard.pked{border-color:#FF2442}
 .cvr{position:relative;overflow:hidden}
 .cvr svg{width:100%;display:block}
-.cvr-ov{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.76);color:#fff;padding:9px 11px;font-size:11px;line-height:1.55;transform:translateY(18px);opacity:0;transition:transform .2s,opacity .2s}
+.cvr-ov{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.78);color:#fff;padding:9px 11px;font-size:11px;line-height:1.55;transform:translateY(100%);opacity:0;transition:transform .22s,opacity .22s}
 .cvr:hover .cvr-ov{transform:translateY(0);opacity:1}
 .rec-badge{position:absolute;top:0;left:0;background:#FF2442;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:0 0 8px 0}
-.hot-badge{position:absolute;top:0;right:30px;background:rgba(255,87,34,.88);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:0 0 6px 6px;max-width:86px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ck-btn{position:absolute;top:7px;right:7px;width:24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,.9);background:rgba(255,255,255,.28);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;backdrop-filter:blur(4px);color:transparent}
+.spu-badge{position:absolute;top:7px;right:34px;background:rgba(230,81,0,.85);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ck-btn{position:absolute;top:7px;right:7px;width:24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,.9);background:rgba(255,255,255,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;backdrop-filter:blur(4px);color:transparent}
 .ck-btn.pked{background:#FF2442;border-color:#FF2442;color:#fff}
 .cbody{padding:11px 12px}
 .ctitle{font-size:13px;font-weight:600;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:5px}
@@ -79,7 +79,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .cacts{display:flex;gap:7px}
 .btn-det,.btn-pk{flex:1;font-size:12px;padding:6px 0;border-radius:9px;border:1.5px solid #eee;background:#fff;cursor:pointer;font-family:inherit;color:#666;font-weight:500}
 .btn-det:hover{border-color:#FF2442;color:#FF2442}
-.btn-pk:hover{border-color:#FF2442;color:#FF2442}
 .btn-pk.pked{background:#e8f7ee;border-color:#1e8a3c;color:#1e8a3c}
 .right{width:360px;background:#fff;border-left:1px solid #eee;display:flex;flex-direction:column;flex-shrink:0}
 .rtabs{display:flex;border-bottom:1px solid #eee;flex-shrink:0}
@@ -93,7 +92,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .rcard{background:#fff0f2;border-radius:10px;padding:11px;margin-bottom:9px;border:1px solid #ffd0d8}
 .rcard-top{display:flex;gap:9px;margin-bottom:7px}
 .rthumb{width:46px;height:46px;border-radius:8px;overflow:hidden;flex-shrink:0}
-.rthumb svg{width:100%;height:100%}
+.rthumb svg{width:100%;height:100%;display:block}
 .rinfo{flex:1;min-width:0}
 .rtitle{font-size:12px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:3px}
 .rreason{font-size:11px;color:#aaa;line-height:1.4}
@@ -113,9 +112,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .brow{display:flex;gap:7px;align-items:flex-start}
 .brow.r{flex-direction:row-reverse}
 .bav{width:27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#FF2442,#ff6b8a);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.bubble{max-width:85%;padding:9px 11px;border-radius:11px;font-size:13px;line-height:1.55}
+.bubble{max-width:85%;padding:9px 11px;border-radius:11px;font-size:13px;line-height:1.6;white-space:pre-wrap}
 .bubble.l{background:#fff0f2;border-radius:4px 11px 11px 11px}
-.bubble.r{background:#FF2442;color:#fff;border-radius:11px 4px 11px 11px}
+.bubble.r{background:#FF2442;color:#fff;border-radius:11px 4px 11px 11px;white-space:normal}
 .qtags{padding:9px 13px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid #eee;flex-shrink:0}
 .qtag{padding:5px 11px;border-radius:15px;border:1.5px solid #ffd0d8;background:#fff0f2;color:#FF2442;font-size:12px;cursor:pointer;font-family:inherit}
 .cin-row{display:flex;gap:7px;padding:11px 13px;border-top:1px solid #eee;flex-shrink:0}
@@ -141,12 +140,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .kpi-card{background:#fff;border-radius:11px;padding:14px;border:1.5px solid #eee}
 .kpi-lbl{font-size:12px;color:#aaa;margin-bottom:5px}
 .kpi-val{font-size:22px;font-weight:700;margin-bottom:3px}
-.kpi-ch{font-size:12px;font-weight:600}
-.kpi-ch.up{color:#1e8a3c}
+.kpi-ch{font-size:12px;font-weight:600}.kpi-ch.up{color:#1e8a3c}
 .dist-card{background:#fff;border-radius:11px;padding:14px;border:1.5px solid #eee;flex-shrink:0}
 .dist-title{font-size:13px;font-weight:700;margin-bottom:11px}
 .dist-row{display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:12px}
-.dist-lbl{width:65px;color:#777;flex-shrink:0}
+.dist-lbl{width:70px;color:#777;flex-shrink:0}
 .dist-t{flex:1;height:7px;background:#f0f0f0;border-radius:4px;overflow:hidden}
 .dist-f{height:100%;border-radius:4px}
 .dist-pct{width:33px;text-align:right;color:#aaa;font-weight:600}
@@ -191,15 +189,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
     <div class="logo">薯</div>
     <span class="hdr-title">合作广场</span>
     <span class="hdr-sep">·</span>
-    <span class="hdr-sub">陈山楂的美甲店</span>
+    <span class="hdr-sub">山楂饼家</span>
   </div>
   <div style="display:flex;align-items:center;gap:10px">
-    <div class="acc-pill">💅 陈山楂的美甲店</div>
+    <div class="acc-pill">🍡 山楂饼家</div>
     <div class="avatar">山</div>
   </div>
 </header>
 <div class="banner" id="banner">
-  <div class="banner-txt">💅 懒懒为你主动精选了 3 篇高潜力笔记 · 根据你的历史投放数据智能匹配 ✨
+  <div class="banner-txt">💡 懒懒为你主动精选了 4 篇高潜力笔记 · 根据在售 SPU 和历史投放数据智能匹配 ✨
     <span class="banner-link" id="bannerLink">查看精选 &gt;</span>
   </div>
   <button class="banner-x" onclick="document.getElementById('banner').style.display='none'">×</button>
@@ -207,35 +205,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 <div class="main">
   <div class="left">
     <div class="mtabs">
-      <button class="mtab on" data-id="pool" onclick="switchMain('pool')">💅 内容池</button>
-      <button class="mtab" data-id="hots" onclick="switchMain('hots')">🔥 热点追踪</button>
-      <button class="mtab" data-id="hist" onclick="switchMain('hist')">📊 历史分析</button>
+      <button class="mtab on" data-id="pool" onclick="switchMain('pool')">📦 种草库</button>
+      <button class="mtab" data-id="hots" onclick="switchMain('hots')">🔥 热力图谱</button>
+      <button class="mtab" data-id="hist" onclick="switchMain('hist')">📈 投放复盘</button>
     </div>
-    <!-- 内容池 -->
+
+    <!-- 种草库 -->
     <div class="mpanel on" id="mp-pool">
       <div class="toolbar">
-        <div class="search-box"><span>🔍</span><input id="searchInput" type="text" placeholder="搜索笔记、关键词、作者…"></div>
+        <div class="search-box">
+          <span>🔍</span>
+          <input id="searchInput" type="text" placeholder="搜索笔记、SPU、投放场景… 按 Enter 搜索">
+        </div>
         <button class="btn-filter" id="btnFilter" onclick="toggleFilter()">⚙️ 筛选</button>
         <button class="btn-ask" onclick="switchRight('chat')">✨ 问懒懒</button>
       </div>
-      <!-- 筛选抽屉 -->
       <div class="fdrawer" id="fdrawer">
         <div>
           <div class="fsec">📅 基础维度</div>
-          <div style="font-size:12px;color:#888;margin:5px 0 3px">笔记发布时间</div>
+          <div class="fsub">笔记发布时间</div>
           <div class="frow">
             <span class="ftag" data-g="time" data-v="7d">近7天</span>
             <span class="ftag" data-g="time" data-v="30d">近30天</span>
             <span class="ftag" data-g="time" data-v="3m">近3个月</span>
             <span class="ftag on" data-g="time" data-v="all">全部</span>
           </div>
-          <div style="font-size:12px;color:#888;margin:8px 0 3px">作者粉丝数</div>
+          <div class="fsub">作者粉丝数（可多选，再次点击取消）</div>
           <div class="frow">
-            <span class="ftag" data-g="fans" data-v="s">1万以下</span>
-            <span class="ftag" data-g="fans" data-v="m">1-10万</span>
-            <span class="ftag" data-g="fans" data-v="l">10-50万</span>
-            <span class="ftag" data-g="fans" data-v="xl">50万+</span>
-            <span class="ftag on" data-g="fans" data-v="all">全部</span>
+            <span class="ftag" data-g="fans" data-v="0-1000">0-1000</span>
+            <span class="ftag" data-g="fans" data-v="1000-5000">1000-5000</span>
+            <span class="ftag" data-g="fans" data-v="5000-1万">5000-1万</span>
           </div>
         </div>
         <hr class="fdiv">
@@ -251,29 +250,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
         <hr class="fdiv">
         <div>
           <div class="fsec">🌸 行业化维度</div>
-          <div style="font-size:12px;color:#888;margin:5px 0 3px">消费场景</div>
+          <div class="fsub">消费场景（可多选）</div>
           <div class="frow">
-            <span class="ftag" data-g="scene" data-v="holiday">节日美甲</span>
-            <span class="ftag" data-g="scene" data-v="daily">日常通勤</span>
-            <span class="ftag" data-g="scene" data-v="date">约会出行</span>
-            <span class="ftag" data-g="scene" data-v="wedding">婚礼场景</span>
-            <span class="ftag" data-g="scene" data-v="promo">促销薅羊毛</span>
-          </div>
-          <div style="font-size:12px;color:#888;margin:8px 0 3px">人群场景</div>
-          <div class="frow">
-            <span class="ftag" data-g="ppl" data-v="stu">学生党</span>
-            <span class="ftag" data-g="ppl" data-v="ofc">白领通勤</span>
-            <span class="ftag" data-g="ppl" data-v="dat">约会人群</span>
-            <span class="ftag" data-g="ppl" data-v="brd">新娘人群</span>
-            <span class="ftag" data-g="ppl" data-v="trn">追流行人群</span>
-          </div>
-          <div style="font-size:12px;color:#888;margin:8px 0 3px">功效需求</div>
-          <div class="frow">
-            <span class="ftag" data-g="fn" data-v="white">显白提肤</span>
-            <span class="ftag" data-g="fn" data-v="beauty">颜值出片</span>
-            <span class="ftag" data-g="fn" data-v="cheap">性价比</span>
-            <span class="ftag" data-g="fn" data-v="fest">节日氛围</span>
-            <span class="ftag" data-g="fn" data-v="craft">工艺展示</span>
+            <span class="ftag" data-g="scene" data-v="节日送礼">节日送礼</span>
+            <span class="ftag" data-g="scene" data-v="下午茶场景">下午茶场景</span>
+            <span class="ftag" data-g="scene" data-v="出行场景">出行场景</span>
+            <span class="ftag" data-g="scene" data-v="家庭场景">家庭场景</span>
+            <span class="ftag" data-g="scene" data-v="办公室场景">办公室场景</span>
+            <span class="ftag" data-g="scene" data-v="健康轻食">健康轻食</span>
           </div>
         </div>
         <div class="f-acts">
@@ -283,7 +267,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
       </div>
       <div class="stb">
         <div style="display:flex;align-items:center">
-          <span class="pool-title">💅 美甲 · 内容池</span>
+          <span class="pool-title">🍡 点心 · 种草库</span>
           <span class="pool-cnt" id="poolCnt">共 12 篇</span>
         </div>
         <span class="sort-btn">懒懒力荐优先 ↑</span>
@@ -297,108 +281,117 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
       </div>
       <div class="ngrid" id="ngrid"></div>
     </div>
-    <!-- 热点追踪 -->
+
+    <!-- 热力图谱 -->
     <div class="mpanel" id="mp-hots">
-      <div class="sec-title">🔥 热点追踪</div>
-      <div class="sec-sub">实时监控美甲相关热点话题，命中内容池笔记自动标注 ✨</div>
+      <div class="sec-title">🔥 热力图谱</div>
+      <div class="sec-sub">实时监控点心/零食相关热点话题，命中种草库笔记自动标注 ✨</div>
       <div class="hot-grid" id="hotGrid"></div>
       <div class="sec-title" style="margin-top:16px">📅 近期营销节点</div>
       <div class="node-grid" id="nodeGrid"></div>
     </div>
-    <!-- 历史分析 -->
+
+    <!-- 投放复盘 -->
     <div class="mpanel" id="mp-hist">
-      <div class="sec-title">📊 历史投放分析</div>
+      <div class="sec-title">📈 投放复盘</div>
       <div class="kpi-grid">
-        <div class="kpi-card"><div class="kpi-lbl">日均消耗</div><div class="kpi-val">¥1.2万</div><div class="kpi-ch up">↑ 38% vs 上月</div></div>
-        <div class="kpi-card"><div class="kpi-lbl">授权笔记数</div><div class="kpi-val">47篇</div><div class="kpi-ch up">↑ 25%</div></div>
-        <div class="kpi-card"><div class="kpi-lbl">平均CTR</div><div class="kpi-val">3.8%</div><div class="kpi-ch up">↑ 0.6pp</div></div>
-        <div class="kpi-card"><div class="kpi-lbl">授权成功率</div><div class="kpi-val">72%</div><div class="kpi-ch up">↑ 12pp</div></div>
+        <div class="kpi-card"><div class="kpi-lbl">日均消耗</div><div class="kpi-val">¥2.3万</div><div class="kpi-ch up">↑ 42% vs 上月</div></div>
+        <div class="kpi-card"><div class="kpi-lbl">授权笔记数</div><div class="kpi-val">63篇</div><div class="kpi-ch up">↑ 31%</div></div>
+        <div class="kpi-card"><div class="kpi-lbl">平均CTR</div><div class="kpi-val">4.2%</div><div class="kpi-ch up">↑ 0.8pp</div></div>
+        <div class="kpi-card"><div class="kpi-lbl">授权成功率</div><div class="kpi-val">78%</div><div class="kpi-ch up">↑ 15pp</div></div>
       </div>
       <div class="dist-card">
         <div class="dist-title">表达方式分布</div>
         <div class="dist-row"><span class="dist-lbl">真实体验</span><div class="dist-t"><div class="dist-f" style="width:68%;background:linear-gradient(90deg,#FF2442,#ff6b8a)"></div></div><span class="dist-pct">68%</span></div>
-        <div class="dist-row"><span class="dist-lbl">情绪共鸣</span><div class="dist-t"><div class="dist-f" style="width:52%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)"></div></div><span class="dist-pct">52%</span></div>
-        <div class="dist-row"><span class="dist-lbl">干货攻略</span><div class="dist-t"><div class="dist-f" style="width:34%;background:linear-gradient(90deg,#43e97b,#38f9d7)"></div></div><span class="dist-pct">34%</span></div>
-        <div class="dist-row"><span class="dist-lbl">热点借势</span><div class="dist-t"><div class="dist-f" style="width:28%;background:linear-gradient(90deg,#f9ca24,#f0932b)"></div></div><span class="dist-pct">28%</span></div>
+        <div class="dist-row"><span class="dist-lbl">情绪共鸣</span><div class="dist-t"><div class="dist-f" style="width:55%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)"></div></div><span class="dist-pct">55%</span></div>
+        <div class="dist-row"><span class="dist-lbl">干货攻略</span><div class="dist-t"><div class="dist-f" style="width:38%;background:linear-gradient(90deg,#43e97b,#38f9d7)"></div></div><span class="dist-pct">38%</span></div>
+        <div class="dist-row"><span class="dist-lbl">热点借势</span><div class="dist-t"><div class="dist-f" style="width:31%;background:linear-gradient(90deg,#f9ca24,#f0932b)"></div></div><span class="dist-pct">31%</span></div>
       </div>
       <div class="dist-card">
         <div class="dist-title">消费场景分布</div>
-        <div class="dist-row"><span class="dist-lbl">日常通勤</span><div class="dist-t"><div class="dist-f" style="width:55%;background:linear-gradient(90deg,#FF2442,#ff6b8a)"></div></div><span class="dist-pct">55%</span></div>
-        <div class="dist-row"><span class="dist-lbl">节日美甲</span><div class="dist-t"><div class="dist-f" style="width:42%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)"></div></div><span class="dist-pct">42%</span></div>
-        <div class="dist-row"><span class="dist-lbl">约会出行</span><div class="dist-t"><div class="dist-f" style="width:31%;background:linear-gradient(90deg,#f093fb,#f5576c)"></div></div><span class="dist-pct">31%</span></div>
-        <div class="dist-row"><span class="dist-lbl">婚礼场景</span><div class="dist-t"><div class="dist-f" style="width:22%;background:linear-gradient(90deg,#f7d794,#e17055)"></div></div><span class="dist-pct">22%</span></div>
+        <div class="dist-row"><span class="dist-lbl">下午茶场景</span><div class="dist-t"><div class="dist-f" style="width:62%;background:linear-gradient(90deg,#FF2442,#ff6b8a)"></div></div><span class="dist-pct">62%</span></div>
+        <div class="dist-row"><span class="dist-lbl">节日送礼</span><div class="dist-t"><div class="dist-f" style="width:48%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)"></div></div><span class="dist-pct">48%</span></div>
+        <div class="dist-row"><span class="dist-lbl">出行场景</span><div class="dist-t"><div class="dist-f" style="width:35%;background:linear-gradient(90deg,#f093fb,#f5576c)"></div></div><span class="dist-pct">35%</span></div>
+        <div class="dist-row"><span class="dist-lbl">家庭场景</span><div class="dist-t"><div class="dist-f" style="width:28%;background:linear-gradient(90deg,#f7d794,#e17055)"></div></div><span class="dist-pct">28%</span></div>
       </div>
       <div class="ptn-card">
         <div class="ptn-title">🏆 爆款规律</div>
-        <div class="ptn-tags"><span class="ptn-tag">真实体验</span><span class="ptn-tag">节日节点</span><span class="ptn-tag">强正向情绪</span><span class="ptn-tag">热点借势</span></div>
-        <div class="ptn-desc">历史高跑量笔记的共同特征：真实体验表达、强正向情绪、节日/季节节点命中。笔记原生感≥80分的内容CTR比平均高出41%。</div>
+        <div class="ptn-tags"><span class="ptn-tag">节日节点</span><span class="ptn-tag">强颜值内容</span><span class="ptn-tag">芋泥/玫瑰/青梅SKU</span><span class="ptn-tag">下午茶场景</span></div>
+        <div class="ptn-desc">节日节点+强颜值内容，CTR比日常高2.3倍。芋泥/玫瑰/青梅三款SKU历史CTR最高。办公室/下午茶场景内容转化最快（1-3天见效）。</div>
       </div>
       <div class="gc-card">
-        <div class="gc-title">✅ Good Case · 情人节心形甲 CTR +55%</div>
-        <div class="gc-row">💡 <strong>为什么好：</strong>节日节点+强正向情绪+生活感封面，三要素齐备</div>
-        <div class="gc-row">📋 <strong>内容拆解：</strong>真实体验叙述 · 情绪共鸣 · 摆拍封面 · 弱营销感知</div>
-        <div class="gc-row">📈 <strong>效果数据：</strong>CTR 5.2% | 互动率 8.7% | 授权成本 ¥180 | ROI 3.2x</div>
+        <div class="gc-title">✅ Good Case · 七夕玫瑰云朵糕 CTR +55%</div>
+        <div class="gc-row">💡 <strong>为什么好：</strong>节日节点+高颜值封面+送礼场景，三要素齐备</div>
+        <div class="gc-row">📋 <strong>内容拆解：</strong>颜值出片 · 情绪共鸣 · 弱营销感知</div>
+        <div class="gc-row">📈 <strong>效果数据：</strong>CTR 5.8% | 互动率 9.2% | 授权成本 ¥160 | ROI 3.8x</div>
       </div>
       <div class="gc-card" style="margin-top:10px">
-        <div class="gc-title">✅ Good Case · 奶油白显白甲 CTR +34%</div>
-        <div class="gc-row">💡 <strong>为什么好：</strong>「显白」高频需求 + 生活感封面 + 历史高跑量相似内容</div>
-        <div class="gc-row">📋 <strong>内容拆解：</strong>真实体验 · 强正向 · 功效诉求清晰</div>
-        <div class="gc-row">📈 <strong>效果数据：</strong>CTR 4.1% | 互动率 6.3% | 授权成本 ¥220 | ROI 2.8x</div>
+        <div class="gc-title">✅ Good Case · 下午茶芋泥麻薯 CTR +33%</div>
+        <div class="gc-row">💡 <strong>为什么好：</strong>高频下午茶场景+打工人共鸣+软糯视觉冲击</div>
+        <div class="gc-row">📋 <strong>内容拆解：</strong>真实体验 · 办公室场景 · 生活感封面</div>
+        <div class="gc-row">📈 <strong>效果数据：</strong>CTR 4.4% | 互动率 7.1% | 授权成本 ¥220 | ROI 2.9x</div>
       </div>
     </div>
   </div>
+
   <!-- 右侧面板 -->
   <div class="right">
     <div class="rtabs">
-      <button class="rtab on" data-id="rec" onclick="switchRight('rec')">✨ 懒懒精选 (3)</button>
+      <button class="rtab on" data-id="rec" onclick="switchRight('rec')">✨ 懒懒精选 (4)</button>
       <button class="rtab" data-id="chat" onclick="switchRight('chat')">💬 问懒懒</button>
     </div>
     <div class="rpanel on" id="rp-rec">
       <div class="pa-scroll">
         <div class="pa-title">✨ 懒懒精选推荐</div>
-        <div class="pa-sub">根据你的历史投放数据，这几篇值得优先考虑～</div>
+        <div class="pa-sub">根据在售 SPU 和历史投放，这几篇值得优先考虑～</div>
         <div id="recCards"></div>
       </div>
       <div class="pa-ft">
         <div class="pk-cnt">已Pick <span id="pkCnt">0</span> 篇</div>
-        <button class="btn-rpt" onclick="openReport()">📋 生成内容参考报告</button>
+        <button class="btn-rpt" onclick="openReport()">📋 生成投放参考报告</button>
       </div>
     </div>
     <div class="rpanel" id="rp-chat">
       <div class="pb-wrap">
-        <div class="pb-hdr"><div class="pb-title">💬 问懒懒</div><div class="pb-sub">告诉我你想投什么，我来帮你找对内容 🔍</div></div>
+        <div class="pb-hdr">
+          <div class="pb-title">💬 问懒懒</div>
+          <div class="pb-sub">告诉我这次想主打哪个投放场景，我来给你推荐 ✨</div>
+        </div>
         <div class="chat-area" id="chatArea">
-          <div class="brow"><div class="bav">懒</div><div class="bubble l">你好呀！告诉我你想投什么场景，或者目标人群是谁，我来帮你从笔记池里找最合适的几篇 💅</div></div>
+          <div class="brow"><div class="bav">懒</div><div class="bubble l">你好！告诉我这次想主打哪个投放场景，我来帮你从种草库里找最合适的笔记，并给出投放组合建议 ✨</div></div>
         </div>
         <div class="qtags">
-          <button class="qtag" onclick="quickChat('节日美甲')">节日美甲</button>
-          <button class="qtag" onclick="quickChat('日常通勤')">日常通勤</button>
-          <button class="qtag" onclick="quickChat('显白显手')">显白显手</button>
-          <button class="qtag" onclick="quickChat('性价比')">性价比</button>
-          <button class="qtag" onclick="quickChat('颜值出片')">颜值出片</button>
+          <button class="qtag" onclick="quickChat('🌸 节日送礼')">🌸 节日送礼</button>
+          <button class="qtag" onclick="quickChat('☕ 下午茶种草')">☕ 下午茶种草</button>
+          <button class="qtag" onclick="quickChat('✈️ 五一出游')">✈️ 五一出游</button>
+          <button class="qtag" onclick="quickChat('🆕 新品上新')">🆕 新品上新</button>
+          <button class="qtag" onclick="quickChat('💪 健康轻食')">💪 健康轻食</button>
+          <button class="qtag" onclick="quickChat('🏠 家庭场景')">🏠 家庭场景</button>
         </div>
         <div class="cin-row">
-          <input class="cin" id="chatInput" type="text" placeholder="告诉我你的投放目标…">
+          <input class="cin" id="chatInput" type="text" placeholder="描述你的投放目标…">
           <button class="btn-send" onclick="sendChat()">发送 💌</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <!-- 报告弹窗 -->
 <div class="mask" id="rptMask">
   <div class="modal">
     <div class="m-hd">
-      <div><div class="m-title">📋 内容参考报告 · 陈山楂的美甲店</div><div class="m-sub" id="rptSub"></div></div>
+      <div><div class="m-title">📋 投放参考报告 · 山楂饼家</div><div class="m-sub" id="rptSub"></div></div>
       <button class="m-x" onclick="document.getElementById('rptMask').classList.remove('open')">×</button>
     </div>
     <div class="m-body" id="rptBody"></div>
     <div class="m-ft">
-      <button class="btn-sync" id="btnSync" onclick="doSync()">💅 一键同步 · 合作广场后台</button>
-      <div class="sync-note">同步后可在「合作广场 &gt; 合作内容管理 &gt; 我的精选」中查看并设置分成比例，发起正式授权申请</div>
+      <button class="btn-sync" id="btnSync" onclick="doSync()">💡 一键同步 · 合作广场后台</button>
+      <div class="sync-note">同步后可在「合作广场 &gt; 合作内容管理 &gt; 我的精选」中查看并发起正式授权申请</div>
     </div>
   </div>
 </div>
+
 <!-- 详情弹窗 -->
 <div class="mask" id="detMask">
   <div class="modal sm">
@@ -409,95 +402,115 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
     <div class="m-body" id="detBody"></div>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
 <script>
-const NOTES=[{"id": "n01", "em": "💅", "title": "奶油白美甲，这个颜色真的会让手显白！", "author": "小鱼的指尖日记", "fans": "3.2万", "date": "04-10", "tags": ["真实体验", "强正向"], "sc": {"hot": 88, "q": 85, "nat": 90, "his": 82}, "rec": true, "ctr": "+34%", "reason": "生活感强，显白需求高频，与历史高跑量内容相似度高", "hot": "#五一出游穿搭", "dA": ["真实体验", "情绪共鸣", "强正向", "生活感封面"], "dB": ["日常美甲", "白领通勤", "显白提肤", "颜值出片"]}, {"id": "n02", "em": "✨", "title": "情人节必做！玫红心形甲太绝了", "author": "云朵甲艺", "fans": "12.6万", "date": "04-05", "tags": ["情绪共鸣", "节日美甲"], "sc": {"hot": 95, "q": 88, "nat": 85, "his": 78}, "rec": true, "ctr": "+41%", "reason": "节日节点+强正向，CTR历史最高，强烈推荐", "hot": "#情人节约会穿搭", "dA": ["情绪共鸣", "真实体验", "强正向", "摆拍感封面"], "dB": ["节日美甲", "约会人群", "颜值出片", "节日氛围"]}, {"id": "n03", "em": "🌸", "title": "学生党69元猫眼甲，性价比天花板", "author": "买买买省钱小达人", "fans": "5.8万", "date": "04-12", "tags": ["干货攻略", "性价比"], "sc": {"hot": 62, "q": 70, "nat": 68, "his": 55}, "rec": false, "ctr": "+18%", "reason": "价格锚点清晰，但热点未命中，受众体量偏小", "hot": null, "dA": ["干货攻略", "正向", "生活感封面"], "dB": ["促销薅羊毛", "学生党", "性价比"]}, {"id": "n04", "em": "🍓", "title": "草莓季限定美甲！酸甜配色好出片", "author": "甜甜圈Lulu", "fans": "8.1万", "date": "04-08", "tags": ["热点借势", "颜值出片"], "sc": {"hot": 91, "q": 82, "nat": 80, "his": 72}, "rec": true, "ctr": "+29%", "reason": "季节限定+颜值出片，命中草莓季热点", "hot": "#草莓季好物", "dA": ["热点借势", "情绪共鸣", "强正向", "摆拍感封面"], "dB": ["节日美甲", "约会人群", "颜值出片", "节日氛围"]}, {"id": "n05", "em": "💎", "title": "深紫暗黑系美甲，秋冬氛围感拉满", "author": "暗黑美甲研究所", "fans": "2.3万", "date": "03-28", "tags": ["场景代入", "氛围感"], "sc": {"hot": 45, "q": 72, "nat": 78, "his": 48}, "rec": false, "ctr": "+15%", "reason": "风格垂直，原生感不错，但受众偏小众", "hot": null, "dA": ["场景代入", "中性", "摆拍感封面"], "dB": ["日常美甲", "追流行人群", "工艺展示"]}, {"id": "n06", "em": "🌿", "title": "极简白月光甲，越素越好看", "author": "禅意指尖", "fans": "4.2万", "date": "04-02", "tags": ["真实体验", "简约百搭"], "sc": {"hot": 38, "q": 76, "nat": 85, "his": 70}, "rec": false, "ctr": "+12%", "reason": "极简风原生感好，适合长效日投，节奏慢但稳", "hot": null, "dA": ["真实体验", "中性", "生活感封面"], "dB": ["日常美甲", "白领通勤", "简约百搭"]}, {"id": "n07", "em": "🦋", "title": "蝴蝶甲元素超火，这期手残党也能做！", "author": "宝藏美甲师Mia", "fans": "18.5万", "date": "04-14", "tags": ["干货攻略", "热点借势"], "sc": {"hot": 89, "q": 86, "nat": 82, "his": 75}, "rec": true, "ctr": "+38%", "reason": "蝴蝶元素持续热门，教程型内容引流强", "hot": "#蝴蝶美甲", "dA": ["干货攻略", "热点借势", "正向", "生活感封面"], "dB": ["日常美甲", "追流行人群", "工艺展示", "颜值出片"]}, {"id": "n08", "em": "☁️", "title": "云朵棉花糖美甲，软软的好治愈", "author": "治愈系生活家", "fans": "6.7万", "date": "03-20", "tags": ["情绪共鸣", "治愈系"], "sc": {"hot": 52, "q": 74, "nat": 88, "his": 60}, "rec": false, "ctr": "+16%", "reason": "情绪价值高，原生感极佳，但无热点加持", "hot": null, "dA": ["情绪共鸣", "正向", "生活感封面"], "dB": ["日常美甲", "追流行人群", "工艺展示"]}, {"id": "n09", "em": "💍", "title": "婚礼美甲全攻略，新娘必看！", "author": "婚礼甲艺师", "fans": "9.3万", "date": "04-11", "tags": ["干货攻略", "节日美甲"], "sc": {"hot": 80, "q": 84, "nat": 78, "his": 68}, "rec": true, "ctr": "+33%", "reason": "婚礼场景高客单，转化意愿强，覆盖婚庆节点人群", "hot": "#婚礼穿搭", "dA": ["干货攻略", "情绪共鸣", "强正向", "摆拍感封面"], "dB": ["婚礼场景", "新娘人群", "颜值出片", "节日氛围"]}, {"id": "n10", "em": "🌺", "title": "渐变甲做完被问了八次！在哪做的", "author": "手控Vivian", "fans": "7.4万", "date": "03-15", "tags": ["情绪共鸣", "真实体验"], "sc": {"hot": 55, "q": 79, "nat": 87, "his": 65}, "rec": false, "ctr": "+22%", "reason": "内容质量高+原生感强，缺少热点放大，建议等热点节点复投", "hot": null, "dA": ["情绪共鸣", "真实体验", "强正向", "生活感封面"], "dB": ["日常美甲", "追流行人群", "工艺展示", "颜值出片"]}, {"id": "n11", "em": "🍋", "title": "夏日柠檬甲，清爽感一整个上头", "author": "夏日指尖", "fans": "5.1万", "date": "04-16", "tags": ["热点借势", "颜值出片"], "sc": {"hot": 85, "q": 80, "nat": 82, "his": 70}, "rec": true, "ctr": "+31%", "reason": "夏日清新定位，命中季节热点，五一前集中投放最佳", "hot": "#夏日出游穿搭", "dA": ["热点借势", "真实体验", "正向", "生活感封面"], "dB": ["约会出行", "日常美甲", "约会人群", "颜值出片"]}, {"id": "n12", "em": "🐱", "title": "猫爪美甲，软萌到我每次都被问同款", "author": "猫系女孩圆圆", "fans": "3.8万", "date": "03-25", "tags": ["情绪共鸣", "IP联动"], "sc": {"hot": 60, "q": 71, "nat": 80, "his": 58}, "rec": false, "ctr": "+19%", "reason": "萌系内容互动好，但受众集中，规模偏小", "hot": null, "dA": ["情绪共鸣", "正向", "生活感封面"], "dB": ["日常美甲", "追流行人群", "颜值出片"]}];
-const COVER_CFG={"n01": {"c1": "#ffb3ba", "c2": "#ffd6e0", "sh": "<circle cx='220' cy='30' r='40' fill='rgba(255,255,255,0.22)'/><circle cx='60' cy='110' r='28' fill='rgba(255,255,255,0.15)'/><ellipse cx='155' cy='78' rx='50' ry='20' fill='rgba(255,180,190,0.38)'/>"}, "n02": {"c1": "#c9a0e8", "c2": "#f7c5e8", "sh": "<polygon points='148,18 178,68 118,68' fill='rgba(255,255,255,0.28)'/><circle cx='78' cy='38' r='24' fill='rgba(255,255,255,0.18)'/><circle cx='230' cy='110' r='18' fill='rgba(200,150,230,0.38)'/>"}, "n03": {"c1": "#ffd6a5", "c2": "#ffb3c6", "sh": "<rect x='182' y='18' width='48' height='48' rx='12' fill='rgba(255,255,255,0.22)' transform='rotate(20 206 42)'/><circle cx='68' cy='88' r='29' fill='rgba(255,255,255,0.18)'/>"}, "n04": {"c1": "#ff8a80", "c2": "#ffb3ba", "sh": "<circle cx='198' cy='48' r='34' fill='rgba(255,255,255,0.28)'/><circle cx='78' cy='78' r='21' fill='rgba(255,255,255,0.18)'/><ellipse cx='150' cy='118' rx='58' ry='17' fill='rgba(255,100,80,0.28)'/>"}, "n05": {"c1": "#9575cd", "c2": "#6949a0", "sh": "<polygon points='148,14 228,78 68,78' fill='rgba(255,255,255,0.1)'/><circle cx='218' cy='108' r='28' fill='rgba(255,255,255,0.08)'/><rect x='98' y='88' width='78' height='7' rx='4' fill='rgba(255,255,255,0.18)'/>"}, "n06": {"c1": "#a8e6cf", "c2": "#dcedc8", "sh": "<circle cx='78' cy='58' r='34' fill='rgba(255,255,255,0.28)'/><circle cx='218' cy='98' r='26' fill='rgba(255,255,255,0.22)'/>"}, "n07": {"c1": "#f48fb1", "c2": "#ce93d8", "sh": "<ellipse cx='148' cy='68' rx='78' ry='38' fill='rgba(255,255,255,0.18)'/><circle cx='238' cy='38' r='28' fill='rgba(255,255,255,0.18)'/>"}, "n08": {"c1": "#b0bec5", "c2": "#e8eaf6", "sh": "<circle cx='128' cy='52' r='43' fill='rgba(255,255,255,0.32)'/><circle cx='218' cy='98' r='23' fill='rgba(255,255,255,0.28)'/>"}, "n09": {"c1": "#ffe0b2", "c2": "#ffccbc", "sh": "<polygon points='148,18 198,78 98,78' fill='rgba(255,255,255,0.32)'/><circle cx='238' cy='58' r='26' fill='rgba(255,255,255,0.22)'/>"}, "n10": {"c1": "#f06292", "c2": "#ff80ab", "sh": "<circle cx='178' cy='43' r='36' fill='rgba(255,255,255,0.22)'/><circle cx='68' cy='98' r='24' fill='rgba(255,255,255,0.18)'/>"}, "n11": {"c1": "#fff176", "c2": "#ffe082", "sh": "<circle cx='198' cy='38' r='33' fill='rgba(255,255,255,0.38)'/><circle cx='68' cy='88' r='23' fill='rgba(255,255,255,0.28)'/>"}, "n12": {"c1": "#80deea", "c2": "#b39ddb", "sh": "<circle cx='88' cy='52' r='36' fill='rgba(255,255,255,0.28)'/><circle cx='218' cy='88' r='26' fill='rgba(255,255,255,0.22)'/>"}};
-const H_MAP={"n01": 158, "n02": 176, "n03": 143, "n04": 166, "n05": 152, "n06": 137, "n07": 183, "n08": 147, "n09": 163, "n10": 156, "n11": 170, "n12": 141};
-const HOT_TOPICS=[{"rank": 1, "em": "🌸", "name": "#五一出游穿搭", "heat": "1.2亿播放", "match": true}, {"rank": 2, "em": "💅", "name": "#夏日美甲推荐", "heat": "8600万播放", "match": true}, {"rank": 3, "em": "🦋", "name": "#蝴蝶美甲", "heat": "6200万播放", "match": true}, {"rank": 4, "em": "💍", "name": "#婚礼穿搭", "heat": "5100万播放", "match": true}, {"rank": 5, "em": "🍓", "name": "#草莓季好物", "heat": "4300万播放", "match": true}, {"rank": 6, "em": "☀️", "name": "#夏日出游穿搭", "heat": "3800万播放", "match": true}, {"rank": 7, "em": "❤️", "name": "#情人节约会穿搭", "heat": "3200万播放", "match": false}, {"rank": 8, "em": "🌿", "name": "#极简风穿搭", "heat": "2100万播放", "match": false}, {"rank": 9, "em": "🐱", "name": "#可爱萌系穿搭", "heat": "1600万播放", "match": false}];
-const NODES=[{"date": "5.1", "name": "五一假期", "tip": "节日美甲\n出游穿搭"}, {"date": "5.20", "name": "520情人节", "tip": "爱心美甲\n约会场景"}, {"date": "6.1", "name": "儿童节", "tip": "亲子萌甲\n可爱风格"}, {"date": "6.18", "name": "618促销", "tip": "性价比甲\n薅羊毛"}, {"date": "7.7", "name": "七夕节", "tip": "浪漫美甲\n粉紫系"}, {"date": "暑期", "name": "暑假季", "tip": "学生党\n缤纷配色"}];
-const TAG_CLR={"真实体验":"t-blue","情绪共鸣":"t-blue","干货攻略":"t-purple","性价比":"t-orange","热点借势":"t-orange","颜值出片":"t-pink","强正向":"t-green","节日美甲":"t-pink","场景代入":"t-gray","氛围感":"t-gray","简约百搭":"t-gray","治愈系":"t-blue","IP联动":"t-purple"};
+const NOTES=[{"id": "n01", "spu": "青梅酥饼", "title": "酸甜得刚刚好！青梅酥饼让我找回了小时候的味道", "author": "小酸梅子", "fans": "3.2万", "date": "04-10", "tags": ["真实体验", "情绪共鸣"], "sc": {"hot": 88, "q": 85, "nat": 90, "his": 82}, "rec": true, "ctr": "+34%", "reason": "情绪共鸣强，记忆点清晰，原生感极佳，历史相似内容CTR高"}, {"id": "n02", "spu": "玫瑰云朵糕", "title": "七夕送这个！玫瑰云朵糕颜值高到不像真的", "author": "礼物研究所", "fans": "12.6万", "date": "04-05", "tags": ["节日送礼", "颜值出片"], "sc": {"hot": 95, "q": 88, "nat": 85, "his": 78}, "rec": true, "ctr": "+41%", "reason": "节日节点+高颜值，CTR历史峰值，送礼场景转化极强"}, {"id": "n03", "spu": "核桃脆饼", "title": "健身er也能吃的饼干？核桃脆饼热量表一看直接放心", "author": "健康星人丸子", "fans": "5.8万", "date": "04-12", "tags": ["干货攻略", "健康轻食"], "sc": {"hot": 62, "q": 70, "nat": 68, "his": 55}, "rec": false, "ctr": "+18%", "reason": "健康赛道有需求，但热点命中弱，适合精准人群投放"}, {"id": "n04", "spu": "芋泥麻薯", "title": "下午茶新宠！芋泥麻薯软糯程度把我惊到了", "author": "奶茶配点心", "fans": "8.1万", "date": "04-08", "tags": ["下午茶场景", "真实体验"], "sc": {"hot": 91, "q": 82, "nat": 80, "his": 72}, "rec": true, "ctr": "+29%", "reason": "下午茶高频场景，原生感强，芋泥元素持续热门"}, {"id": "n05", "spu": "抹茶流心饼", "title": "拍完就发！抹茶流心饼出片率太高了吧", "author": "摆拍日记本", "fans": "2.3万", "date": "03-28", "tags": ["颜值出片", "摆拍攻略"], "sc": {"hot": 45, "q": 72, "nat": 78, "his": 48}, "rec": false, "ctr": "+15%", "reason": "颜值内容互动好，受众偏摄影圈，规模化有限"}, {"id": "n06", "spu": "桂花糯米糕", "title": "中秋不送月饼送这个！桂花糯米糕才是今年最惊艳的礼盒", "author": "节气生活家", "fans": "4.2万", "date": "04-02", "tags": ["节日送礼", "节气风情"], "sc": {"hot": 38, "q": 76, "nat": 85, "his": 70}, "rec": false, "ctr": "+12%", "reason": "节气内容原生感好，节日节点前复投效果佳，当前时机稍早"}, {"id": "n07", "spu": "玫瑰云朵糕", "title": "手残党也能复刻的节日礼盒装法，送女朋友必入", "author": "精致生活Mia", "fans": "8.5万", "date": "04-14", "tags": ["干货攻略", "节日送礼"], "sc": {"hot": 89, "q": 86, "nat": 82, "his": 75}, "rec": true, "ctr": "+38%", "reason": "礼盒教程+节日场景，引流效率高，覆盖广"}, {"id": "n08", "spu": "青梅酥饼", "title": "全职妈妈的零食清单，这款青梅饼让全家都爱上了", "author": "妈妈的零食柜", "fans": "6.7万", "date": "03-20", "tags": ["真实体验", "家庭场景"], "sc": {"hot": 52, "q": 74, "nat": 88, "his": 60}, "rec": false, "ctr": "+16%", "reason": "家庭场景原生感极强，适合长效投放"}, {"id": "n09", "spu": "芋泥麻薯", "title": "办公室下午茶测评！芋泥麻薯吃一口就忘记下班了", "author": "打工人茶水间", "fans": "9.3万", "date": "04-11", "tags": ["办公室场景", "下午茶场景"], "sc": {"hot": 80, "q": 84, "nat": 78, "his": 68}, "rec": true, "ctr": "+33%", "reason": "办公室场景高频，打工人共鸣强，下午茶消费决策快"}, {"id": "n10", "spu": "核桃脆饼", "title": "囤货清单来了，核桃脆饼这个配方绝了", "author": "囤货控Vivian", "fans": "7.4万", "date": "03-15", "tags": ["囤货种草", "真实体验"], "sc": {"hot": 55, "q": 79, "nat": 87, "his": 65}, "rec": false, "ctr": "+22%", "reason": "囤货场景转化意愿强，适合大促节点复投"}, {"id": "n11", "spu": "抹茶流心饼", "title": "五一出游带什么零食？这款抹茶饼真的是出行神器", "author": "出游零食指南", "fans": "5.1万", "date": "04-16", "tags": ["出行场景", "热点借势"], "sc": {"hot": 85, "q": 80, "nat": 82, "his": 70}, "rec": true, "ctr": "+31%", "reason": "五一热点命中，出行场景高频，轻便零食刚需"}, {"id": "n12", "spu": "桂花糯米糕", "title": "国风点心测评！桂花糯米糕真的是东方美学天花板", "author": "国风好物志", "fans": "3.8万", "date": "03-25", "tags": ["国风种草", "颜值出片"], "sc": {"hot": 60, "q": 71, "nat": 80, "his": 58}, "rec": false, "ctr": "+19%", "reason": "国风赛道互动好，颜值内容有传播力，规模偏小众"}];
+const HOT_TOPICS=[{"rank": 1, "em": "🎁", "name": "#五一出游零食", "heat": "1.8亿播放", "match": true}, {"rank": 2, "em": "☕", "name": "#下午茶好物推荐", "heat": "9200万播放", "match": true}, {"rank": 3, "em": "🍡", "name": "#中式点心颜值", "heat": "7600万播放", "match": true}, {"rank": 4, "em": "🎀", "name": "#节日礼盒推荐", "heat": "6100万播放", "match": true}, {"rank": 5, "em": "💪", "name": "#健康零食清单", "heat": "5300万播放", "match": true}, {"rank": 6, "em": "🌿", "name": "#国风好物", "heat": "4200万播放", "match": true}, {"rank": 7, "em": "💼", "name": "#办公室零食", "heat": "3100万播放", "match": false}, {"rank": 8, "em": "📦", "name": "#囤货必买", "heat": "2800万播放", "match": false}, {"rank": 9, "em": "🏪", "name": "#烘焙探店", "heat": "1900万播放", "match": false}];
+const NODES=[{"date": "5.1", "name": "五一假期", "tip": "出游零食\n送礼伴手礼"}, {"date": "5.20", "name": "520情人节", "tip": "玫瑰云朵糕\n节日礼盒"}, {"date": "6.18", "name": "618大促", "tip": "囤货种草\n大促活动"}, {"date": "7.7", "name": "七夕节", "tip": "高端送礼\n国风礼盒"}, {"date": "暑期", "name": "暑假季", "tip": "下午茶\n亲子场景"}, {"date": "9.x", "name": "中秋节", "tip": "节气点心\n礼盒送礼"}];
+const H_MAP={"n01": 162, "n02": 178, "n03": 148, "n04": 170, "n05": 155, "n06": 142, "n07": 185, "n08": 158, "n09": 165, "n10": 152, "n11": 172, "n12": 145};
+const COVERS={"n01": {"c1": "#c8f6c8", "c2": "#a8e6a8", "em": "🫐", "food": "\n      <ellipse cx=\"150\" cy=\"95\" rx=\"70\" ry=\"52\" fill=\"#6dbf6d\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"88\" rx=\"60\" ry=\"44\" fill=\"#8fd48f\" opacity=\"0.8\"/>\n      <ellipse cx=\"150\" cy=\"82\" rx=\"48\" ry=\"34\" fill=\"#b2e8b2\"/>\n      <ellipse cx=\"150\" cy=\"78\" rx=\"36\" ry=\"22\" fill=\"#d4f5d4\"/>\n      <circle cx=\"120\" cy=\"60\" r=\"18\" fill=\"#6dbf6d\" opacity=\"0.5\"/>\n      <circle cx=\"180\" cy=\"65\" r=\"14\" fill=\"#6dbf6d\" opacity=\"0.4\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"55\" ry=\"12\" fill=\"rgba(80,160,80,0.18)\"/>"}, "n02": {"c1": "#ffd6e8", "c2": "#e8b4d0", "em": "🌸", "food": "\n      <circle cx=\"150\" cy=\"85\" r=\"38\" fill=\"#f8bbd0\"/>\n      <circle cx=\"110\" cy=\"75\" r=\"26\" fill=\"#f8bbd0\"/>\n      <circle cx=\"190\" cy=\"75\" r=\"26\" fill=\"#f8bbd0\"/>\n      <circle cx=\"130\" cy=\"55\" r=\"22\" fill=\"#f8bbd0\"/>\n      <circle cx=\"170\" cy=\"55\" r=\"22\" fill=\"#f8bbd0\"/>\n      <circle cx=\"150\" cy=\"85\" r=\"26\" fill=\"#fce4ec\"/>\n      <circle cx=\"150\" cy=\"85\" r=\"14\" fill=\"#f48fb1\" opacity=\"0.6\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"52\" ry=\"10\" fill=\"rgba(200,100,150,0.15)\"/>"}, "n03": {"c1": "#f5deb3", "c2": "#deb887", "em": "🌰", "food": "\n      <ellipse cx=\"150\" cy=\"90\" rx=\"65\" ry=\"45\" fill=\"#c8a06a\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"85\" rx=\"55\" ry=\"36\" fill=\"#dab87a\"/>\n      <ellipse cx=\"150\" cy=\"80\" rx=\"44\" ry=\"27\" fill=\"#e8c88a\"/>\n      <path d=\"M115,75 Q130,60 150,72 Q170,60 185,75\" fill=\"none\" stroke=\"#b8904a\" stroke-width=\"2.5\" opacity=\"0.6\"/>\n      <path d=\"M120,83 Q135,70 150,80 Q165,70 180,83\" fill=\"none\" stroke=\"#b8904a\" stroke-width=\"2\" opacity=\"0.5\"/>\n      <ellipse cx=\"150\" cy=\"128\" rx=\"54\" ry=\"11\" fill=\"rgba(160,110,50,0.18)\"/>"}, "n04": {"c1": "#e8d5f5", "c2": "#c8a8e8", "em": "🟣", "food": "\n      <ellipse cx=\"150\" cy=\"92\" rx=\"62\" ry=\"50\" fill=\"#9c6fc8\" opacity=\"0.5\"/>\n      <ellipse cx=\"150\" cy=\"88\" rx=\"54\" ry=\"44\" fill=\"#b48cd8\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"84\" rx=\"46\" ry=\"36\" fill=\"#c8a8e8\"/>\n      <ellipse cx=\"150\" cy=\"80\" rx=\"36\" ry=\"26\" fill=\"#dcc4f4\"/>\n      <path d=\"M120,78 Q150,68 180,78\" fill=\"none\" stroke=\"#9c6fc8\" stroke-width=\"1.5\" opacity=\"0.5\"/>\n      <path d=\"M115,86 Q150,76 185,86\" fill=\"none\" stroke=\"#9c6fc8\" stroke-width=\"1.5\" opacity=\"0.4\"/>\n      <ellipse cx=\"150\" cy=\"132\" rx=\"52\" ry=\"11\" fill=\"rgba(130,80,190,0.15)\"/>"}, "n05": {"c1": "#d4f5d4", "c2": "#a8d8a8", "em": "🍵", "food": "\n      <circle cx=\"150\" cy=\"88\" r=\"52\" fill=\"#5a9a5a\" opacity=\"0.5\"/>\n      <circle cx=\"150\" cy=\"85\" r=\"44\" fill=\"#6db86d\" opacity=\"0.65\"/>\n      <circle cx=\"150\" cy=\"82\" r=\"36\" fill=\"#88cc88\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"26\" fill=\"#aadcaa\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"16\" fill=\"#c2e8a0\" opacity=\"0.9\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"8\" fill=\"#fff\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"50\" ry=\"10\" fill=\"rgba(60,130,60,0.15)\"/>"}, "n06": {"c1": "#fff3cd", "c2": "#ffd700", "em": "🌼", "food": "\n      <rect x=\"90\" y=\"65\" width=\"120\" height=\"70\" rx=\"10\" fill=\"#e8b800\" opacity=\"0.6\"/>\n      <rect x=\"95\" y=\"68\" width=\"110\" height=\"62\" rx=\"8\" fill=\"#f5cc00\" opacity=\"0.8\"/>\n      <rect x=\"100\" y=\"72\" width=\"100\" height=\"54\" rx=\"6\" fill=\"#fff0a0\"/>\n      <line x1=\"100\" y1=\"90\" x2=\"200\" y2=\"90\" stroke=\"#e8b800\" stroke-width=\"1.5\" opacity=\"0.5\"/>\n      <line x1=\"100\" y1=\"108\" x2=\"200\" y2=\"108\" stroke=\"#e8b800\" stroke-width=\"1.5\" opacity=\"0.5\"/>\n      <circle cx=\"130\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/>\n      <circle cx=\"170\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"132\" rx=\"55\" ry=\"10\" fill=\"rgba(200,160,0,0.15)\"/>"}, "n07": {"c1": "#fce4ec", "c2": "#f8bbd0", "em": "🎀", "food": "\n      <rect x=\"95\" y=\"78\" width=\"110\" height=\"75\" rx=\"8\" fill=\"#f48fb1\" opacity=\"0.6\"/>\n      <rect x=\"100\" y=\"82\" width=\"100\" height=\"67\" rx=\"6\" fill=\"#f8bbd0\" opacity=\"0.9\"/>\n      <rect x=\"105\" y=\"86\" width=\"90\" height=\"58\" rx=\"5\" fill=\"#fce4ec\"/>\n      <path d=\"M150,82 Q135,65 118,72 Q130,82 150,78 Q170,82 182,72 Q165,65 150,82Z\" fill=\"#f48fb1\" opacity=\"0.8\"/>\n      <circle cx=\"150\" cy=\"82\" r=\"7\" fill=\"#e91e63\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"148\" rx=\"52\" ry=\"10\" fill=\"rgba(200,80,130,0.15)\"/>"}, "n08": {"c1": "#e8f5e9", "c2": "#c8e6c9", "em": "🍃", "food": "\n      <ellipse cx=\"150\" cy=\"90\" rx=\"65\" ry=\"48\" fill=\"#66bb6a\" opacity=\"0.5\"/>\n      <ellipse cx=\"150\" cy=\"86\" rx=\"55\" ry=\"40\" fill=\"#81c784\" opacity=\"0.65\"/>\n      <ellipse cx=\"150\" cy=\"82\" rx=\"44\" ry=\"31\" fill=\"#a5d6a7\"/>\n      <ellipse cx=\"150\" cy=\"78\" rx=\"33\" ry=\"20\" fill=\"#c8e6c9\"/>\n      <path d=\"M115,72 Q125,55 140,68\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"2\" opacity=\"0.6\"/>\n      <path d=\"M185,72 Q175,55 160,68\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"2\" opacity=\"0.6\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"52\" ry=\"11\" fill=\"rgba(70,160,70,0.15)\"/>"}, "n09": {"c1": "#ede7f6", "c2": "#d1c4e9", "em": "💜", "food": "\n      <ellipse cx=\"118\" cy=\"95\" rx=\"42\" ry=\"40\" fill=\"#7b52ab\" opacity=\"0.55\"/>\n      <ellipse cx=\"182\" cy=\"95\" rx=\"42\" ry=\"40\" fill=\"#7b52ab\" opacity=\"0.55\"/>\n      <ellipse cx=\"150\" cy=\"88\" rx=\"44\" ry=\"42\" fill=\"#9575cd\" opacity=\"0.75\"/>\n      <ellipse cx=\"118\" cy=\"92\" rx=\"34\" ry=\"32\" fill=\"#ab87d4\"/>\n      <ellipse cx=\"182\" cy=\"92\" rx=\"34\" ry=\"32\" fill=\"#ab87d4\"/>\n      <ellipse cx=\"150\" cy=\"85\" rx=\"36\" ry=\"34\" fill=\"#c5aae8\"/>\n      <ellipse cx=\"150\" cy=\"136\" rx=\"56\" ry=\"11\" fill=\"rgba(100,60,170,0.15)\"/>"}, "n10": {"c1": "#efebe9", "c2": "#d7ccc8", "em": "🤎", "food": "\n      <rect x=\"88\" y=\"68\" width=\"124\" height=\"78\" rx=\"10\" fill=\"#8d6e63\" opacity=\"0.55\"/>\n      <rect x=\"93\" y=\"72\" width=\"114\" height=\"70\" rx=\"8\" fill=\"#a1887f\" opacity=\"0.75\"/>\n      <rect x=\"98\" y=\"76\" width=\"104\" height=\"62\" rx=\"6\" fill=\"#bcaaa4\"/>\n      <line x1=\"98\" y1=\"92\" x2=\"202\" y2=\"92\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.45\"/>\n      <line x1=\"98\" y1=\"108\" x2=\"202\" y2=\"108\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.45\"/>\n      <line x1=\"150\" y1=\"76\" x2=\"150\" y2=\"138\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.35\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"55\" ry=\"11\" fill=\"rgba(100,70,60,0.15)\"/>"}, "n11": {"c1": "#f1f8e9", "c2": "#dcedc8", "em": "🍃", "food": "\n      <circle cx=\"150\" cy=\"88\" r=\"50\" fill=\"#558b2f\" opacity=\"0.45\"/>\n      <circle cx=\"150\" cy=\"85\" r=\"42\" fill=\"#6a9e3f\" opacity=\"0.6\"/>\n      <circle cx=\"150\" cy=\"82\" r=\"34\" fill=\"#8bc34a\" opacity=\"0.75\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"24\" fill=\"#aed581\"/>\n      <line x1=\"106\" y1=\"62\" x2=\"194\" y2=\"98\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.4\"/>\n      <line x1=\"106\" y1=\"78\" x2=\"194\" y2=\"82\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.35\"/>\n      <line x1=\"106\" y1=\"94\" x2=\"194\" y2=\"66\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.4\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"50\" ry=\"10\" fill=\"rgba(70,130,30,0.15)\"/>"}, "n12": {"c1": "#fffde7", "c2": "#fff9c4", "em": "✨", "food": "\n      <circle cx=\"150\" cy=\"90\" r=\"52\" fill=\"#f9a825\" opacity=\"0.45\"/>\n      <circle cx=\"150\" cy=\"87\" rx=\"44\" r=\"44\" fill=\"#fbc02d\" opacity=\"0.6\"/>\n      <circle cx=\"150\" cy=\"84\" r=\"36\" fill=\"#fdd835\" opacity=\"0.75\"/>\n      <circle cx=\"150\" cy=\"82\" r=\"26\" fill=\"#ffee58\"/>\n      <circle cx=\"130\" cy=\"72\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/>\n      <circle cx=\"150\" cy=\"67\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/>\n      <circle cx=\"170\" cy=\"72\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/>\n      <circle cx=\"122\" cy=\"85\" r=\"4\" fill=\"#f9a825\" opacity=\"0.6\"/>\n      <circle cx=\"178\" cy=\"85\" r=\"4\" fill=\"#f9a825\" opacity=\"0.6\"/>\n      <ellipse cx=\"150\" cy=\"132\" rx=\"50\" ry=\"10\" fill=\"rgba(200,160,0,0.15)\"/>"}};
+const TAG_CLR={"真实体验":"t-blue","情绪共鸣":"t-blue","干货攻略":"t-purple","健康轻食":"t-green","颜值出片":"t-pink","节日送礼":"t-pink","节气风情":"t-orange","摆拍攻略":"t-gray","家庭场景":"t-blue","下午茶场景":"t-orange","办公室场景":"t-purple","囤货种草":"t-orange","出行场景":"t-green","热点借势":"t-orange","国风种草":"t-purple"};
 function tc(t){return TAG_CLR[t]||"t-gray";}
-function makeSVG(n,thumb){
-  const cfg=COVER_CFG[n.id]||{c1:"#ffb3ba",c2:"#ffd6e0",sh:""};
-  const h=thumb?46:(H_MAP[n.id]||160);
-  const vw=thumb?46:300;
-  const mid=Math.round(h/2);
-  const eid=n.id+(thumb?"t":"");
-  return '<svg viewBox="0 0 '+vw+' '+h+'" xmlns="http://www.w3.org/2000/svg">'
-    +'<defs><linearGradient id="g'+eid+'" x1="0" y1="0" x2="1" y2="1">'
-    +'<stop offset="0%" stop-color="'+cfg.c1+'"/>'
-    +'<stop offset="100%" stop-color="'+cfg.c2+'"/>'
-    +'</linearGradient></defs>'
-    +'<rect width="'+vw+'" height="'+h+'" fill="url(#g'+eid+')"/>'
-    +(thumb?'':cfg.sh)
-    +'<text x="'+(vw/2)+'" y="'+(mid-4)+'" text-anchor="middle" font-size="'+(thumb?14:34)+'" dominant-baseline="middle">'+n.em+'</text>'
-    +(thumb?'':'<text x="150" y="'+(mid+24)+'" text-anchor="middle" font-size="11" fill="rgba(70,30,30,0.6)" dominant-baseline="middle">美甲</text>')
-    +'</svg>';
+
+function makeSVG(n, thumb) {
+  const cfg = COVERS[n.id] || {c1:"#ffd6e8",c2:"#f8bbd0",em:"🍡",food:""};
+  const h = thumb ? 46 : (H_MAP[n.id]||160);
+  const vw = thumb ? 46 : 300;
+  const eid = n.id + (thumb ? "t" : "f");
+  if (thumb) {
+    return "<svg viewBox=\"0 0 46 46\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"g" + eid + "\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\"" + cfg.c1 + "\"/><stop offset=\"100%\" stop-color=\"" + cfg.c2 + "\"/></linearGradient></defs><rect width=\"46\" height=\"46\" fill=\"url(#g" + eid + ")\"/><text x=\"23\" y=\"28\" text-anchor=\"middle\" font-size=\"22\" dominant-baseline=\"middle\">" + cfg.em + "</text></svg>";
+  }
+  return "<svg viewBox=\"0 0 300 " + h + "\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"g" + eid + "\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\"" + cfg.c1 + "\"/><stop offset=\"100%\" stop-color=\"" + cfg.c2 + "\"/></linearGradient></defs><rect width=\"300\" height=\"" + h + "\" fill=\"url(#g" + eid + ")\"/>" + cfg.food + "<text x=\"150\" y=\"" + Math.round(h*0.45) + "\" text-anchor=\"middle\" font-size=\"32\" dominant-baseline=\"middle\">" + cfg.em + "</text></svg>";
 }
-const PKD=new Set();
-let activeChip="all";
-function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200);}
+
+const PKD = new Set();
+const filterState = {q:"", fans:[], scenes:[], chip:"all"};
+
+function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2300);}
+
 function switchMain(id){
   document.querySelectorAll(".mtab").forEach(b=>b.classList.remove("on"));
   document.querySelectorAll(".mpanel").forEach(p=>p.classList.remove("on"));
-  document.querySelector('.mtab[data-id="'+id+'"]').classList.add("on");
+  document.querySelector(".mtab[data-id=\""+id+"\"]").classList.add("on");
   document.getElementById("mp-"+id).classList.add("on");
 }
 function switchRight(id){
   document.querySelectorAll(".rtab").forEach(b=>b.classList.remove("on"));
   document.querySelectorAll(".rpanel").forEach(p=>p.classList.remove("on"));
-  document.querySelector('.rtab[data-id="'+id+'"]').classList.add("on");
+  document.querySelector(".rtab[data-id=\""+id+"\"]").classList.add("on");
   document.getElementById("rp-"+id).classList.add("on");
 }
+
 function toggleFilter(){
   const d=document.getElementById("fdrawer"),b=document.getElementById("btnFilter");
   const open=d.classList.toggle("open");b.classList.toggle("open",open);
-  b.textContent=open?"⚙️ 收起筛选":"⚙️ 筛选";
+  b.textContent=open?"⚙️ 收起":"⚙️ 筛选";
 }
-function resetFilter(){document.querySelectorAll(".ftag").forEach(t=>{t.classList.remove("on");if(t.dataset.v==="all")t.classList.add("on");});}
-function applyFilter(){renderNotes();showToast("筛选已应用 ✨");}
-document.addEventListener("click",function(e){
-  const t=e.target.closest(".ftag");
-  if(t){const g=t.dataset.g;document.querySelectorAll('.ftag[data-g="'+g+'"]').forEach(x=>x.classList.remove("on"));t.classList.add("on");}
-});
-function setChip(val){
-  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
-  document.querySelector('.chip[data-cf="'+val+'"]').classList.add("on");
-  activeChip=val;renderNotes();
+
+function parseFans(s){
+  if(!s)return 0;
+  if(s.includes("万"))return parseFloat(s);
+  return parseFloat(s)/10000;
 }
-function getVisible(){
-  let arr=NOTES.slice();
-  if(activeChip==="hot")arr=arr.filter(n=>n.sc.hot>=80);
-  else if(activeChip==="quality")arr=arr.filter(n=>n.sc.q>=80);
-  else if(activeChip==="native")arr=arr.filter(n=>n.sc.nat>=80);
-  else if(activeChip==="history")arr=arr.filter(n=>n.sc.his>=70);
-  arr.sort((a,b)=>{const sa=a.rec?(a.sc.hot+a.sc.q):0,sb=b.rec?(b.sc.hot+b.sc.q):0;return sb-sa;});
-  return arr;
+
+function filterNotes(){
+  return NOTES.filter(n=>{
+    if(filterState.q){
+      const q=filterState.q.toLowerCase();
+      const hit=n.title.toLowerCase().includes(q)||n.spu.toLowerCase().includes(q)||n.author.toLowerCase().includes(q)||n.tags.some(t=>t.toLowerCase().includes(q));
+      if(!hit)return false;
+    }
+    if(filterState.fans.length>0){
+      const f=parseFans(n.fans);
+      const match=filterState.fans.some(fv=>{
+        if(fv==="0-1000")return f<0.1;
+        if(fv==="1000-5000")return f>=0.1&&f<0.5;
+        if(fv==="5000-1万")return f>=0.5&&f<1;
+        return false;
+      });
+      if(!match)return false;
+    }
+    if(filterState.scenes.length>0){
+      const match=filterState.scenes.some(sc=>n.tags.includes(sc));
+      if(!match)return false;
+    }
+    if(filterState.chip==="hot"&&n.sc.hot<80)return false;
+    if(filterState.chip==="quality"&&n.sc.q<80)return false;
+    if(filterState.chip==="native"&&n.sc.nat<80)return false;
+    if(filterState.chip==="history"&&n.sc.his<70)return false;
+    return true;
+  }).sort((a,b)=>{const sa=a.rec?(a.sc.hot+a.sc.q):0,sb=b.rec?(b.sc.hot+b.sc.q):0;return sb-sa;});
 }
+
 function renderNotes(){
-  const arr=getVisible();
+  const arr=filterNotes();
   document.getElementById("poolCnt").textContent="共 "+arr.length+" 篇";
   document.getElementById("ngrid").innerHTML=arr.map(n=>{
     const pk=PKD.has(n.id);
-    return `<div class="ncard${pk?' pked':''}" id="card-${n.id}">
-<div class="cvr">${makeSVG(n,false)}
-${n.rec?'<div class="rec-badge">✨ 懒懒力荐</div>':''}
-${n.hot?`<div class="hot-badge">${n.hot}</div>`:''}
-<div class="ck-btn${pk?' pked':''}" onclick="togglePk('${n.id}',event)">✓</div>
-<div class="cvr-ov"><div style="font-weight:600;margin-bottom:3px">懒懒说 💬</div><div>预估CTR：${n.ctr}</div><div style="margin-top:3px;font-size:10px;opacity:.82">${n.reason}</div></div></div>
-<div class="cbody"><div class="ctitle">${n.title}</div>
-<div class="cauthor">@${n.author} · ${n.fans}粉 · ${n.date}</div>
-<div class="sbars">
-<div class="sbar-row"><span class="sbar-lbl">热点</span><div class="sbar-t"><div class="sbar-f" style="width:${n.sc.hot}%;background:linear-gradient(90deg,#FF2442,#ff6b8a)"></div></div></div>
-<div class="sbar-row"><span class="sbar-lbl">质量</span><div class="sbar-t"><div class="sbar-f" style="width:${n.sc.q}%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)"></div></div></div>
-</div>
-<div class="ctags">${n.tags.map(t=>`<span class="tag ${tc(t)}">${t}</span>`).join('')}</div>
-<div class="cacts">
-<button class="btn-det" onclick="openDet('${n.id}')">🔍 详细分析</button>
-<button class="btn-pk${pk?' pked':''}" id="pk-${n.id}" onclick="togglePk('${n.id}',event)">${pk?'已Pick ✓':'Pick 💅'}</button>
-</div></div></div>`;}).join('');
+    return "<div class=\"ncard"+(pk?" pked":"")+"\" id=\"card-"+n.id+"\">"
+      +"<div class=\"cvr\">"+makeSVG(n,false)
+      +(n.rec?"<div class=\"rec-badge\">✨ 懒懒力荐</div>":"")
+      +"<div class=\"spu-badge\">"+n.spu+"</div>"
+      +"<div class=\"ck-btn"+(pk?" pked":"")+"\" onclick=\"togglePk('"+n.id+"',event)\">✓</div>"
+      +"<div class=\"cvr-ov\"><div style=\"font-weight:600;margin-bottom:3px\">懒懒说 💬</div>"
+      +"<div>预估CTR："+n.ctr+"</div>"
+      +"<div style=\"margin-top:4px;font-size:10px;opacity:.85\">"+n.reason+"</div></div></div>"
+      +"<div class=\"cbody\">"
+      +"<div class=\"ctitle\">"+n.title+"</div>"
+      +"<div class=\"cauthor\">@"+n.author+" · "+n.fans+"粉 · "+n.date+"</div>"
+      +"<div class=\"sbars\">"
+      +"<div class=\"sbar-row\"><span class=\"sbar-lbl\">热点</span><div class=\"sbar-t\"><div class=\"sbar-f\" style=\"width:"+n.sc.hot+"%;background:linear-gradient(90deg,#FF2442,#ff6b8a)\"></div></div></div>"
+      +"<div class=\"sbar-row\"><span class=\"sbar-lbl\">质量</span><div class=\"sbar-t\"><div class=\"sbar-f\" style=\"width:"+n.sc.q+"%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)\"></div></div></div>"
+      +"</div>"
+      +"<div class=\"ctags\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div>"
+      +"<div class=\"cacts\">"
+      +"<button class=\"btn-det\" onclick=\"openDet('"+n.id+"')\">🔍 详细分析</button>"
+      +"<button class=\"btn-pk"+(pk?" pked":"")+"\" id=\"pk-"+n.id+"\" onclick=\"togglePk('"+n.id+"',event)\">"+(pk?"已Pick ✓":"Pick 💅")+"</button>"
+      +"</div></div></div>";
+  }).join("");
 }
+
 function togglePk(id,e){if(e)e.stopPropagation();if(PKD.has(id))PKD.delete(id);else PKD.add(id);refreshPkUI(id);document.getElementById("pkCnt").textContent=PKD.size;}
 function refreshPkUI(id){
   const pk=PKD.has(id);
@@ -505,58 +518,283 @@ function refreshPkUI(id){
   if(card){card.className="ncard"+(pk?" pked":"");const cb=card.querySelector(".ck-btn");if(cb)cb.className="ck-btn"+(pk?" pked":"");const pb=document.getElementById("pk-"+id);if(pb){pb.className="btn-pk"+(pk?" pked":"");pb.textContent=pk?"已Pick ✓":"Pick 💅";}}
   const rp=document.getElementById("rpk-"+id);if(rp){rp.className="btn-rpk"+(pk?" pked":"");rp.textContent=pk?"已Pick ✓":"Pick 💅";}
 }
-const REC_IDS=["n01","n02","n07"];
+
+const REC_IDS=["n01","n02","n07","n09"];
 function renderRec(){
   const recs=REC_IDS.map(id=>NOTES.find(n=>n.id===id)).filter(Boolean);
   document.getElementById("recCards").innerHTML=recs.map(n=>{
     const pk=PKD.has(n.id);
-    return `<div class="rcard"><div class="rcard-top"><div class="rthumb">${makeSVG(n,true)}</div><div class="rinfo"><div class="rtitle">${n.title}</div><div class="rreason">${n.reason}</div></div></div><div class="rcard-tags">${n.tags.map(t=>`<span class="tag ${tc(t)}">${t}</span>`).join('')}</div><div class="rcard-ft"><button class="btn-rpk${pk?' pked':''}" id="rpk-${n.id}" onclick="togglePk('${n.id}',event)">${pk?'已Pick ✓':'Pick 💅'}</button></div></div>`;
-  }).join('');
+    return "<div class=\"rcard\"><div class=\"rcard-top\"><div class=\"rthumb\">"+makeSVG(n,true)+"</div>"
+      +"<div class=\"rinfo\"><div class=\"rtitle\">"+n.title+"</div><div class=\"rreason\">"+n.reason+"</div></div></div>"
+      +"<div class=\"rcard-tags\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div>"
+      +"<div class=\"rcard-ft\"><button class=\"btn-rpk"+(pk?" pked":"")+"\" id=\"rpk-"+n.id+"\" onclick=\"togglePk('"+n.id+"',event)\">"+(pk?"已Pick ✓":"Pick 💅")+"</button></div></div>";
+  }).join("");
 }
+
+function setChip(val){
+  filterState.chip=val;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
+  document.querySelector(".chip[data-cf=\""+val+"\"]").classList.add("on");
+  renderNotes();
+}
+
+function resetFilter(){
+  filterState.fans=[];filterState.scenes=[];filterState.q="";
+  document.getElementById("searchInput").value="";
+  document.querySelectorAll(".ftag[data-g=\"time\"]").forEach(t=>{t.classList.remove("on");if(t.dataset.v==="all")t.classList.add("on");});
+  document.querySelectorAll(".ftag[data-g=\"fans\"]").forEach(t=>t.classList.remove("sel"));
+  document.querySelectorAll(".ftag[data-g=\"scene\"]").forEach(t=>t.classList.remove("sel"));
+  document.querySelectorAll(".ftag[data-g=\"pri\"]").forEach(t=>t.classList.remove("on"));
+}
+function applyFilter(){
+  filterState.fans=Array.from(document.querySelectorAll(".ftag[data-g=\"fans\"].sel")).map(t=>t.dataset.v);
+  filterState.scenes=Array.from(document.querySelectorAll(".ftag[data-g=\"scene\"].sel")).map(t=>t.dataset.v);
+  renderNotes();showToast("筛选已应用 ✨");
+}
+
+document.addEventListener("click",function(e){
+  const t=e.target.closest(".ftag");
+  if(!t)return;
+  const g=t.dataset.g;
+  if(g==="time"){document.querySelectorAll(".ftag[data-g=\"time\"]").forEach(x=>x.classList.remove("on"));t.classList.add("on");}
+  else if(g==="pri"){document.querySelectorAll(".ftag[data-g=\"pri\"]").forEach(x=>x.classList.remove("on"));t.classList.add("on");}
+  else if(g==="fans"){t.classList.toggle("sel");}
+  else if(g==="scene"){t.classList.toggle("sel");}
+});
+
+document.getElementById("searchInput").addEventListener("keydown",function(e){
+  if(e.key==="Enter"){filterState.q=this.value.trim();renderNotes();}
+});
+
 function buildRadar(notes){
   const cx=130,cy=115,r=80,keys=["hot","q","nat","his"],lbls=["热点匹配","内容质量","笔记原生","历史匹配"],cols=["#FF2442","#a18cd1","#43e97b","#f9ca24"];
   function pt(i,v){const a=(Math.PI*2*i/4)-Math.PI/2,rv=r*v/100;return[cx+rv*Math.cos(a),cy+rv*Math.sin(a)];}
-  let s='<svg width="260" height="230" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 12px">';
-  [.25,.5,.75,1].forEach(f=>{const pts=keys.map((_,i)=>pt(i,f*100).join(",")).join(" ");s+=`<polygon points="${pts}" fill="none" stroke="#eee" stroke-width="1"/>`;});
-  keys.forEach((_,i)=>{const p=pt(i,100);s+=`<line x1="${cx}" y1="${cy}" x2="${p[0]}" y2="${p[1]}" stroke="#eee" stroke-width="1"/>`;});
+  let s="<svg width=\"260\" height=\"230\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;margin:0 auto 12px\">";
+  [.25,.5,.75,1].forEach(f=>{const pts=keys.map((_,i)=>pt(i,f*100).join(",")).join(" ");s+="<polygon points=\""+pts+"\" fill=\"none\" stroke=\"#eee\" stroke-width=\"1\"/>";});
+  keys.forEach((_,i)=>{const p=pt(i,100);s+="<line x1=\""+cx+"\" y1=\""+cy+"\" x2=\""+p[0]+"\" y2=\""+p[1]+"\" stroke=\"#eee\" stroke-width=\"1\"/>";});
   const off=[[0,-14],[18,4],[0,14],[-18,4]];
-  lbls.forEach((l,i)=>{const p=pt(i,100),o=off[i];s+=`<text x="${p[0]+o[0]}" y="${p[1]+o[1]}" text-anchor="middle" font-size="10" fill="#999">${l}</text>`;});
-  notes.slice(0,3).forEach((n,ni)=>{const pts=keys.map((k,i)=>pt(i,n.sc[k]).join(",")).join(" ");s+=`<polygon points="${pts}" fill="${cols[ni]}" fill-opacity="0.18" stroke="${cols[ni]}" stroke-width="1.5"/>`;});
-  notes.slice(0,3).forEach((n,ni)=>{s+=`<circle cx="${20+ni*80}" cy="210" r="5" fill="${cols[ni]}"/><text x="${30+ni*80}" y="214" font-size="9" fill="#666">${n.em} ${n.author.slice(0,4)}</text>`;});
-  return s+'</svg>';
+  lbls.forEach((l,i)=>{const p=pt(i,100),o=off[i];s+="<text x=\""+(p[0]+o[0])+"\" y=\""+(p[1]+o[1])+"\" text-anchor=\"middle\" font-size=\"10\" fill=\"#999\">"+l+"</text>";});
+  notes.slice(0,3).forEach((n,ni)=>{const pts=keys.map((k,i)=>pt(i,n.sc[k]).join(",")).join(" ");s+="<polygon points=\""+pts+"\" fill=\""+cols[ni]+"\" fill-opacity=\"0.18\" stroke=\""+cols[ni]+"\" stroke-width=\"1.5\"/>";});
+  notes.slice(0,3).forEach((n,ni)=>{s+="<circle cx=\""+(20+ni*80)+"\" cy=\"210\" r=\"5\" fill=\""+cols[ni]+"\"/><text x=\""+(30+ni*80)+"\" y=\"214\" font-size=\"9\" fill=\"#666\">"+n.spu.slice(0,3)+"</text>";});
+  return s+"</svg>";
 }
+
 function openReport(){
   if(PKD.size===0){showToast("请先 Pick 至少一篇笔记 💅");return;}
   const tns=Array.from(PKD).map(id=>NOTES.find(n=>n.id===id)).filter(Boolean);
   document.getElementById("rptSub").textContent="基于已Pick "+tns.length+" 篇笔记";
   const sc=[["hot","🔥 热点匹配","linear-gradient(90deg,#FF2442,#ff6b8a)"],["q","⭐ 内容质量","linear-gradient(90deg,#a18cd1,#fbc2eb)"],["nat","💚 笔记原生","linear-gradient(90deg,#43e97b,#38f9d7)"],["his","📊 历史匹配","linear-gradient(90deg,#f9ca24,#f0932b)"]];
-  const nhtml=tns.map(n=>`<div class="rpt-nb"><div class="rpt-nt">${n.em} ${n.title}</div><div class="rpt-sbars">${sc.map(([k,l,bg])=>`<div class="rpt-sr"><span class="rpt-sl">${l}</span><div class="rpt-st"><div class="rpt-sf" style="width:${n.sc[k]}%;background:${bg}"></div></div><span class="rpt-sn">${n.sc[k]}</span></div>`).join('')}</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">${n.dA.slice(0,3).map(t=>`<span class="tag ${tc(t)}">${t}</span>`).join('')}</div><div class="rpt-reason">💬 懒懒说：${n.reason}（预估CTR ${n.ctr}）</div></div>`).join('');
-  document.getElementById("rptBody").innerHTML='<div style="background:#fafafa;border-radius:10px;padding:14px;margin-bottom:16px;border:1.5px solid #f0f0f0"><div style="font-size:13px;font-weight:700;margin-bottom:10px">📊 四维评分对比雷达图</div>'+buildRadar(tns)+'</div>'+nhtml;
-  const btn=document.getElementById("btnSync");btn.className="btn-sync";btn.textContent="💅 一键同步 · 合作广场后台";
+  const nhtml=tns.map(n=>"<div class=\"rpt-nb\"><div class=\"rpt-nt\">"+n.spu+" · "+n.title.slice(0,18)+"…</div><div class=\"rpt-sbars\">"+sc.map(([k,l,bg])=>"<div class=\"rpt-sr\"><span class=\"rpt-sl\">"+l+"</span><div class=\"rpt-st\"><div class=\"rpt-sf\" style=\"width:"+n.sc[k]+"%;background:"+bg+"\"></div></div><span class=\"rpt-sn\">"+n.sc[k]+"</span></div>").join("")+"</div><div style=\"display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div><div class=\"rpt-reason\">💬 懒懒说："+n.reason+"（预估CTR "+n.ctr+"）</div></div>").join("");
+  document.getElementById("rptBody").innerHTML="<div style=\"background:#fafafa;border-radius:10px;padding:14px;margin-bottom:16px;border:1.5px solid #f0f0f0\"><div style=\"font-size:13px;font-weight:700;margin-bottom:10px\">📊 四维评分对比雷达图</div>"+buildRadar(tns)+"</div>"+nhtml;
+  const btn=document.getElementById("btnSync");btn.className="btn-sync";btn.textContent="💡 一键同步 · 合作广场后台";
   document.getElementById("rptMask").classList.add("open");
 }
 function doSync(){const btn=document.getElementById("btnSync");btn.className="btn-sync done";btn.textContent="✅ 已同步 · 前往合作内容管理查看";showToast("已同步到「合作广场 > 合作内容管理 > 我的精选」🎉");}
+
 function openDet(id){
   const n=NOTES.find(x=>x.id===id);if(!n)return;
-  document.getElementById("detTitle").textContent=n.em+" "+n.title;
+  document.getElementById("detTitle").textContent=n.spu+" · "+n.title;
   document.getElementById("detSub").textContent="@"+n.author+" · "+n.fans+"粉 · "+n.date;
   const sc=[["hot","🔥 热点匹配","linear-gradient(90deg,#FF2442,#ff6b8a)"],["q","⭐ 内容质量","linear-gradient(90deg,#a18cd1,#fbc2eb)"],["nat","💚 笔记原生","linear-gradient(90deg,#43e97b,#38f9d7)"],["his","📊 历史匹配","linear-gradient(90deg,#f9ca24,#f0932b)"]];
-  document.getElementById("detBody").innerHTML=`<div style="border-radius:10px;overflow:hidden;margin-bottom:14px">${makeSVG(n,false)}</div><div style="font-size:13px;font-weight:700;margin-bottom:9px">四维评分</div><div class="rpt-sbars">${sc.map(([k,l,bg])=>`<div class="rpt-sr"><span class="rpt-sl">${l}</span><div class="rpt-st"><div class="rpt-sf" style="width:${n.sc[k]}%;background:${bg}"></div></div><span class="rpt-sn">${n.sc[k]}</span></div>`).join('')}</div><div style="font-size:13px;font-weight:700;margin:11px 0 7px">内容画像（维度A）</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px">${n.dA.map(t=>`<span class="tag ${tc(t)}">${t}</span>`).join('')}</div><div style="font-size:13px;font-weight:700;margin-bottom:7px">需求场景（维度B）</div><div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px">${n.dB.map(t=>`<span class="tag t-orange">${t}</span>`).join('')}</div><div class="rpt-reason">💬 懒懒说：${n.reason}</div>`;
+  document.getElementById("detBody").innerHTML="<div style=\"border-radius:10px;overflow:hidden;margin-bottom:14px\">"+makeSVG(n,false)+"</div><div style=\"font-size:13px;font-weight:700;margin-bottom:9px\">四维评分</div><div class=\"rpt-sbars\">"+sc.map(([k,l,bg])=>"<div class=\"rpt-sr\"><span class=\"rpt-sl\">"+l+"</span><div class=\"rpt-st\"><div class=\"rpt-sf\" style=\"width:"+n.sc[k]+"%;background:"+bg+"\"></div></div><span class=\"rpt-sn\">"+n.sc[k]+"</span></div>").join("")+"</div><div style=\"font-size:13px;font-weight:700;margin:11px 0 7px\">内容标签</div><div style=\"display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div><div class=\"rpt-reason\">💬 懒懒说："+n.reason+"</div>";
   document.getElementById("detMask").classList.add("open");
 }
+
 function renderHot(){
-  document.getElementById("hotGrid").innerHTML=HOT_TOPICS.map(h=>`<div class="hot-card${h.match?' match':''}"><div class="hot-rank">热点 #${h.rank}</div><div class="hot-em">${h.em}</div><div class="hot-name">${h.name}</div><div class="hot-heat">${h.heat}</div>${h.match?'<div class="match-badge">✨ 已命中笔记</div>':''}</div>`).join('');
-  document.getElementById("nodeGrid").innerHTML=NODES.map(n=>`<div class="node-card"><div class="node-date">${n.date}</div><div class="node-name">${n.name}</div><div class="node-tip">${n.tip}</div></div>`).join('');
+  document.getElementById("hotGrid").innerHTML=HOT_TOPICS.map(h=>"<div class=\"hot-card"+(h.match?" match":"")+"\"><div class=\"hot-rank\">热点 #"+h.rank+"</div><div class=\"hot-em\">"+h.em+"</div><div class=\"hot-name\">"+h.name+"</div><div class=\"hot-heat\">"+h.heat+"</div>"+(h.match?"<div class=\"match-badge\">✨ 已命中笔记</div>":"")+"</div>").join("");
+  document.getElementById("nodeGrid").innerHTML=NODES.map(n=>"<div class=\"node-card\"><div class=\"node-date\">"+n.date+"</div><div class=\"node-name\">"+n.name+"</div><div class=\"node-tip\">"+n.tip+"</div></div>").join("");
 }
-const CHAT_RS={"节日美甲":"节日美甲场景首选情人节心形甲（CTR最高）、草莓季限定甲（热点91分）、婚礼甲攻略（高客单转化）～","日常通勤":"日常通勤首选奶油白显白甲和极简白月光甲，原生感强、稳定消耗，适合长效日投 💅","显白显手":"显白需求首推奶油白美甲，「显白」高频词+生活感封面，历史CTR +34%，稳！","性价比":"性价比首选学生党69元猫眼甲，价格锚点清晰，适合性价比人群投放","颜值出片":"颜值出片Top3：草莓季限定甲、蝴蝶甲元素、夏日柠檬甲，配色好出片 ✨"};
-function quickChat(q){addBubble(q,true);addTyping();setTimeout(()=>{document.getElementById("typ")&&document.getElementById("typ").remove();addBubble(CHAT_RS[q]||"好的，让我帮你查一查～ 💅",false);},800);}
-function sendChat(){const inp=document.getElementById("chatInput"),txt=(inp.value||"").trim();if(!txt)return;addBubble(txt,true);inp.value="";addTyping();setTimeout(()=>{document.getElementById("typ")&&document.getElementById("typ").remove();addBubble("好哒！根据你的描述，给你圈出最合适的几篇～ 💅",false);},900);}
-function addBubble(txt,isUser){const a=document.getElementById("chatArea");const d=document.createElement("div");d.className="brow"+(isUser?" r":"");d.innerHTML=isUser?`<div class="bubble r">${txt}</div>`:`<div class="bav">懒</div><div class="bubble l">${txt}</div>`;a.appendChild(d);a.scrollTop=a.scrollHeight;}
-function addTyping(){const a=document.getElementById("chatArea");const d=document.createElement("div");d.className="brow";d.id="typ";d.innerHTML='<div class="bav">懒</div><div class="bubble l" style="color:#aaa">正在思考…</div>';a.appendChild(d);a.scrollTop=a.scrollHeight;}
-document.addEventListener("keydown",function(e){if(e.key==="Enter"&&document.activeElement===document.getElementById("chatInput"))sendChat();});
+
+const CHAT_RS={
+  "🌸 节日送礼":"节日送礼场景，建议优先投这3篇：\n① 玫瑰云朵糕颜值帖（CTR+41%，七夕高峰期冲量强）\n② 礼盒装法教程帖（引流效率高，转化快）\n③ 桂花糯米糕国风礼盒（国风赛道口碑积累）\n\n投放建议：节日前2周开始，颜值帖60%+教程帖40%，预算¥3000-5000/天，节日当天翻倍加量。",
+  "☕ 下午茶种草":"下午茶场景，推荐2篇作主力：\n① 芋泥麻薯下午茶帖（CTR+29%，软糯画面冲击强）\n② 办公室下午茶测评（CTR+33%，打工人共鸣即时转化）\n\n投放建议：工作日下午2-4点集中投放，转化最快，日预算¥1500-3000即可跑出效果。",
+  "✈️ 五一出游":"五一出游场景已有热点命中！推荐：\n① 抹茶流心饼出行神器帖（CTR+31%，命中#五一出游零食）\n② 青梅酥饼情绪帖（原生感强，出游分享场景）\n\n投放建议：4月25日起集中投放，节前3天预算上调50%，日预算¥2000-4000。",
+  "🆕 新品上新":"新品上新建议分两波：\n第一波（上新前3天）：精选原生感≥85的笔记先种草，主打真实体验。\n第二波（上新当天）：叠加颜值帖+教程帖，形成认知叠加。\n\n推荐Pick：青梅酥饼情绪帖（原生感90）+玫瑰云朵糕颜值帖（热点95），组合ROI最优。",
+  "💪 健康轻食":"健康场景推荐：\n① 核桃脆饼热量帖（垂直健身人群，转化精准）\n② 青梅酥饼妈妈零食帖（家庭健康场景，受众广）\n\n建议精准投健身/育儿兴趣人群，预算¥800-1500/天，转化成本可控。",
+  "🏠 家庭场景":"家庭场景推荐：\n① 青梅酥饼全家零食帖（原生感88，家庭代入感强）\n② 芋泥麻薯下午茶帖（亲子场景延伸效果好）\n\n建议周末集中投放，家庭消费决策快，单篇预算¥500-1000/天即可验证效果。"
+};
+function quickChat(q){addBubble(q,true);addTyping();setTimeout(()=>{document.getElementById("typ")&&document.getElementById("typ").remove();addBubble(CHAT_RS[q]||"好的，让我帮你从种草库里找最合适的笔记组合 💅",false);},900);}
+function sendChat(){const inp=document.getElementById("chatInput"),txt=(inp.value||"").trim();if(!txt)return;addBubble(txt,true);inp.value="";addTyping();setTimeout(()=>{document.getElementById("typ")&&document.getElementById("typ").remove();addBubble("收到！根据你描述的场景，建议先Pick种草库中原生感和热点分都高的笔记，结合节点集中投放效果最好。有具体场景可以点下方快捷标签～ 💅",false);},900);}
+function addBubble(txt,isUser){const a=document.getElementById("chatArea");const d=document.createElement("div");d.className="brow"+(isUser?" r":"");d.innerHTML=isUser?"<div class=\"bubble r\">"+txt+"</div>":"<div class=\"bav\">懒</div><div class=\"bubble l\">"+txt+"</div>";a.appendChild(d);a.scrollTop=a.scrollHeight;}
+function addTyping(){const a=document.getElementById("chatArea");const d=document.createElement("div");d.className="brow";d.id="typ";d.innerHTML="<div class=\"bav\">懒</div><div class=\"bubble l\" style=\"color:#aaa\">思考中…</div>";a.appendChild(d);a.scrollTop=a.scrollHeight;}
+document.getElementById("chatInput").addEventListener("keydown",function(e){if(e.key==="Enter")sendChat();});
 document.getElementById("bannerLink").addEventListener("click",function(){switchRight("rec");});
+
 renderNotes();renderRec();renderHot();
 
 </script>
 </body>
 </html>
+// ================= PICK =================
+function togglePick(id) {
+  if (pickedNotes.has(id)) {
+    pickedNotes.delete(id);
+  } else {
+    pickedNotes.add(id);
+  }
+  renderWaterfall();
+  renderFeatured();
+  updatePickCount();
+}
+
+function updatePickCount() {
+  document.getElementById("pickCount").textContent = pickedNotes.size;
+}
+
+// ================= TABS =================
+function switchMainTab(idx) {
+  document.querySelectorAll(".main-tab").forEach((t, i) => t.classList.toggle("active", i === idx));
+  document.querySelectorAll(".tab-content").forEach((c, i) => c.classList.toggle("active", i === idx));
+}
+
+function switchRpTab(idx) {
+  currentRpTab = idx;
+  document.querySelectorAll(".rp-tab").forEach((t, i) => t.classList.toggle("active", i === idx));
+  document.querySelectorAll(".rp-panel").forEach((p, i) => {
+    p.classList.toggle("active", i === idx);
+    p.style.display = i === idx ? "flex" : "none";
+  });
+}
+
+// ================= CHAT =================
+function initChat() {
+  const msgs = document.getElementById("chatMessages");
+  msgs.innerHTML = `<div class="chat-bubble ai">你好！告诉我这次想主打哪个投放场景，我来帮你从种草库里找最合适的笔记，并给出投放组合建议 ✨</div>`;
+  const quick = document.getElementById("chatQuick");
+  quick.innerHTML = quickQuestions.map(q => `<button class="chat-quick-btn" onclick="sendQuick('${q.text}')">${q.emoji} ${q.text}</button>`).join("");
+}
+
+function sendQuick(text) {
+  const msgs = document.getElementById("chatMessages");
+  msgs.innerHTML += `<div class="chat-bubble user">${text}</div>`;
+  setTimeout(() => {
+    const reply = replies[text] || "收到！让我为你分析投放策略...";
+    msgs.innerHTML += `<div class="chat-bubble ai">${reply}</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 400);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function sendChat() {
+  const input = document.getElementById("chatInput");
+  const text = input.value.trim();
+  if (!text) return;
+  const msgs = document.getElementById("chatMessages");
+  msgs.innerHTML += `<div class="chat-bubble user">${text}</div>`;
+  input.value = "";
+  setTimeout(() => {
+    msgs.innerHTML += `<div class="chat-bubble ai">收到你的需求！「${text}」场景我会为你匹配最优笔记组合，请查看左侧种草库筛选结果，或点击上方快捷问题获取投放建议 ✨</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 400);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ================= HEATMAP =================
+function renderHeatmap() {
+  const topicList = document.getElementById("topicList");
+  topicList.innerHTML = topics.map(t => {
+    const pct = Math.round(parseFloat(t.plays.replace(/[^0-9.]/g,"")) / 180 * 100);
+    return `
+      <div class="topic-item">
+        <div class="topic-rank ${t.match ? "" : "gray"}">${t.rank}</div>
+        <div class="topic-emoji">${t.emoji}</div>
+        <div class="topic-info">
+          <div class="topic-name">${t.name}</div>
+          <div class="topic-plays">${t.plays}播放</div>
+        </div>
+        <div class="topic-bar-wrap">
+          <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:${pct}%"></div></div>
+        </div>
+        <div class="topic-match ${t.match ? "yes" : "no"}">${t.match ? "✓ 已匹配" : "未匹配"}</div>
+      </div>
+    `;
+  }).join("");
+
+  const calStrip = document.getElementById("calStrip");
+  calStrip.innerHTML = calendar.map(c => `
+    <div class="cal-node">
+      <div class="cal-date">${c.date}</div>
+      <div class="cal-name">${c.name}</div>
+      <div class="cal-desc">${c.desc.replace("\n","<br>")}</div>
+    </div>
+  `).join("");
+}
+
+// ================= REVIEW =================
+function renderReview() {
+  const kpis = [
+    {val:"¥2.3万",label:"日均消耗",change:"↑42%"},
+    {val:"63篇",label:"授权笔记",change:"↑31%"},
+    {val:"4.2%",label:"平均CTR",change:"↑0.8pp"},
+    {val:"78%",label:"授权成功率",change:"↑15pp"}
+  ];
+  document.getElementById("kpiGrid").innerHTML = kpis.map(k => `
+    <div class="kpi-card">
+      <div class="kpi-val">${k.val}</div>
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-change">${k.change}</div>
+    </div>
+  `).join("");
+
+  const distData = [
+    {label:"真实体验",val:68,color:"#ff6b8a"},
+    {label:"情绪共鸣",val:55,color:"#ffa940"},
+    {label:"干货攻略",val:38,color:"#52c41a"},
+    {label:"热点借势",val:31,color:"#1890ff"}
+  ];
+  const sceneData = [
+    {label:"下午茶场景",val:62,color:"#ff6b8a"},
+    {label:"节日送礼",val:48,color:"#ffa940"},
+    {label:"出行场景",val:35,color:"#52c41a"},
+    {label:"家庭场景",val:28,color:"#1890ff"}
+  ];
+
+  document.getElementById("distSection").innerHTML = `
+    <div style="margin-bottom:14px;font-size:12px;font-weight:600;color:#666;">表达方式分布</div>
+    ${distData.map(d => `
+      <div class="dist-row">
+        <span class="dist-label">${d.label}</span>
+        <div class="dist-bar-bg"><div class="dist-bar-fill" style="width:${d.val}%;background:${d.color}"></div></div>
+        <span class="dist-pct">${d.val}%</span>
+      </div>
+    `).join("")}
+    <div style="margin:14px 0 10px;font-size:12px;font-weight:600;color:#666;">消费场景分布</div>
+    ${sceneData.map(d => `
+      <div class="dist-row">
+        <span class="dist-label">${d.label}</span>
+        <div class="dist-bar-bg"><div class="dist-bar-fill" style="width:${d.val}%;background:${d.color}"></div></div>
+        <span class="dist-pct">${d.val}%</span>
+      </div>
+    `).join("")}
+  `;
+
+  document.getElementById("insightBox").innerHTML = `
+    <div class="insight-title">💡 爆款规律</div>
+    <div class="insight-item">节日节点+强颜值内容CTR比日常高2.3倍</div>
+    <div class="insight-item">芋泥/玫瑰/青梅三款SKU历史CTR最高</div>
+    <div class="insight-item">办公室/下午茶场景转化最快（1-3天见效）</div>
+  `;
+
+  document.getElementById("goodCases").innerHTML = `
+    <div class="good-case">
+      <div class="gc-title">七夕玫瑰云朵糕 CTR+55%</div>
+      <div class="gc-badge">节日节点+高颜值封面+送礼场景</div>
+      <div class="gc-metrics">
+        <span class="gc-metric">CTR 5.8%</span>
+        <span class="gc-metric">互动率 9.2%</span>
+        <span class="gc-metric">授权成本¥160</span>
+        <span class="gc-metric">ROI 3.8x</span>
+      </div>
+    </div>
+    <div class="good-case">
+      <div class="gc-title">下午茶芋泥麻薯 CTR+33%</div>
+      <div class="gc-badge">高频下午茶场景+打工人共鸣+软糯视觉</div>
+      <div class="gc-metrics">
+        <span class="gc-metric">CTR 4.4%</span>
+        <span class="gc-metric">互动率 7.1%</span>
+        <span class="gc-metric">授权成本¥220</span>
+        <span class="gc-metric">ROI 2.9x</span>
+      </div>
+    </div>
+  `;
+}
