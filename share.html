@@ -3,77 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>山楂饼家 · 投放精选笔记 · 客户预览</title>
+<title>山楂饼家 · 投放精选笔记 · 品牌确认</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;background:#f5f5f7;color:#1a1a1a;min-height:100vh}
-.shdr{background:#fff;border-bottom:1px solid #eee;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.shdr{background:#fff;border-bottom:1px solid #eee;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
 .shdr-l{display:flex;align-items:center;gap:10px}
 .logo{width:32px;height:32px;background:#FF2442;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:700}
 .shdr-title{font-size:15px;font-weight:700}
 .shdr-sub{font-size:12px;color:#aaa;margin-left:6px}
 .brand-pill{background:#fff0f2;border-radius:20px;padding:5px 13px;font-size:13px;color:#FF2442;font-weight:600}
 .hero{background:linear-gradient(135deg,#FF2442,#ff6b8a);color:#fff;padding:24px 20px 20px;text-align:center}
-.hero-logo{font-size:32px;margin-bottom:8px}
+.hero-logo{font-size:36px;margin-bottom:8px}
 .hero-title{font-size:20px;font-weight:700;margin-bottom:4px}
-.hero-sub{font-size:13px;opacity:.85;margin-bottom:12px}
-.hero-note{font-size:11px;background:rgba(255,255,255,.2);border-radius:20px;padding:5px 14px;display:inline-block}
+.hero-sub{font-size:13px;opacity:.85;margin-bottom:14px}
+.fee-card{background:rgba(255,255,255,.18);border-radius:12px;padding:12px 16px;display:inline-flex;align-items:center;gap:10px;backdrop-filter:blur(8px)}
+.fee-label{font-size:11px;opacity:.8}
+.fee-val{font-size:18px;font-weight:700}
+.fee-note{font-size:10px;opacity:.7;margin-top:1px}
 .wrap{max-width:540px;margin:0 auto;padding:16px}
 .sec-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.note-list{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.note-list{display:flex;flex-direction:column;gap:12px;margin-bottom:90px}
 .ncard{background:#fff;border-radius:12px;border:1.5px solid #eee;overflow:hidden;transition:border-color .2s,box-shadow .2s}
-.ncard:hover{box-shadow:0 4px 14px rgba(255,36,66,.1)}
-.ncard.pked{border-color:#FF2442}
+.ncard.pked{border-color:#FF2442;box-shadow:0 2px 12px rgba(255,36,66,.15)}
 .cvr{position:relative;overflow:hidden}
-.cvr svg{width:100%;display:block;max-height:180px}
+.cvr svg{width:100%;display:block;max-height:160px}
 .rec-badge{position:absolute;top:0;left:0;background:#FF2442;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:0 0 8px 0}
 .spu-badge{position:absolute;top:8px;right:40px;background:rgba(230,81,0,.85);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
-.ck-wrap{position:absolute;top:8px;right:8px}
-.ck-btn{width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.9);background:rgba(255,255,255,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;backdrop-filter:blur(4px);transition:all .15s}
+.ck-btn{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.9);background:rgba(255,255,255,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;backdrop-filter:blur(4px);transition:all .15s}
 .ck-btn.pked{background:#FF2442;border-color:#FF2442;color:#fff}
 .cbody{padding:12px 14px}
 .ctitle{font-size:14px;font-weight:600;line-height:1.45;margin-bottom:5px}
-.cauthor{font-size:12px;color:#aaa;margin-bottom:8px}
-.sbars{margin-bottom:8px}
+.cauthor{font-size:12px;color:#aaa;margin-bottom:7px}
+.sbars{margin-bottom:7px}
 .sbar-row{display:flex;align-items:center;gap:6px;font-size:11px;color:#bbb;margin-bottom:4px}
 .sbar-lbl{width:40px;flex-shrink:0}
 .sbar-t{flex:1;height:4px;background:#f0f0f0;border-radius:2px;overflow:hidden}
 .sbar-f{height:100%;border-radius:2px}
-.ctags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.ctags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
 .tag{padding:3px 8px;border-radius:9px;font-size:11px;font-weight:500}
 .t-blue{background:#e8f4ff;color:#1e6bb8}.t-pink{background:#ffe8f0;color:#c0335a}
 .t-green{background:#e8f7ee;color:#1e8a3c}.t-purple{background:#f0e8ff;color:#6b3ac0}
 .t-orange{background:#fff3e0;color:#e65100}.t-gray{background:#f5f5f5;color:#666}
-.reason-box{font-size:12px;color:#888;line-height:1.55;background:#fff8f9;padding:7px 10px;border-radius:7px;border-left:3px solid #FF2442;margin-bottom:10px}
+.fee-row{display:flex;align-items:center;justify-content:space-between;background:#fff8f9;border-radius:8px;padding:8px 11px;margin-bottom:9px;border:1px solid #ffd0d8}
+.fee-row-l{font-size:12px;color:#c62828;font-weight:600}
+.fee-row-r{font-size:13px;font-weight:700;color:#FF2442}
+.reason-box{font-size:12px;color:#888;line-height:1.55;background:#fafafa;padding:7px 10px;border-radius:7px;border-left:3px solid #FF2442;margin-bottom:10px}
 .btn-pk{width:100%;height:38px;border-radius:10px;border:1.5px solid #FF2442;background:#fff;color:#FF2442;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
 .btn-pk.pked{background:#e8f7ee;border-color:#1e8a3c;color:#1e8a3c}
-.sticky-ft{position:sticky;bottom:0;background:#fff;border-top:1px solid #eee;padding:14px 20px;z-index:100;max-width:540px;margin:0 auto}
+.sticky-ft{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;padding:12px 20px 20px;z-index:100}
+.sticky-inner{max-width:540px;margin:0 auto}
 .pk-status{font-size:13px;color:#aaa;margin-bottom:10px;text-align:center}
 .pk-status span{color:#FF2442;font-weight:700;font-size:16px}
-.btn-submit{width:100%;height:46px;border-radius:12px;background:linear-gradient(135deg,#FF2442,#ff6b8a);color:#fff;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
-.btn-submit:disabled{opacity:.4;cursor:not-allowed}
+.btn-submit{width:100%;height:46px;border-radius:12px;background:linear-gradient(135deg,#FF2442,#ff6b8a);color:#fff;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s}
+.btn-submit:disabled{opacity:.35;cursor:not-allowed}
 .submit-note{text-align:center;font-size:11px;color:#bbb;margin-top:6px}
 .modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:900}
 .modal-mask.open{display:flex}
-.modal-sheet{background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:540px;padding:24px 20px 36px}
-.modal-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:6px}
-.modal-sub{font-size:13px;color:#aaa;text-align:center;margin-bottom:20px;line-height:1.5}
-.modal-check{display:flex;align-items:flex-start;gap:10px;background:#f9f9f9;border-radius:10px;padding:12px;margin-bottom:10px}
-.modal-check-em{font-size:20px;flex-shrink:0}
-.modal-check-txt{font-size:12px;color:#555;line-height:1.6}
-.modal-check-txt strong{color:#1a1a1a}
-.btn-confirm{width:100%;height:46px;border-radius:12px;background:linear-gradient(135deg,#34c759,#30b050);color:#fff;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:14px}
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(0,0,0,.78);color:#fff;padding:10px 20px;border-radius:22px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
+.modal-sheet{background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:540px;padding:22px 20px 40px;max-height:80vh;overflow-y:auto}
+.modal-handle{width:36px;height:4px;background:#eee;border-radius:2px;margin:0 auto 16px}
+.modal-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:4px}
+.modal-sub{font-size:13px;color:#aaa;text-align:center;margin-bottom:18px}
+.confirm-notes{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;max-height:35vh;overflow-y:auto}
+.confirm-row{display:flex;align-items:center;gap:10px;background:#fafafa;border-radius:9px;padding:9px 11px;border:1px solid #f0f0f0}
+.confirm-thumb{width:36px;height:36px;border-radius:7px;overflow:hidden;flex-shrink:0}
+.confirm-info{flex:1;min-width:0}
+.confirm-title{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.confirm-meta{font-size:10px;color:#aaa;margin-top:1px}
+.terms-box{background:#fff8f9;border-radius:10px;padding:12px;border:1px solid #ffd0d8;margin-bottom:14px}
+.terms-title{font-size:12px;font-weight:700;color:#c62828;margin-bottom:8px}
+.terms-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;font-size:12px;color:#555;line-height:1.55}
+.terms-em{flex-shrink:0;font-size:14px}
+.btn-confirm{width:100%;height:46px;border-radius:12px;background:linear-gradient(135deg,#34c759,#30b050);color:#fff;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(0,0,0,.78);color:#fff;padding:10px 20px;border-radius:22px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.success-screen{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;padding:40px 20px;text-align:center}
+.success-screen.show{display:flex}
+.success-em{font-size:60px;margin-bottom:16px}
+.success-title{font-size:20px;font-weight:700;margin-bottom:6px}
+.success-sub{font-size:14px;color:#aaa;line-height:1.6}
 </style>
 </head>
 <body>
-
 <div class="shdr">
   <div class="shdr-l">
     <div class="logo">薯</div>
     <span class="shdr-title">合作广场</span>
-    <span class="shdr-sub">客户精选预览</span>
+    <span class="shdr-sub">品牌方确认页</span>
   </div>
   <div class="brand-pill">🍡 山楂饼家</div>
 </div>
@@ -81,38 +97,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 <div class="hero">
   <div class="hero-logo">🍡</div>
   <div class="hero-title">山楂饼家 · 投放精选笔记</div>
-  <div class="hero-sub">共 12 篇 · 代理已为你精选推荐，可浏览并选择心仪笔记</div>
-  <div class="hero-note">✨ 选好后点「确认Pick」→ 代理设置分成 → 发起授权</div>
+  <div class="hero-sub">共 12 篇优质内容 · 浏览后选择心仪笔记 Pick</div>
+  <div class="fee-card">
+    <div>
+      <div class="fee-label">品牌方预设授权分成</div>
+      <div class="fee-val">消耗金额 × 10%</div>
+      <div class="fee-note">按实际消耗结算，作者收入有保障</div>
+    </div>
+  </div>
 </div>
 
 <div class="wrap">
-  <div class="sec-title">📋 精选笔记列表</div>
+  <div class="sec-title">📋 精选笔记（共 12 篇）</div>
   <div class="note-list" id="noteList"></div>
+  <div class="success-screen" id="successScreen">
+    <div class="success-em">🎉</div>
+    <div class="success-title">Pick 已提交！</div>
+    <div class="success-sub">你的笔记选择已同步至合作广场后台<br>作者将收到授权邀请，分成按消耗 × 10% 结算<br>授权成功后可在聚光平台直接投放</div>
+  </div>
 </div>
 
-<div class="sticky-ft">
-  <div class="pk-status">已选 <span id="pkCnt">0</span> 篇笔记</div>
-  <button class="btn-submit" id="btnSubmit" disabled onclick="openSubmit()">确认Pick · 同步至代理后台</button>
-  <div class="submit-note">Pick后代理将为你设置授权分成并发起合作申请</div>
+<div class="sticky-ft" id="stickyFt">
+  <div class="sticky-inner">
+    <div class="pk-status">已选 <span id="pkCnt">0</span> 篇笔记</div>
+    <button class="btn-submit" id="btnSubmit" disabled onclick="openSubmit()">确认 Pick · 同步至合作广场后台</button>
+    <div class="submit-note">Pick 后系统将向作者发起授权邀请，分成由品牌方统一预设</div>
+  </div>
 </div>
 
 <div class="modal-mask" id="submitMask">
   <div class="modal-sheet">
-    <div class="modal-title">确认Pick笔记</div>
-    <div class="modal-sub" id="modalSub">你已选择 0 篇笔记，确认后将同步至代理后台</div>
-    <div class="modal-check">
-      <div class="modal-check-em">🔗</div>
-      <div class="modal-check-txt"><strong>授权流程说明</strong><br>Pick确认后，代理将在1个工作日内设置分成比例并向笔记作者发起授权申请，授权成功后笔记即可在合作广场投放。</div>
+    <div class="modal-handle"></div>
+    <div class="modal-title">确认 Pick 笔记</div>
+    <div class="modal-sub" id="modalSub">已选 0 篇</div>
+    <div class="confirm-notes" id="confirmNotes"></div>
+    <div class="terms-box">
+      <div class="terms-title">📋 授权条款（品牌方预设）</div>
+      <div class="terms-row"><span class="terms-em">💰</span><div>授权分成：<strong>消耗金额 × 10%</strong>，按月结算至作者账户，由小红书合作广场平台托管</div></div>
+      <div class="terms-row"><span class="terms-em">📅</span><div>授权周期：<strong>90天</strong>，到期后可续签或终止，不影响作者笔记正常展示</div></div>
+      <div class="terms-row"><span class="terms-em">🔒</span><div>内容保护：授权期间笔记内容归作者所有，品牌方仅获得投放权，不得修改内容</div></div>
+      <div class="terms-row"><span class="terms-em">✅</span><div>Pick 确认后，系统将向作者发送授权邀请，作者同意后正式生效</div></div>
     </div>
-    <div class="modal-check">
-      <div class="modal-check-em">💰</div>
-      <div class="modal-check-txt"><strong>分成说明</strong><br>授权分成由代理与作者协商，一般为消耗金额的5%-15%，代理将在发起授权前与你确认。</div>
-    </div>
-    <div class="modal-check">
-      <div class="modal-check-em">📱</div>
-      <div class="modal-check-txt"><strong>后续跟进</strong><br>授权申请发出后，代理将通过Hi通讯或邮件通知你进度，授权成功后可在聚光平台直接投放。</div>
-    </div>
-    <button class="btn-confirm" onclick="doSubmit()">✅ 确认，同步给代理</button>
+    <button class="btn-confirm" onclick="doSubmit()">✅ 同意条款并确认 Pick</button>
   </div>
 </div>
 
@@ -127,11 +153,16 @@ const TAG_CLR={"真实体验":"t-blue","情绪共鸣":"t-blue","干货攻略":"t
 function tc(t){return TAG_CLR[t]||"t-gray";}
 function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2300);}
 
-function makeSVG(n){
+function makeSVGFull(n){
   const cfg=COVERS[n.id]||{c1:"#ffd6e8",c2:"#f8bbd0",em:"🍡",food:""};
   const h=H_MAP[n.id]||160;
   const eid=n.id+"s";
-  return "<svg viewBox=\"0 0 300 "+h+"\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"g"+eid+"\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\""+cfg.c1+"\"/><stop offset=\"100%\" stop-color=\""+cfg.c2+"\"/></linearGradient></defs><rect width=\"300\" height=\""+h+"\" fill=\"url(#g"+eid+")\"\/>"+cfg.food+"<text x=\"150\" y=\""+Math.round(h*0.45)+"\" text-anchor=\"middle\" font-size=\"32\" dominant-baseline=\"middle\">"+cfg.em+"</text></svg>";
+  return "<svg viewBox=\"0 0 300 "+h+"\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"gs"+eid+"\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\""+cfg.c1+"\"/><stop offset=\"100%\" stop-color=\""+cfg.c2+"\"/></linearGradient></defs><rect width=\"300\" height=\""+h+"\" fill=\"url(#gs"+eid+")\"\/>"+cfg.food+"<text x=\"150\" y=\""+Math.round(h*0.45)+"\" text-anchor=\"middle\" font-size=\"32\" dominant-baseline=\"middle\">"+cfg.em+"</text></svg>";
+}
+function makeSVGThumb(n){
+  const cfg=COVERS[n.id]||{c1:"#ffd6e8",c2:"#f8bbd0",em:"🍡"};
+  const eid=n.id+"ct";
+  return "<svg viewBox=\"0 0 36 36\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"gt"+eid+"\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\""+cfg.c1+"\"/><stop offset=\"100%\" stop-color=\""+cfg.c2+"\"/></linearGradient></defs><rect width=\"36\" height=\"36\" fill=\"url(#gt"+eid+")\"\/><text x=\"18\" y=\"22\" text-anchor=\"middle\" font-size=\"18\" dominant-baseline=\"middle\">"+cfg.em+"</text></svg>";
 }
 
 const PKD=new Set();
@@ -140,10 +171,10 @@ function renderNotes(){
   document.getElementById("noteList").innerHTML=NOTES.map(n=>{
     const pk=PKD.has(n.id);
     return "<div class=\"ncard"+(pk?" pked":"")+"\" id=\"card-"+n.id+"\">"
-      +"<div class=\"cvr\">"+makeSVG(n)
-      +(n.rec?"<div class=\"rec-badge\">✨ 代理力荐</div>":"")
+      +"<div class=\"cvr\">"+makeSVGFull(n)
+      +(n.rec?"<div class=\"rec-badge\">✨ 懒懒力荐</div>":"")
       +"<div class=\"spu-badge\">"+n.spu+"</div>"
-      +"<div class=\"ck-wrap\"><div class=\"ck-btn"+(pk?" pked":"")+"\" onclick=\"togglePk('"+n.id+"',event)\">✓</div></div>"
+      +"<div class=\"ck-btn"+(pk?" pked":"")+"\" onclick=\"togglePk('"+n.id+"',event)\">✓</div>"
       +"</div>"
       +"<div class=\"cbody\">"
       +"<div class=\"ctitle\">"+n.title+"</div>"
@@ -152,9 +183,11 @@ function renderNotes(){
       +"<div class=\"sbar-row\"><span class=\"sbar-lbl\">热点</span><div class=\"sbar-t\"><div class=\"sbar-f\" style=\"width:"+n.sc.hot+"%;background:linear-gradient(90deg,#FF2442,#ff6b8a)\"></div></div></div>"
       +"<div class=\"sbar-row\"><span class=\"sbar-lbl\">质量</span><div class=\"sbar-t\"><div class=\"sbar-f\" style=\"width:"+n.sc.q+"%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)\"></div></div></div>"
       +"</div>"
-      +"<div class=\"ctags\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\"\>"+t+"</span>").join("")+"<span class=\"tag t-orange\">👥 "+n.crowd+"</span><span class=\"tag t-green\">🎯 "+n.need+"</span></div>"
+      +"<div class=\"ctags\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\"\>"+t+"</span>").join("")
+      +"<span class=\"tag t-orange\">👥 "+n.crowd+"</span><span class=\"tag t-green\">🎯 "+n.need+"</span></div>"
+      +"<div class=\"fee-row\"><span class=\"fee-row-l\">💰 授权分成（品牌预设）</span><span class=\"fee-row-r\">消耗 × 10%</span></div>"
       +"<div class=\"reason-box\">💬 "+n.reason+"（预估CTR "+n.ctr+"）</div>"
-      +"<button class=\"btn-pk"+(pk?" pked":"")+"\" id=\"pk-"+n.id+"\" onclick=\"togglePk('"+n.id+"',event)\">"+(pk?"已Pick ✓":"Pick 这篇 💅")+"</button>"
+      +"<button class=\"btn-pk"+(pk?" pked":"")+"\" id=\"pk-"+n.id+"\" onclick=\"togglePk('"+n.id+"',event)\">"+(pk?"已 Pick ✓":"Pick 这篇 💅")+"</button>"
       +"</div></div>";
   }).join("");
 }
@@ -164,30 +197,25 @@ function togglePk(id,e){
   if(PKD.has(id))PKD.delete(id);else PKD.add(id);
   const pk=PKD.has(id);
   const card=document.getElementById("card-"+id);
-  if(card){
-    card.className="ncard"+(pk?" pked":"");
-    const cb=card.querySelector(".ck-btn");if(cb)cb.className="ck-btn"+(pk?" pked":"");
-    const pb=document.getElementById("pk-"+id);if(pb){pb.className="btn-pk"+(pk?" pked":"");pb.textContent=pk?"已Pick ✓":"Pick 这篇 💅";}
-  }
+  if(card){card.className="ncard"+(pk?" pked":"");const cb=card.querySelector(".ck-btn");if(cb)cb.className="ck-btn"+(pk?" pked":"");const pb=document.getElementById("pk-"+id);if(pb){pb.className="btn-pk"+(pk?" pked":"");pb.textContent=pk?"已 Pick ✓":"Pick 这篇 💅";}}
   document.getElementById("pkCnt").textContent=PKD.size;
   document.getElementById("btnSubmit").disabled=PKD.size===0;
 }
 
 function openSubmit(){
-  document.getElementById("modalSub").textContent="你已选择 "+PKD.size+" 篇笔记，确认后将同步至代理后台";
+  const tns=Array.from(PKD).map(id=>NOTES.find(n=>n.id===id)).filter(Boolean);
+  document.getElementById("modalSub").textContent="已选 "+tns.length+" 篇笔记，确认 Pick 并同步后台";
+  document.getElementById("confirmNotes").innerHTML=tns.map(n=>"<div class=\"confirm-row\"><div class=\"confirm-thumb\">"+makeSVGThumb(n)+"</div><div class=\"confirm-info\"><div class=\"confirm-title\">"+n.title+"</div><div class=\"confirm-meta\">"+n.spu+" · @"+n.author+" · 分成 10%</div></div></div>").join("");
   document.getElementById("submitMask").classList.add("open");
 }
 function doSubmit(){
   document.getElementById("submitMask").classList.remove("open");
-  showToast("✅ 已同步！代理将在1个工作日内联系你确认分成 🎉");
-  setTimeout(()=>{
-    document.getElementById("btnSubmit").textContent="✅ 已提交 · 等待代理处理";
-    document.getElementById("btnSubmit").style.background="#34c759";
-    document.getElementById("btnSubmit").disabled=true;
-  },500);
+  document.getElementById("noteList").style.display="none";
+  document.getElementById("stickyFt").style.display="none";
+  document.getElementById("successScreen").classList.add("show");
+  showToast("✅ Pick 已提交！等待作者确认授权 🎉");
 }
 document.getElementById("submitMask").addEventListener("click",function(e){if(e.target===this)this.classList.remove("open");});
-
 renderNotes();
 </script>
 </body>
