@@ -181,6 +181,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(0,0,0,.78);color:#fff;padding:9px 18px;border-radius:22px;font-size:13px;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+
+.rpt-sl-fix{width:58px;flex-shrink:0;white-space:nowrap;font-size:11px;color:#777}
+.btn-det-sm{padding:4px 9px;border-radius:9px;border:1.5px solid #eee;background:#fff;cursor:pointer;font-size:11px;color:#666;font-family:inherit}
+.btn-det-sm:hover{border-color:#FF2442;color:#FF2442}
+.btn-pk-xs{padding:4px 10px;border-radius:12px;border:1.5px solid #FF2442;background:#fff;color:#FF2442;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600;flex-shrink:0}
+.btn-pk-xs.pked{background:#e8f7ee;border-color:#1e8a3c;color:#1e8a3c}
+.hot-notes{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.hot-note-row{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.7);border-radius:8px;padding:5px 7px}
+.hot-note-thumb{width:32px;height:32px;border-radius:6px;overflow:hidden;flex-shrink:0}
+.hot-note-info{flex:1;min-width:0}
+.hot-note-title{font-size:10px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hot-note-meta{font-size:9px;color:#aaa}
+.hot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;flex-shrink:0}
+.hot-card{background:#fff;border-radius:11px;border:1.5px solid #eee;padding:11px;text-align:center}
+.hot-card.match{border-color:#FF2442;background:#fff8f9}
+.hot-rank{font-size:11px;color:#bbb;margin-bottom:4px}
+.hot-em{font-size:20px;margin-bottom:4px}
+.hot-name{font-size:11px;font-weight:600;line-height:1.35;margin-bottom:4px}
+.hot-heat{font-size:10px;color:#FF2442;font-weight:600}
+.match-badge{display:inline-block;background:#fff0f2;color:#FF2442;font-size:9px;font-weight:700;padding:2px 6px;border-radius:7px;margin-top:3px}
+.chat-note-card{display:flex;align-items:center;gap:8px;background:#fff;border-radius:9px;padding:7px 9px;border:1.5px solid #ffd0d8}
+.chat-note-thumb{width:38px;height:38px;border-radius:7px;overflow:hidden;flex-shrink:0}
+.chat-note-info{flex:1;min-width:0}
+.chat-note-title{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-note-meta{font-size:10px;color:#aaa;margin-top:1px}
+.rpt-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:14px}
+.rpt-kpi{background:#fff0f2;border-radius:10px;padding:10px 6px;text-align:center;border:1px solid #ffd0d8}
+.rpt-kpi-v{font-size:18px;font-weight:700;color:#FF2442;margin-bottom:2px}
+.rpt-kpi-l{font-size:10px;color:#aaa}
+.rpt-sec{margin-bottom:16px}
+.rpt-sec-title{font-size:13px;font-weight:700;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #f0f0f0}
+.rpt-advice{background:#fafafa;border-radius:9px;padding:11px 13px;border:1.5px solid #f0f0f0}
+.adv-row{font-size:12px;color:#555;line-height:1.6;margin-bottom:4px}
+.share-box{background:linear-gradient(135deg,#fff8f9,#f0f7ff);border-radius:12px;padding:14px;border:1.5px solid #d0e8ff;margin-top:4px}
+.share-title{font-size:13px;font-weight:700;color:#1565c0;margin-bottom:4px}
+.share-sub{font-size:11px;color:#888;line-height:1.5;margin-bottom:8px}
+.share-url{background:#fff;border-radius:8px;padding:8px 11px;font-size:11px;color:#1565c0;font-family:monospace;border:1.5px solid #bbdefb;word-break:break-all}
+.btn-copy{padding:6px 13px;border-radius:10px;border:1.5px solid #FF2442;background:#fff0f2;color:#FF2442;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.share-flow{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:12px;padding:8px;background:#fff;border-radius:8px}
+.sf-step{font-size:10px;color:#555;font-weight:600;background:#f0f7ff;padding:3px 7px;border-radius:6px}
+.sf-arr{font-size:10px;color:#aaa}
+.rpt-nb{background:#fafafa;border-radius:10px;padding:13px;margin-bottom:11px;border:1.5px solid #f0f0f0}
+
 </style>
 </head>
 <body>
@@ -209,26 +252,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
       <button class="mtab" data-id="hots" onclick="switchMain('hots')">🔥 热力图谱</button>
       <button class="mtab" data-id="hist" onclick="switchMain('hist')">📈 投放复盘</button>
     </div>
+
     <div class="mpanel on" id="mp-pool">
       <div class="toolbar">
         <div class="search-box">
           <span>🔍</span>
-          <input id="searchInput" type="text" placeholder="搜索笔记、SPU、投放场景… 按 Enter 搜索">
+          <input id="searchInput" type="text" placeholder="搜索笔记标题、SPU、作者… 按 Enter 搜索">
         </div>
         <button class="btn-filter" id="btnFilter" onclick="toggleFilter()">⚙️ 筛选</button>
         <button class="btn-ask" onclick="switchRight('chat')">✨ 问懒懒</button>
       </div>
+
       <div class="fdrawer" id="fdrawer">
         <div>
-          <div class="fsec">📅 基础维度</div>
-          <div class="fsub">笔记发布时间</div>
+          <div class="fsec">📅 基础维度（单选）</div>
+          <div class="fsub">发布时间</div>
           <div class="frow">
             <span class="ftag" data-g="time" data-v="7d">近7天</span>
             <span class="ftag" data-g="time" data-v="30d">近30天</span>
             <span class="ftag" data-g="time" data-v="3m">近3个月</span>
             <span class="ftag on" data-g="time" data-v="all">全部</span>
           </div>
-          <div class="fsub">作者粉丝数（可多选，再次点击取消）</div>
+          <div class="fsub">粉丝数（可多选，再次点击取消）</div>
           <div class="frow">
             <span class="ftag" data-g="fans" data-v="0-1000">0-1000</span>
             <span class="ftag" data-g="fans" data-v="1000-5000">1000-5000</span>
@@ -237,18 +282,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
         </div>
         <hr class="fdiv">
         <div>
-          <div class="fsec">🎯 推荐优先级</div>
-          <div class="frow">
-            <span class="ftag" data-g="pri" data-v="hot">🔥 热点匹配</span>
-            <span class="ftag" data-g="pri" data-v="quality">⭐ 内容质量</span>
-            <span class="ftag" data-g="pri" data-v="native">💚 笔记原生</span>
-            <span class="ftag" data-g="pri" data-v="history">📊 历史匹配</span>
-          </div>
-        </div>
-        <hr class="fdiv">
-        <div>
-          <div class="fsec">🌸 行业化维度</div>
-          <div class="fsub">消费场景（可多选）</div>
+          <div class="fsec">🌸 行业化维度（可多选，再次点击取消）</div>
+          <div class="fsub">消费场景</div>
           <div class="frow">
             <span class="ftag" data-g="scene" data-v="节日送礼">节日送礼</span>
             <span class="ftag" data-g="scene" data-v="下午茶场景">下午茶场景</span>
@@ -257,12 +292,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
             <span class="ftag" data-g="scene" data-v="办公室场景">办公室场景</span>
             <span class="ftag" data-g="scene" data-v="健康轻食">健康轻食</span>
           </div>
+          <div class="fsub">人群场景</div>
+          <div class="frow">
+            <span class="ftag" data-g="crowd" data-v="学生党">学生党</span>
+            <span class="ftag" data-g="crowd" data-v="白领通勤">白领通勤</span>
+            <span class="ftag" data-g="crowd" data-v="约会人群">约会人群</span>
+            <span class="ftag" data-g="crowd" data-v="家庭人群">家庭人群</span>
+            <span class="ftag" data-g="crowd" data-v="追流行人群">追流行人群</span>
+            <span class="ftag" data-g="crowd" data-v="新娘人群">新娘人群</span>
+            <span class="ftag" data-g="crowd" data-v="健身人群">健身人群</span>
+          </div>
+          <div class="fsub">功效需求</div>
+          <div class="frow">
+            <span class="ftag" data-g="need" data-v="颜值出片">颜值出片</span>
+            <span class="ftag" data-g="need" data-v="情绪共鸣">情绪共鸣</span>
+            <span class="ftag" data-g="need" data-v="性价比">性价比</span>
+            <span class="ftag" data-g="need" data-v="节日氛围">节日氛围</span>
+            <span class="ftag" data-g="need" data-v="工艺展示">工艺展示</span>
+          </div>
         </div>
         <div class="f-acts">
           <button class="btn-freset" onclick="resetFilter()">重置</button>
           <button class="btn-fapply" onclick="applyFilter()">应用筛选</button>
         </div>
       </div>
+
       <div class="stb">
         <div style="display:flex;align-items:center">
           <span class="pool-title">🍡 点心 · 种草库</span>
@@ -279,6 +333,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
       </div>
       <div class="ngrid" id="ngrid"></div>
     </div>
+
     <div class="mpanel" id="mp-hots">
       <div class="sec-title">🔥 热力图谱</div>
       <div class="sec-sub">实时监控点心/零食相关热点话题，命中种草库笔记自动标注 ✨</div>
@@ -286,6 +341,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
       <div class="sec-title" style="margin-top:16px">📅 近期营销节点</div>
       <div class="node-grid" id="nodeGrid"></div>
     </div>
+
     <div class="mpanel" id="mp-hist">
       <div class="sec-title">📈 投放复盘</div>
       <div class="kpi-grid">
@@ -327,6 +383,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
       </div>
     </div>
   </div>
+
   <div class="right">
     <div class="rtabs">
       <button class="rtab on" data-id="rec" onclick="switchRight('rec')">✨ 懒懒精选 (4)</button>
@@ -347,7 +404,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
       <div class="pb-wrap">
         <div class="pb-hdr">
           <div class="pb-title">💬 问懒懒</div>
-          <div class="pb-sub">告诉我这次想主打哪个投放场景，我来给你推荐 ✨</div>
+          <div class="pb-sub">告诉我投放场景，我来推荐笔记+给投放建议 ✨</div>
         </div>
         <div class="chat-area" id="chatArea">
           <div class="brow"><div class="bav">懒</div><div class="bubble l">你好！告诉我这次想主打哪个投放场景，我来帮你从种草库里找最合适的笔记，并给出投放组合建议 ✨</div></div>
@@ -368,6 +425,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
     </div>
   </div>
 </div>
+
 <div class="mask" id="rptMask">
   <div class="modal">
     <div class="m-hd">
@@ -376,11 +434,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
     </div>
     <div class="m-body" id="rptBody"></div>
     <div class="m-ft">
-      <button class="btn-sync" id="btnSync" onclick="doSync()">💡 一键同步 · 合作广场后台</button>
+      <button class="btn-sync" id="btnSync" onclick="doSync()">💡 一键同步至合作广场后台</button>
       <div class="sync-note">同步后可在「合作广场 &gt; 合作内容管理 &gt; 我的精选」中查看并发起正式授权申请</div>
     </div>
   </div>
 </div>
+
 <div class="mask" id="detMask">
   <div class="modal sm">
     <div class="m-hd">
@@ -390,33 +449,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
     <div class="m-body" id="detBody"></div>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
 <script>
-const NOTES=[{"id": "n01", "spu": "青梅酥饼", "title": "酸甜得刚刚好！青梅酥饼让我找回了小时候的味道", "author": "小酸梅子", "fans": "3.2万", "date": "04-10", "tags": ["真实体验", "情绪共鸣"], "sc": {"hot": 88, "q": 85, "nat": 90, "his": 82}, "rec": true, "ctr": "+34%", "reason": "情绪共鸣强，记忆点清晰，原生感极佳，历史相似内容CTR高"}, {"id": "n02", "spu": "玫瑰云朵糕", "title": "七夕送这个！玫瑰云朵糕颜值高到不像真的", "author": "礼物研究所", "fans": "12.6万", "date": "04-05", "tags": ["节日送礼", "颜值出片"], "sc": {"hot": 95, "q": 88, "nat": 85, "his": 78}, "rec": true, "ctr": "+41%", "reason": "节日节点+高颜值，CTR历史峰值，送礼场景转化极强"}, {"id": "n03", "spu": "核桃脆饼", "title": "健身er也能吃的饼干？核桃脆饼热量表一看直接放心", "author": "健康星人丸子", "fans": "5.8万", "date": "04-12", "tags": ["干货攻略", "健康轻食"], "sc": {"hot": 62, "q": 70, "nat": 68, "his": 55}, "rec": false, "ctr": "+18%", "reason": "健康赛道有需求，但热点命中弱，适合精准人群投放"}, {"id": "n04", "spu": "芋泥麻薯", "title": "下午茶新宠！芋泥麻薯软糯程度把我惊到了", "author": "奶茶配点心", "fans": "8.1万", "date": "04-08", "tags": ["下午茶场景", "真实体验"], "sc": {"hot": 91, "q": 82, "nat": 80, "his": 72}, "rec": true, "ctr": "+29%", "reason": "下午茶高频场景，原生感强，芋泥元素持续热门"}, {"id": "n05", "spu": "抹茶流心饼", "title": "拍完就发！抹茶流心饼出片率太高了吧", "author": "摆拍日记本", "fans": "2.3万", "date": "03-28", "tags": ["颜值出片", "摆拍攻略"], "sc": {"hot": 45, "q": 72, "nat": 78, "his": 48}, "rec": false, "ctr": "+15%", "reason": "颜值内容互动好，受众偏摄影圈，规模化有限"}, {"id": "n06", "spu": "桂花糯米糕", "title": "中秋不送月饼送这个！桂花糯米糕才是今年最惊艳的礼盒", "author": "节气生活家", "fans": "4.2万", "date": "04-02", "tags": ["节日送礼", "节气风情"], "sc": {"hot": 38, "q": 76, "nat": 85, "his": 70}, "rec": false, "ctr": "+12%", "reason": "节气内容原生感好，节日节点前复投效果佳，当前时机稍早"}, {"id": "n07", "spu": "玫瑰云朵糕", "title": "手残党也能复刻的节日礼盒装法，送女朋友必入", "author": "精致生活Mia", "fans": "8.5万", "date": "04-14", "tags": ["干货攻略", "节日送礼"], "sc": {"hot": 89, "q": 86, "nat": 82, "his": 75}, "rec": true, "ctr": "+38%", "reason": "礼盒教程+节日场景，引流效率高，覆盖广"}, {"id": "n08", "spu": "青梅酥饼", "title": "全职妈妈的零食清单，这款青梅饼让全家都爱上了", "author": "妈妈的零食柜", "fans": "6.7万", "date": "03-20", "tags": ["真实体验", "家庭场景"], "sc": {"hot": 52, "q": 74, "nat": 88, "his": 60}, "rec": false, "ctr": "+16%", "reason": "家庭场景原生感极强，适合长效投放"}, {"id": "n09", "spu": "芋泥麻薯", "title": "办公室下午茶测评！芋泥麻薯吃一口就忘记下班了", "author": "打工人茶水间", "fans": "9.3万", "date": "04-11", "tags": ["办公室场景", "下午茶场景"], "sc": {"hot": 80, "q": 84, "nat": 78, "his": 68}, "rec": true, "ctr": "+33%", "reason": "办公室场景高频，打工人共鸣强，下午茶消费决策快"}, {"id": "n10", "spu": "核桃脆饼", "title": "囤货清单来了，核桃脆饼这个配方绝了", "author": "囤货控Vivian", "fans": "7.4万", "date": "03-15", "tags": ["囤货种草", "真实体验"], "sc": {"hot": 55, "q": 79, "nat": 87, "his": 65}, "rec": false, "ctr": "+22%", "reason": "囤货场景转化意愿强，适合大促节点复投"}, {"id": "n11", "spu": "抹茶流心饼", "title": "五一出游带什么零食？这款抹茶饼真的是出行神器", "author": "出游零食指南", "fans": "5.1万", "date": "04-16", "tags": ["出行场景", "热点借势"], "sc": {"hot": 85, "q": 80, "nat": 82, "his": 70}, "rec": true, "ctr": "+31%", "reason": "五一热点命中，出行场景高频，轻便零食刚需"}, {"id": "n12", "spu": "桂花糯米糕", "title": "国风点心测评！桂花糯米糕真的是东方美学天花板", "author": "国风好物志", "fans": "3.8万", "date": "03-25", "tags": ["国风种草", "颜值出片"], "sc": {"hot": 60, "q": 71, "nat": 80, "his": 58}, "rec": false, "ctr": "+19%", "reason": "国风赛道互动好，颜值内容有传播力，规模偏小众"}];
-const HOT_TOPICS=[{"rank": 1, "em": "🎁", "name": "#五一出游零食", "heat": "1.8亿播放", "match": true}, {"rank": 2, "em": "☕", "name": "#下午茶好物推荐", "heat": "9200万播放", "match": true}, {"rank": 3, "em": "🍡", "name": "#中式点心颜值", "heat": "7600万播放", "match": true}, {"rank": 4, "em": "🎀", "name": "#节日礼盒推荐", "heat": "6100万播放", "match": true}, {"rank": 5, "em": "💪", "name": "#健康零食清单", "heat": "5300万播放", "match": true}, {"rank": 6, "em": "🌿", "name": "#国风好物", "heat": "4200万播放", "match": true}, {"rank": 7, "em": "💼", "name": "#办公室零食", "heat": "3100万播放", "match": false}, {"rank": 8, "em": "📦", "name": "#囤货必买", "heat": "2800万播放", "match": false}, {"rank": 9, "em": "🏪", "name": "#烘焙探店", "heat": "1900万播放", "match": false}];
+const NOTES=[{"id": "n01", "spu": "青梅酥饼", "title": "酸甜得刚刚好！青梅酥饼让我找回了小时候的味道", "author": "小酸梅子", "fans_raw": 32000, "fans": "3.2万", "date": "2026-04-10", "crowd": "学生党", "need": "情绪共鸣", "tags": ["真实体验", "情绪共鸣"], "sc": {"hot": 88, "q": 85, "nat": 90, "his": 82}, "rec": true, "ctr": "+34%", "reason": "情绪共鸣强，记忆点清晰，原生感极佳，历史相似内容CTR高", "hot_match": ["#五一出游零食"]}, {"id": "n02", "spu": "玫瑰云朵糕", "title": "七夕送这个！玫瑰云朵糕颜值高到不像真的", "author": "礼物研究所", "fans_raw": 126000, "fans": "12.6万", "date": "2026-04-05", "crowd": "约会人群", "need": "颜值出片", "tags": ["节日送礼", "颜值出片"], "sc": {"hot": 95, "q": 88, "nat": 85, "his": 78}, "rec": true, "ctr": "+41%", "reason": "节日节点+高颜值，CTR历史峰值，送礼场景转化极强", "hot_match": ["#节日礼盒推荐", "#中式点心颜值"]}, {"id": "n03", "spu": "核桃脆饼", "title": "健身er也能吃的饼干？核桃脆饼热量表一看直接放心", "author": "健康星人丸子", "fans_raw": 58000, "fans": "5.8万", "date": "2026-04-12", "crowd": "健身人群", "need": "性价比", "tags": ["干货攻略", "健康轻食"], "sc": {"hot": 62, "q": 70, "nat": 68, "his": 55}, "rec": false, "ctr": "+18%", "reason": "健康赛道有需求，但热点命中弱，适合精准人群投放", "hot_match": ["#健康零食清单"]}, {"id": "n04", "spu": "芋泥麻薯", "title": "下午茶新宠！芋泥麻薯软糯程度把我惊到了", "author": "奶茶配点心", "fans_raw": 81000, "fans": "8.1万", "date": "2026-04-08", "crowd": "白领通勤", "need": "工艺展示", "tags": ["下午茶场景", "真实体验"], "sc": {"hot": 91, "q": 82, "nat": 80, "his": 72}, "rec": true, "ctr": "+29%", "reason": "下午茶高频场景，原生感强，芋泥元素持续热门", "hot_match": ["#下午茶好物推荐"]}, {"id": "n05", "spu": "抹茶流心饼", "title": "拍完就发！抹茶流心饼出片率太高了吧", "author": "摆拍日记本", "fans_raw": 23000, "fans": "2.3万", "date": "2026-03-28", "crowd": "追流行人群", "need": "颜值出片", "tags": ["颜值出片", "摆拍攻略"], "sc": {"hot": 45, "q": 72, "nat": 78, "his": 48}, "rec": false, "ctr": "+15%", "reason": "颜值内容互动好，受众偏摄影圈，规模化有限", "hot_match": []}, {"id": "n06", "spu": "桂花糯米糕", "title": "中秋不送月饼送这个！桂花糯米糕才是今年最惊艳的礼盒", "author": "节气生活家", "fans_raw": 42000, "fans": "4.2万", "date": "2026-04-02", "crowd": "新娘人群", "need": "节日氛围", "tags": ["节日送礼", "节气风情"], "sc": {"hot": 38, "q": 76, "nat": 85, "his": 70}, "rec": false, "ctr": "+12%", "reason": "节气内容原生感好，节日节点前复投效果佳，当前时机稍早", "hot_match": ["#国风好物"]}, {"id": "n07", "spu": "玫瑰云朵糕", "title": "手残党也能复刻的节日礼盒装法，送女朋友必入", "author": "精致生活Mia", "fans_raw": 185000, "fans": "18.5万", "date": "2026-04-14", "crowd": "约会人群", "need": "工艺展示", "tags": ["干货攻略", "节日送礼"], "sc": {"hot": 89, "q": 86, "nat": 82, "his": 75}, "rec": true, "ctr": "+38%", "reason": "礼盒教程+节日场景，引流效率高，覆盖广", "hot_match": ["#节日礼盒推荐"]}, {"id": "n08", "spu": "青梅酥饼", "title": "全职妈妈的零食清单，这款青梅饼让全家都爱上了", "author": "妈妈的零食柜", "fans_raw": 67000, "fans": "6.7万", "date": "2026-03-20", "crowd": "家庭人群", "need": "情绪共鸣", "tags": ["真实体验", "家庭场景"], "sc": {"hot": 52, "q": 74, "nat": 88, "his": 60}, "rec": false, "ctr": "+16%", "reason": "家庭场景原生感极强，适合长效投放", "hot_match": []}, {"id": "n09", "spu": "芋泥麻薯", "title": "办公室下午茶测评！芋泥麻薯吃一口就忘记下班了", "author": "打工人茶水间", "fans_raw": 93000, "fans": "9.3万", "date": "2026-04-11", "crowd": "白领通勤", "need": "性价比", "tags": ["办公室场景", "下午茶场景"], "sc": {"hot": 80, "q": 84, "nat": 78, "his": 68}, "rec": true, "ctr": "+33%", "reason": "办公室场景高频，打工人共鸣强，下午茶消费决策快", "hot_match": ["#下午茶好物推荐", "#办公室零食"]}, {"id": "n10", "spu": "核桃脆饼", "title": "囤货清单来了，核桃脆饼这个配方绝了", "author": "囤货控Vivian", "fans_raw": 74000, "fans": "7.4万", "date": "2026-03-15", "crowd": "追流行人群", "need": "性价比", "tags": ["囤货种草", "真实体验"], "sc": {"hot": 55, "q": 79, "nat": 87, "his": 65}, "rec": false, "ctr": "+22%", "reason": "囤货场景转化意愿强，适合大促节点复投", "hot_match": ["#囤货必买"]}, {"id": "n11", "spu": "抹茶流心饼", "title": "五一出游带什么零食？这款抹茶饼真的是出行神器", "author": "出游零食指南", "fans_raw": 51000, "fans": "5.1万", "date": "2026-04-16", "crowd": "学生党", "need": "节日氛围", "tags": ["出行场景", "热点借势"], "sc": {"hot": 85, "q": 80, "nat": 82, "his": 70}, "rec": true, "ctr": "+31%", "reason": "五一热点命中，出行场景高频，轻便零食刚需", "hot_match": ["#五一出游零食"]}, {"id": "n12", "spu": "桂花糯米糕", "title": "国风点心测评！桂花糯米糕真的是东方美学天花板", "author": "国风好物志", "fans_raw": 38000, "fans": "3.8万", "date": "2026-03-25", "crowd": "追流行人群", "need": "颜值出片", "tags": ["国风种草", "颜值出片"], "sc": {"hot": 60, "q": 71, "nat": 80, "his": 58}, "rec": false, "ctr": "+19%", "reason": "国风赛道互动好，颜值内容有传播力", "hot_match": ["#国风好物", "#中式点心颜值"]}];
+const HOT_TOPICS=[{"rank": 1, "em": "🎁", "name": "#五一出游零食", "heat": "1.8亿播放", "match": true}, {"rank": 2, "em": "☕", "name": "#下午茶好物推荐", "heat": "9200万播放", "match": true}, {"rank": 3, "em": "🍡", "name": "#中式点心颜值", "heat": "7600万播放", "match": true}, {"rank": 4, "em": "🎀", "name": "#节日礼盒推荐", "heat": "6100万播放", "match": true}, {"rank": 5, "em": "💪", "name": "#健康零食清单", "heat": "5300万播放", "match": true}, {"rank": 6, "em": "🌿", "name": "#国风好物", "heat": "4200万播放", "match": true}, {"rank": 7, "em": "💼", "name": "#办公室零食", "heat": "3100万播放", "match": true}, {"rank": 8, "em": "📦", "name": "#囤货必买", "heat": "2800万播放", "match": false}, {"rank": 9, "em": "🏪", "name": "#烘焙探店", "heat": "1900万播放", "match": false}];
 const NODES=[{"date": "5.1", "name": "五一假期", "tip": "出游零食\n送礼伴手礼"}, {"date": "5.20", "name": "520情人节", "tip": "玫瑰云朵糕\n节日礼盒"}, {"date": "6.18", "name": "618大促", "tip": "囤货种草\n大促活动"}, {"date": "7.7", "name": "七夕节", "tip": "高端送礼\n国风礼盒"}, {"date": "暑期", "name": "暑假季", "tip": "下午茶\n亲子场景"}, {"date": "9.x", "name": "中秋节", "tip": "节气点心\n礼盒送礼"}];
 const H_MAP={"n01": 162, "n02": 178, "n03": 148, "n04": 170, "n05": 155, "n06": 142, "n07": 185, "n08": 158, "n09": 165, "n10": 152, "n11": 172, "n12": 145};
-const COVERS={"n01": {"c1": "#c8f6c8", "c2": "#a8e6a8", "em": "🫐", "food": "\n      <ellipse cx=\"150\" cy=\"95\" rx=\"70\" ry=\"52\" fill=\"#6dbf6d\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"88\" rx=\"60\" ry=\"44\" fill=\"#8fd48f\" opacity=\"0.8\"/>\n      <ellipse cx=\"150\" cy=\"82\" rx=\"48\" ry=\"34\" fill=\"#b2e8b2\"/>\n      <ellipse cx=\"150\" cy=\"78\" rx=\"36\" ry=\"22\" fill=\"#d4f5d4\"/>\n      <circle cx=\"120\" cy=\"60\" r=\"18\" fill=\"#6dbf6d\" opacity=\"0.5\"/>\n      <circle cx=\"180\" cy=\"65\" r=\"14\" fill=\"#6dbf6d\" opacity=\"0.4\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"55\" ry=\"12\" fill=\"rgba(80,160,80,0.18)\"/>"}, "n02": {"c1": "#ffd6e8", "c2": "#e8b4d0", "em": "🌸", "food": "\n      <circle cx=\"150\" cy=\"85\" r=\"38\" fill=\"#f8bbd0\"/>\n      <circle cx=\"110\" cy=\"75\" r=\"26\" fill=\"#f8bbd0\"/>\n      <circle cx=\"190\" cy=\"75\" r=\"26\" fill=\"#f8bbd0\"/>\n      <circle cx=\"130\" cy=\"55\" r=\"22\" fill=\"#f8bbd0\"/>\n      <circle cx=\"170\" cy=\"55\" r=\"22\" fill=\"#f8bbd0\"/>\n      <circle cx=\"150\" cy=\"85\" r=\"26\" fill=\"#fce4ec\"/>\n      <circle cx=\"150\" cy=\"85\" r=\"14\" fill=\"#f48fb1\" opacity=\"0.6\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"52\" ry=\"10\" fill=\"rgba(200,100,150,0.15)\"/>"}, "n03": {"c1": "#f5deb3", "c2": "#deb887", "em": "🌰", "food": "\n      <ellipse cx=\"150\" cy=\"90\" rx=\"65\" ry=\"45\" fill=\"#c8a06a\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"85\" rx=\"55\" ry=\"36\" fill=\"#dab87a\"/>\n      <ellipse cx=\"150\" cy=\"80\" rx=\"44\" ry=\"27\" fill=\"#e8c88a\"/>\n      <path d=\"M115,75 Q130,60 150,72 Q170,60 185,75\" fill=\"none\" stroke=\"#b8904a\" stroke-width=\"2.5\" opacity=\"0.6\"/>\n      <path d=\"M120,83 Q135,70 150,80 Q165,70 180,83\" fill=\"none\" stroke=\"#b8904a\" stroke-width=\"2\" opacity=\"0.5\"/>\n      <ellipse cx=\"150\" cy=\"128\" rx=\"54\" ry=\"11\" fill=\"rgba(160,110,50,0.18)\"/>"}, "n04": {"c1": "#e8d5f5", "c2": "#c8a8e8", "em": "🟣", "food": "\n      <ellipse cx=\"150\" cy=\"92\" rx=\"62\" ry=\"50\" fill=\"#9c6fc8\" opacity=\"0.5\"/>\n      <ellipse cx=\"150\" cy=\"88\" rx=\"54\" ry=\"44\" fill=\"#b48cd8\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"84\" rx=\"46\" ry=\"36\" fill=\"#c8a8e8\"/>\n      <ellipse cx=\"150\" cy=\"80\" rx=\"36\" ry=\"26\" fill=\"#dcc4f4\"/>\n      <path d=\"M120,78 Q150,68 180,78\" fill=\"none\" stroke=\"#9c6fc8\" stroke-width=\"1.5\" opacity=\"0.5\"/>\n      <path d=\"M115,86 Q150,76 185,86\" fill=\"none\" stroke=\"#9c6fc8\" stroke-width=\"1.5\" opacity=\"0.4\"/>\n      <ellipse cx=\"150\" cy=\"132\" rx=\"52\" ry=\"11\" fill=\"rgba(130,80,190,0.15)\"/>"}, "n05": {"c1": "#d4f5d4", "c2": "#a8d8a8", "em": "🍵", "food": "\n      <circle cx=\"150\" cy=\"88\" r=\"52\" fill=\"#5a9a5a\" opacity=\"0.5\"/>\n      <circle cx=\"150\" cy=\"85\" r=\"44\" fill=\"#6db86d\" opacity=\"0.65\"/>\n      <circle cx=\"150\" cy=\"82\" r=\"36\" fill=\"#88cc88\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"26\" fill=\"#aadcaa\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"16\" fill=\"#c2e8a0\" opacity=\"0.9\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"8\" fill=\"#fff\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"50\" ry=\"10\" fill=\"rgba(60,130,60,0.15)\"/>"}, "n06": {"c1": "#fff3cd", "c2": "#ffd700", "em": "🌼", "food": "\n      <rect x=\"90\" y=\"65\" width=\"120\" height=\"70\" rx=\"10\" fill=\"#e8b800\" opacity=\"0.6\"/>\n      <rect x=\"95\" y=\"68\" width=\"110\" height=\"62\" rx=\"8\" fill=\"#f5cc00\" opacity=\"0.8\"/>\n      <rect x=\"100\" y=\"72\" width=\"100\" height=\"54\" rx=\"6\" fill=\"#fff0a0\"/>\n      <line x1=\"100\" y1=\"90\" x2=\"200\" y2=\"90\" stroke=\"#e8b800\" stroke-width=\"1.5\" opacity=\"0.5\"/>\n      <line x1=\"100\" y1=\"108\" x2=\"200\" y2=\"108\" stroke=\"#e8b800\" stroke-width=\"1.5\" opacity=\"0.5\"/>\n      <circle cx=\"130\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/>\n      <circle cx=\"170\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"132\" rx=\"55\" ry=\"10\" fill=\"rgba(200,160,0,0.15)\"/>"}, "n07": {"c1": "#fce4ec", "c2": "#f8bbd0", "em": "🎀", "food": "\n      <rect x=\"95\" y=\"78\" width=\"110\" height=\"75\" rx=\"8\" fill=\"#f48fb1\" opacity=\"0.6\"/>\n      <rect x=\"100\" y=\"82\" width=\"100\" height=\"67\" rx=\"6\" fill=\"#f8bbd0\" opacity=\"0.9\"/>\n      <rect x=\"105\" y=\"86\" width=\"90\" height=\"58\" rx=\"5\" fill=\"#fce4ec\"/>\n      <path d=\"M150,82 Q135,65 118,72 Q130,82 150,78 Q170,82 182,72 Q165,65 150,82Z\" fill=\"#f48fb1\" opacity=\"0.8\"/>\n      <circle cx=\"150\" cy=\"82\" r=\"7\" fill=\"#e91e63\" opacity=\"0.7\"/>\n      <ellipse cx=\"150\" cy=\"148\" rx=\"52\" ry=\"10\" fill=\"rgba(200,80,130,0.15)\"/>"}, "n08": {"c1": "#e8f5e9", "c2": "#c8e6c9", "em": "🍃", "food": "\n      <ellipse cx=\"150\" cy=\"90\" rx=\"65\" ry=\"48\" fill=\"#66bb6a\" opacity=\"0.5\"/>\n      <ellipse cx=\"150\" cy=\"86\" rx=\"55\" ry=\"40\" fill=\"#81c784\" opacity=\"0.65\"/>\n      <ellipse cx=\"150\" cy=\"82\" rx=\"44\" ry=\"31\" fill=\"#a5d6a7\"/>\n      <ellipse cx=\"150\" cy=\"78\" rx=\"33\" ry=\"20\" fill=\"#c8e6c9\"/>\n      <path d=\"M115,72 Q125,55 140,68\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"2\" opacity=\"0.6\"/>\n      <path d=\"M185,72 Q175,55 160,68\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"2\" opacity=\"0.6\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"52\" ry=\"11\" fill=\"rgba(70,160,70,0.15)\"/>"}, "n09": {"c1": "#ede7f6", "c2": "#d1c4e9", "em": "💜", "food": "\n      <ellipse cx=\"118\" cy=\"95\" rx=\"42\" ry=\"40\" fill=\"#7b52ab\" opacity=\"0.55\"/>\n      <ellipse cx=\"182\" cy=\"95\" rx=\"42\" ry=\"40\" fill=\"#7b52ab\" opacity=\"0.55\"/>\n      <ellipse cx=\"150\" cy=\"88\" rx=\"44\" ry=\"42\" fill=\"#9575cd\" opacity=\"0.75\"/>\n      <ellipse cx=\"118\" cy=\"92\" rx=\"34\" ry=\"32\" fill=\"#ab87d4\"/>\n      <ellipse cx=\"182\" cy=\"92\" rx=\"34\" ry=\"32\" fill=\"#ab87d4\"/>\n      <ellipse cx=\"150\" cy=\"85\" rx=\"36\" ry=\"34\" fill=\"#c5aae8\"/>\n      <ellipse cx=\"150\" cy=\"136\" rx=\"56\" ry=\"11\" fill=\"rgba(100,60,170,0.15)\"/>"}, "n10": {"c1": "#efebe9", "c2": "#d7ccc8", "em": "🤎", "food": "\n      <rect x=\"88\" y=\"68\" width=\"124\" height=\"78\" rx=\"10\" fill=\"#8d6e63\" opacity=\"0.55\"/>\n      <rect x=\"93\" y=\"72\" width=\"114\" height=\"70\" rx=\"8\" fill=\"#a1887f\" opacity=\"0.75\"/>\n      <rect x=\"98\" y=\"76\" width=\"104\" height=\"62\" rx=\"6\" fill=\"#bcaaa4\"/>\n      <line x1=\"98\" y1=\"92\" x2=\"202\" y2=\"92\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.45\"/>\n      <line x1=\"98\" y1=\"108\" x2=\"202\" y2=\"108\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.45\"/>\n      <line x1=\"150\" y1=\"76\" x2=\"150\" y2=\"138\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.35\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"55\" ry=\"11\" fill=\"rgba(100,70,60,0.15)\"/>"}, "n11": {"c1": "#f1f8e9", "c2": "#dcedc8", "em": "🍃", "food": "\n      <circle cx=\"150\" cy=\"88\" r=\"50\" fill=\"#558b2f\" opacity=\"0.45\"/>\n      <circle cx=\"150\" cy=\"85\" r=\"42\" fill=\"#6a9e3f\" opacity=\"0.6\"/>\n      <circle cx=\"150\" cy=\"82\" r=\"34\" fill=\"#8bc34a\" opacity=\"0.75\"/>\n      <circle cx=\"150\" cy=\"80\" r=\"24\" fill=\"#aed581\"/>\n      <line x1=\"106\" y1=\"62\" x2=\"194\" y2=\"98\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.4\"/>\n      <line x1=\"106\" y1=\"78\" x2=\"194\" y2=\"82\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.35\"/>\n      <line x1=\"106\" y1=\"94\" x2=\"194\" y2=\"66\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.4\"/>\n      <ellipse cx=\"150\" cy=\"130\" rx=\"50\" ry=\"10\" fill=\"rgba(70,130,30,0.15)\"/>"}, "n12": {"c1": "#fffde7", "c2": "#fff9c4", "em": "✨", "food": "\n      <circle cx=\"150\" cy=\"90\" r=\"52\" fill=\"#f9a825\" opacity=\"0.45\"/>\n      <circle cx=\"150\" cy=\"87\" rx=\"44\" r=\"44\" fill=\"#fbc02d\" opacity=\"0.6\"/>\n      <circle cx=\"150\" cy=\"84\" r=\"36\" fill=\"#fdd835\" opacity=\"0.75\"/>\n      <circle cx=\"150\" cy=\"82\" r=\"26\" fill=\"#ffee58\"/>\n      <circle cx=\"130\" cy=\"72\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/>\n      <circle cx=\"150\" cy=\"67\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/>\n      <circle cx=\"170\" cy=\"72\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/>\n      <circle cx=\"122\" cy=\"85\" r=\"4\" fill=\"#f9a825\" opacity=\"0.6\"/>\n      <circle cx=\"178\" cy=\"85\" r=\"4\" fill=\"#f9a825\" opacity=\"0.6\"/>\n      <ellipse cx=\"150\" cy=\"132\" rx=\"50\" ry=\"10\" fill=\"rgba(200,160,0,0.15)\"/>"}};
+const COVERS={"n01": {"c1": "#c8f6c8", "c2": "#a8e6a8", "em": "🫐", "food": "<ellipse cx=\"150\" cy=\"95\" rx=\"70\" ry=\"52\" fill=\"#6dbf6d\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"88\" rx=\"60\" ry=\"44\" fill=\"#8fd48f\" opacity=\"0.8\"/><ellipse cx=\"150\" cy=\"82\" rx=\"48\" ry=\"34\" fill=\"#b2e8b2\"/><ellipse cx=\"150\" cy=\"78\" rx=\"36\" ry=\"22\" fill=\"#d4f5d4\"/><circle cx=\"120\" cy=\"60\" r=\"18\" fill=\"#6dbf6d\" opacity=\"0.5\"/><circle cx=\"180\" cy=\"65\" r=\"14\" fill=\"#6dbf6d\" opacity=\"0.4\"/><ellipse cx=\"150\" cy=\"130\" rx=\"55\" ry=\"12\" fill=\"rgba(80,160,80,0.18)\"/>"}, "n02": {"c1": "#ffd6e8", "c2": "#e8b4d0", "em": "🌸", "food": "<circle cx=\"150\" cy=\"85\" r=\"38\" fill=\"#f8bbd0\"/><circle cx=\"110\" cy=\"75\" r=\"26\" fill=\"#f8bbd0\"/><circle cx=\"190\" cy=\"75\" r=\"26\" fill=\"#f8bbd0\"/><circle cx=\"130\" cy=\"55\" r=\"22\" fill=\"#f8bbd0\"/><circle cx=\"170\" cy=\"55\" r=\"22\" fill=\"#f8bbd0\"/><circle cx=\"150\" cy=\"85\" r=\"26\" fill=\"#fce4ec\"/><circle cx=\"150\" cy=\"85\" r=\"14\" fill=\"#f48fb1\" opacity=\"0.6\"/><ellipse cx=\"150\" cy=\"130\" rx=\"52\" ry=\"10\" fill=\"rgba(200,100,150,0.15)\"/>"}, "n03": {"c1": "#f5deb3", "c2": "#deb887", "em": "🌰", "food": "<ellipse cx=\"150\" cy=\"90\" rx=\"65\" ry=\"45\" fill=\"#c8a06a\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"85\" rx=\"55\" ry=\"36\" fill=\"#dab87a\"/><ellipse cx=\"150\" cy=\"80\" rx=\"44\" ry=\"27\" fill=\"#e8c88a\"/><path d=\"M115,75 Q130,60 150,72 Q170,60 185,75\" fill=\"none\" stroke=\"#b8904a\" stroke-width=\"2.5\" opacity=\"0.6\"/><path d=\"M120,83 Q135,70 150,80 Q165,70 180,83\" fill=\"none\" stroke=\"#b8904a\" stroke-width=\"2\" opacity=\"0.5\"/><ellipse cx=\"150\" cy=\"128\" rx=\"54\" ry=\"11\" fill=\"rgba(160,110,50,0.18)\"/>"}, "n04": {"c1": "#e8d5f5", "c2": "#c8a8e8", "em": "🟣", "food": "<ellipse cx=\"150\" cy=\"92\" rx=\"62\" ry=\"50\" fill=\"#9c6fc8\" opacity=\"0.5\"/><ellipse cx=\"150\" cy=\"88\" rx=\"54\" ry=\"44\" fill=\"#b48cd8\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"84\" rx=\"46\" ry=\"36\" fill=\"#c8a8e8\"/><ellipse cx=\"150\" cy=\"80\" rx=\"36\" ry=\"26\" fill=\"#dcc4f4\"/><path d=\"M120,78 Q150,68 180,78\" fill=\"none\" stroke=\"#9c6fc8\" stroke-width=\"1.5\" opacity=\"0.5\"/><ellipse cx=\"150\" cy=\"132\" rx=\"52\" ry=\"11\" fill=\"rgba(130,80,190,0.15)\"/>"}, "n05": {"c1": "#d4f5d4", "c2": "#a8d8a8", "em": "🍵", "food": "<circle cx=\"150\" cy=\"88\" r=\"52\" fill=\"#5a9a5a\" opacity=\"0.5\"/><circle cx=\"150\" cy=\"85\" r=\"44\" fill=\"#6db86d\" opacity=\"0.65\"/><circle cx=\"150\" cy=\"82\" r=\"36\" fill=\"#88cc88\"/><circle cx=\"150\" cy=\"80\" r=\"26\" fill=\"#aadcaa\"/><circle cx=\"150\" cy=\"80\" r=\"16\" fill=\"#c2e8a0\" opacity=\"0.9\"/><circle cx=\"150\" cy=\"80\" r=\"8\" fill=\"#fff\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"130\" rx=\"50\" ry=\"10\" fill=\"rgba(60,130,60,0.15)\"/>"}, "n06": {"c1": "#fff3cd", "c2": "#ffd700", "em": "🌼", "food": "<rect x=\"90\" y=\"65\" width=\"120\" height=\"70\" rx=\"10\" fill=\"#e8b800\" opacity=\"0.6\"/><rect x=\"95\" y=\"68\" width=\"110\" height=\"62\" rx=\"8\" fill=\"#f5cc00\" opacity=\"0.8\"/><rect x=\"100\" y=\"72\" width=\"100\" height=\"54\" rx=\"6\" fill=\"#fff0a0\"/><line x1=\"100\" y1=\"90\" x2=\"200\" y2=\"90\" stroke=\"#e8b800\" stroke-width=\"1.5\" opacity=\"0.5\"/><circle cx=\"130\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/><circle cx=\"150\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/><circle cx=\"170\" cy=\"80\" r=\"4\" fill=\"#ffa000\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"132\" rx=\"55\" ry=\"10\" fill=\"rgba(200,160,0,0.15)\"/>"}, "n07": {"c1": "#fce4ec", "c2": "#f8bbd0", "em": "🎀", "food": "<rect x=\"95\" y=\"78\" width=\"110\" height=\"75\" rx=\"8\" fill=\"#f48fb1\" opacity=\"0.6\"/><rect x=\"100\" y=\"82\" width=\"100\" height=\"67\" rx=\"6\" fill=\"#f8bbd0\" opacity=\"0.9\"/><rect x=\"105\" y=\"86\" width=\"90\" height=\"58\" rx=\"5\" fill=\"#fce4ec\"/><path d=\"M150,82 Q135,65 118,72 Q130,82 150,78 Q170,82 182,72 Q165,65 150,82Z\" fill=\"#f48fb1\" opacity=\"0.8\"/><circle cx=\"150\" cy=\"82\" r=\"7\" fill=\"#e91e63\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"148\" rx=\"52\" ry=\"10\" fill=\"rgba(200,80,130,0.15)\"/>"}, "n08": {"c1": "#e8f5e9", "c2": "#c8e6c9", "em": "🍃", "food": "<ellipse cx=\"150\" cy=\"90\" rx=\"65\" ry=\"48\" fill=\"#66bb6a\" opacity=\"0.5\"/><ellipse cx=\"150\" cy=\"86\" rx=\"55\" ry=\"40\" fill=\"#81c784\" opacity=\"0.65\"/><ellipse cx=\"150\" cy=\"82\" rx=\"44\" ry=\"31\" fill=\"#a5d6a7\"/><ellipse cx=\"150\" cy=\"78\" rx=\"33\" ry=\"20\" fill=\"#c8e6c9\"/><path d=\"M115,72 Q125,55 140,68\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"150\" cy=\"130\" rx=\"52\" ry=\"11\" fill=\"rgba(70,160,70,0.15)\"/>"}, "n09": {"c1": "#ede7f6", "c2": "#d1c4e9", "em": "💜", "food": "<ellipse cx=\"118\" cy=\"95\" rx=\"42\" ry=\"40\" fill=\"#7b52ab\" opacity=\"0.55\"/><ellipse cx=\"182\" cy=\"95\" rx=\"42\" ry=\"40\" fill=\"#7b52ab\" opacity=\"0.55\"/><ellipse cx=\"150\" cy=\"88\" rx=\"44\" ry=\"42\" fill=\"#9575cd\" opacity=\"0.75\"/><ellipse cx=\"118\" cy=\"92\" rx=\"34\" ry=\"32\" fill=\"#ab87d4\"/><ellipse cx=\"182\" cy=\"92\" rx=\"34\" ry=\"32\" fill=\"#ab87d4\"/><ellipse cx=\"150\" cy=\"85\" rx=\"36\" ry=\"34\" fill=\"#c5aae8\"/><ellipse cx=\"150\" cy=\"136\" rx=\"56\" ry=\"11\" fill=\"rgba(100,60,170,0.15)\"/>"}, "n10": {"c1": "#efebe9", "c2": "#d7ccc8", "em": "🤎", "food": "<rect x=\"88\" y=\"68\" width=\"124\" height=\"78\" rx=\"10\" fill=\"#8d6e63\" opacity=\"0.55\"/><rect x=\"93\" y=\"72\" width=\"114\" height=\"70\" rx=\"8\" fill=\"#a1887f\" opacity=\"0.75\"/><rect x=\"98\" y=\"76\" width=\"104\" height=\"62\" rx=\"6\" fill=\"#bcaaa4\"/><line x1=\"98\" y1=\"92\" x2=\"202\" y2=\"92\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.45\"/><line x1=\"150\" y1=\"76\" x2=\"150\" y2=\"138\" stroke=\"#8d6e63\" stroke-width=\"2\" opacity=\"0.35\"/><ellipse cx=\"150\" cy=\"130\" rx=\"55\" ry=\"11\" fill=\"rgba(100,70,60,0.15)\"/>"}, "n11": {"c1": "#f1f8e9", "c2": "#dcedc8", "em": "🍃", "food": "<circle cx=\"150\" cy=\"88\" r=\"50\" fill=\"#558b2f\" opacity=\"0.45\"/><circle cx=\"150\" cy=\"85\" r=\"42\" fill=\"#6a9e3f\" opacity=\"0.6\"/><circle cx=\"150\" cy=\"82\" r=\"34\" fill=\"#8bc34a\" opacity=\"0.75\"/><circle cx=\"150\" cy=\"80\" r=\"24\" fill=\"#aed581\"/><line x1=\"106\" y1=\"62\" x2=\"194\" y2=\"98\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.4\"/><line x1=\"106\" y1=\"94\" x2=\"194\" y2=\"66\" stroke=\"#558b2f\" stroke-width=\"1.5\" opacity=\"0.4\"/><ellipse cx=\"150\" cy=\"130\" rx=\"50\" ry=\"10\" fill=\"rgba(70,130,30,0.15)\"/>"}, "n12": {"c1": "#fffde7", "c2": "#fff9c4", "em": "✨", "food": "<circle cx=\"150\" cy=\"90\" r=\"52\" fill=\"#f9a825\" opacity=\"0.45\"/><circle cx=\"150\" cy=\"87\" r=\"44\" fill=\"#fbc02d\" opacity=\"0.6\"/><circle cx=\"150\" cy=\"84\" r=\"36\" fill=\"#fdd835\" opacity=\"0.75\"/><circle cx=\"150\" cy=\"82\" r=\"26\" fill=\"#ffee58\"/><circle cx=\"130\" cy=\"72\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/><circle cx=\"150\" cy=\"67\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/><circle cx=\"170\" cy=\"72\" r=\"5\" fill=\"#f9a825\" opacity=\"0.7\"/><ellipse cx=\"150\" cy=\"132\" rx=\"50\" ry=\"10\" fill=\"rgba(200,160,0,0.15)\"/>"}};
 
 const TAG_CLR={"真实体验":"t-blue","情绪共鸣":"t-blue","干货攻略":"t-purple","健康轻食":"t-green","颜值出片":"t-pink","节日送礼":"t-pink","节气风情":"t-orange","摆拍攻略":"t-gray","家庭场景":"t-blue","下午茶场景":"t-orange","办公室场景":"t-purple","囤货种草":"t-orange","出行场景":"t-green","热点借势":"t-orange","国风种草":"t-purple"};
 function tc(t){return TAG_CLR[t]||"t-gray";}
-
-function makeSVG(n, thumb) {
-  const cfg = COVERS[n.id] || {c1:"#ffd6e8",c2:"#f8bbd0",em:"🍡",food:""};
-  const h = thumb ? 46 : (H_MAP[n.id]||160);
-  const vw = thumb ? 46 : 300;
-  const eid = n.id + (thumb ? "t" : "f");
-  if (thumb) {
-    return "<svg viewBox=\"0 0 46 46\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"g" + eid + "\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\"" + cfg.c1 + "\"/><stop offset=\"100%\" stop-color=\"" + cfg.c2 + "\"/></linearGradient></defs><rect width=\"46\" height=\"46\" fill=\"url(#g" + eid + ")\"/><text x=\"23\" y=\"28\" text-anchor=\"middle\" font-size=\"22\" dominant-baseline=\"middle\">" + cfg.em + "</text></svg>";
-  }
-  return "<svg viewBox=\"0 0 300 " + h + "\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"g" + eid + "\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\"" + cfg.c1 + "\"/><stop offset=\"100%\" stop-color=\"" + cfg.c2 + "\"/></linearGradient></defs><rect width=\"300\" height=\"" + h + "\" fill=\"url(#g" + eid + ")\"/>" + cfg.food + "<text x=\"150\" y=\"" + Math.round(h*0.45) + "\" text-anchor=\"middle\" font-size=\"32\" dominant-baseline=\"middle\">" + cfg.em + "</text></svg>";
-}
-
-const PKD = new Set();
-const filterState = {q:"", fans:[], scenes:[], chip:"all"};
-
 function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2300);}
 
+// ---- SVG helpers ----
+function makeSVG(n,thumb){
+  const cfg=COVERS[n.id]||{c1:"#ffd6e8",c2:"#f8bbd0",em:"🍡",food:""};
+  const h=thumb?46:(H_MAP[n.id]||160);
+  const eid=n.id+(thumb?"t":"f");
+  if(thumb)return "<svg viewBox=\"0 0 46 46\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"g"+eid+"\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\""+cfg.c1+"\"/><stop offset=\"100%\" stop-color=\""+cfg.c2+"\"/></linearGradient></defs><rect width=\"46\" height=\"46\" fill=\"url(#g"+eid+")\"/><text x=\"23\" y=\"28\" text-anchor=\"middle\" font-size=\"22\" dominant-baseline=\"middle\">"+cfg.em+"</text></svg>";
+  return "<svg viewBox=\"0 0 300 "+h+"\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"g"+eid+"\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0%\" stop-color=\""+cfg.c1+"\"/><stop offset=\"100%\" stop-color=\""+cfg.c2+"\"/></linearGradient></defs><rect width=\"300\" height=\""+h+"\" fill=\"url(#g"+eid+")\"/>"+cfg.food+"<text x=\"150\" y=\""+Math.round(h*0.45)+"\" text-anchor=\"middle\" font-size=\"32\" dominant-baseline=\"middle\">"+cfg.em+"</text></svg>";
+}
+
+// ---- Tab switch ----
 function switchMain(id){
   document.querySelectorAll(".mtab").forEach(b=>b.classList.remove("on"));
   document.querySelectorAll(".mpanel").forEach(p=>p.classList.remove("on"));
@@ -430,38 +485,51 @@ function switchRight(id){
   document.getElementById("rp-"+id).classList.add("on");
 }
 
+// ---- Filter drawer ----
 function toggleFilter(){
   const d=document.getElementById("fdrawer"),b=document.getElementById("btnFilter");
   const open=d.classList.toggle("open");b.classList.toggle("open",open);
   b.textContent=open?"⚙️ 收起":"⚙️ 筛选";
 }
 
-function parseFans(s){
-  if(!s)return 0;
-  if(s.includes("万"))return parseFloat(s);
-  return parseFloat(s)/10000;
+// ---- Filter state ----
+const filterState={q:"",date:"all",fans:[],scenes:[],crowds:[],needs:[],chip:"all"};
+
+function parseDateDiff(dateStr){
+  const d=new Date(dateStr),now=new Date("2026-04-19");
+  return Math.floor((now-d)/(1000*86400));
 }
 
 function filterNotes(){
   return NOTES.filter(n=>{
     if(filterState.q){
       const q=filterState.q.toLowerCase();
-      const hit=n.title.toLowerCase().includes(q)||n.spu.toLowerCase().includes(q)||n.author.toLowerCase().includes(q)||n.tags.some(t=>t.toLowerCase().includes(q));
-      if(!hit)return false;
+      if(!(n.title.toLowerCase().includes(q)||n.spu.toLowerCase().includes(q)||n.author.toLowerCase().includes(q)||n.tags.some(t=>t.toLowerCase().includes(q))))return false;
+    }
+    if(filterState.date!=="all"){
+      const diff=parseDateDiff(n.date);
+      if(filterState.date==="7d"&&diff>7)return false;
+      if(filterState.date==="30d"&&diff>30)return false;
+      if(filterState.date==="3m"&&diff>90)return false;
     }
     if(filterState.fans.length>0){
-      const f=parseFans(n.fans);
-      const match=filterState.fans.some(fv=>{
-        if(fv==="0-1000")return f<0.1;
-        if(fv==="1000-5000")return f>=0.1&&f<0.5;
-        if(fv==="5000-1万")return f>=0.5&&f<1;
+      const f=n.fans_raw;
+      const ok=filterState.fans.some(fv=>{
+        if(fv==="0-1000")return f<1000;
+        if(fv==="1000-5000")return f>=1000&&f<5000;
+        if(fv==="5000-1万")return f>=5000&&f<10000;
         return false;
       });
-      if(!match)return false;
+      if(!ok)return false;
     }
     if(filterState.scenes.length>0){
-      const match=filterState.scenes.some(sc=>n.tags.includes(sc));
-      if(!match)return false;
+      if(!filterState.scenes.some(sc=>n.tags.includes(sc)))return false;
+    }
+    if(filterState.crowds.length>0){
+      if(!filterState.crowds.includes(n.crowd))return false;
+    }
+    if(filterState.needs.length>0){
+      if(!filterState.needs.includes(n.need))return false;
     }
     if(filterState.chip==="hot"&&n.sc.hot<80)return false;
     if(filterState.chip==="quality"&&n.sc.q<80)return false;
@@ -471,6 +539,58 @@ function filterNotes(){
   }).sort((a,b)=>{const sa=a.rec?(a.sc.hot+a.sc.q):0,sb=b.rec?(b.sc.hot+b.sc.q):0;return sb-sa;});
 }
 
+function applyFilter(){
+  filterState.date=document.querySelector(".ftag[data-g=\"time\"].on")||document.querySelector(".ftag[data-g=\"time\"][data-v=\"all\"]");
+  filterState.date=(document.querySelector(".ftag[data-g=\"time\"].on")||{dataset:{v:"all"}}).dataset.v;
+  filterState.fans=Array.from(document.querySelectorAll(".ftag[data-g=\"fans\"].on")).map(t=>t.dataset.v);
+  filterState.scenes=Array.from(document.querySelectorAll(".ftag[data-g=\"scene\"].on")).map(t=>t.dataset.v);
+  filterState.crowds=Array.from(document.querySelectorAll(".ftag[data-g=\"crowd\"].on")).map(t=>t.dataset.v);
+  filterState.needs=Array.from(document.querySelectorAll(".ftag[data-g=\"need\"].on")).map(t=>t.dataset.v);
+  renderNotes();showToast("筛选已应用 ✨");
+}
+function resetFilter(){
+  filterState.q="";filterState.date="all";filterState.fans=[];filterState.scenes=[];filterState.crowds=[];filterState.needs=[];
+  document.getElementById("searchInput").value="";
+  document.querySelectorAll(".ftag").forEach(t=>{
+    if(t.dataset.g==="time")t.classList.toggle("on",t.dataset.v==="all");
+    else t.classList.remove("on");
+  });
+  renderNotes();showToast("已重置");
+}
+
+// Toggle ftag - all multi-select, time is single select
+document.addEventListener("click",function(e){
+  const t=e.target.closest(".ftag");
+  if(!t)return;
+  const g=t.dataset.g;
+  if(g==="time"){document.querySelectorAll(".ftag[data-g=\"time\"]").forEach(x=>x.classList.remove("on"));t.classList.add("on");}
+  else{t.classList.toggle("on");}
+});
+
+document.getElementById("searchInput").addEventListener("keydown",function(e){
+  if(e.key==="Enter"){filterState.q=this.value.trim();renderNotes();}
+});
+
+// ---- Chip ----
+function setChip(val){
+  filterState.chip=val;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
+  document.querySelector(".chip[data-cf=\""+val+"\"]").classList.add("on");
+  renderNotes();
+}
+
+// ---- Pick state ----
+const PKD=new Set();
+function togglePk(id,e){if(e)e.stopPropagation();if(PKD.has(id))PKD.delete(id);else PKD.add(id);refreshPkUI(id);document.getElementById("pkCnt").textContent=PKD.size;}
+function refreshPkUI(id){
+  const pk=PKD.has(id);
+  const card=document.getElementById("card-"+id);
+  if(card){card.className="ncard"+(pk?" pked":"");const cb=card.querySelector(".ck-btn");if(cb)cb.className="ck-btn"+(pk?" pked":"");const pb=document.getElementById("pk-"+id);if(pb){pb.className="btn-pk"+(pk?" pked":"");pb.textContent=pk?"已Pick ✓":"Pick 💅";}}
+  const rp=document.getElementById("rpk-"+id);if(rp){rp.className="btn-rpk"+(pk?" pked":"");rp.textContent=pk?"已Pick ✓":"Pick 💅";}
+  const cp=document.getElementById("cpk-"+id);if(cp){cp.className="btn-pk"+(pk?" pked":"");cp.textContent=pk?"已Pick ✓":"Pick 💅";}
+}
+
+// ---- Note card render ----
 function renderNotes(){
   const arr=filterNotes();
   document.getElementById("poolCnt").textContent="共 "+arr.length+" 篇";
@@ -486,7 +606,7 @@ function renderNotes(){
       +"<div style=\"margin-top:4px;font-size:10px;opacity:.85\">"+n.reason+"</div></div></div>"
       +"<div class=\"cbody\">"
       +"<div class=\"ctitle\">"+n.title+"</div>"
-      +"<div class=\"cauthor\">@"+n.author+" · "+n.fans+"粉 · "+n.date+"</div>"
+      +"<div class=\"cauthor\">@"+n.author+" · "+n.fans+"粉 · "+n.date.slice(5)+"</div>"
       +"<div class=\"sbars\">"
       +"<div class=\"sbar-row\"><span class=\"sbar-lbl\">热点</span><div class=\"sbar-t\"><div class=\"sbar-f\" style=\"width:"+n.sc.hot+"%;background:linear-gradient(90deg,#FF2442,#ff6b8a)\"></div></div></div>"
       +"<div class=\"sbar-row\"><span class=\"sbar-lbl\">质量</span><div class=\"sbar-t\"><div class=\"sbar-f\" style=\"width:"+n.sc.q+"%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)\"></div></div></div>"
@@ -499,113 +619,201 @@ function renderNotes(){
   }).join("");
 }
 
-function togglePk(id,e){if(e)e.stopPropagation();if(PKD.has(id))PKD.delete(id);else PKD.add(id);refreshPkUI(id);document.getElementById("pkCnt").textContent=PKD.size;}
-function refreshPkUI(id){
-  const pk=PKD.has(id);
-  const card=document.getElementById("card-"+id);
-  if(card){card.className="ncard"+(pk?" pked":"");const cb=card.querySelector(".ck-btn");if(cb)cb.className="ck-btn"+(pk?" pked":"");const pb=document.getElementById("pk-"+id);if(pb){pb.className="btn-pk"+(pk?" pked":"");pb.textContent=pk?"已Pick ✓":"Pick 💅";}}
-  const rp=document.getElementById("rpk-"+id);if(rp){rp.className="btn-rpk"+(pk?" pked":"");rp.textContent=pk?"已Pick ✓":"Pick 💅";}
-}
-
+// ---- Rec panel ----
 const REC_IDS=["n01","n02","n07","n09"];
 function renderRec(){
-  const recs=REC_IDS.map(id=>NOTES.find(n=>n.id===id)).filter(Boolean);
-  document.getElementById("recCards").innerHTML=recs.map(n=>{
+  document.getElementById("recCards").innerHTML=REC_IDS.map(id=>{
+    const n=NOTES.find(x=>x.id===id);if(!n)return "";
     const pk=PKD.has(n.id);
     return "<div class=\"rcard\"><div class=\"rcard-top\"><div class=\"rthumb\">"+makeSVG(n,true)+"</div>"
       +"<div class=\"rinfo\"><div class=\"rtitle\">"+n.title+"</div><div class=\"rreason\">"+n.reason+"</div></div></div>"
       +"<div class=\"rcard-tags\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div>"
-      +"<div class=\"rcard-ft\"><button class=\"btn-rpk"+(pk?" pked":"")+"\" id=\"rpk-"+n.id+"\" onclick=\"togglePk('"+n.id+"',event)\">"+(pk?"已Pick ✓":"Pick 💅")+"</button></div></div>";
+      +"<div class=\"rcard-ft\">"
+      +"<button class=\"btn-det-sm\" onclick=\"openDet('"+n.id+"')\">🔍 详情</button>"
+      +"<button class=\"btn-rpk"+(pk?" pked":"")+"\" id=\"rpk-"+n.id+"\" onclick=\"togglePk('"+n.id+"',event)\">"+(pk?"已Pick ✓":"Pick 💅")+"</button>"
+      +"</div></div>";
   }).join("");
 }
 
-function setChip(val){
-  filterState.chip=val;
-  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
-  document.querySelector(".chip[data-cf=\""+val+"\"]").classList.add("on");
-  renderNotes();
+// ---- Hot topics ----
+function renderHot(){
+  // Build hot_match map: topic name -> notes
+  const hotMap={};
+  HOT_TOPICS.forEach(h=>{hotMap[h.name]=[];});
+  NOTES.forEach(n=>{(n.hot_match||[]).forEach(hm=>{if(hotMap[hm])hotMap[hm].push(n);});});
+
+  document.getElementById("hotGrid").innerHTML=HOT_TOPICS.map(h=>{
+    const matchNotes=hotMap[h.name]||[];
+    const notesHtml=h.match&&matchNotes.length>0
+      ?"<div class=\"hot-notes\">"+matchNotes.map(n=>"<div class=\"hot-note-row\" onclick=\"openDet('"+n.id+"')\">"
+          +"<div class=\"hot-note-thumb\">"+makeSVG(n,true)+"</div>"
+          +"<div class=\"hot-note-info\"><div class=\"hot-note-title\">"+n.title.slice(0,16)+"…</div>"
+          +"<div class=\"hot-note-meta\">@"+n.author+" · "+n.ctr+"</div></div>"
+          +"<button class=\"btn-pk-xs"+(PKD.has(n.id)?" pked":"")+"\" id=\"cpk-"+n.id+"\" onclick=\"togglePk('"+n.id+"',event)\">Pick</button>"
+          +"</div>").join("")+"</div>"
+      :"";
+    return "<div class=\"hot-card"+(h.match?" match":"")+"\">"
+      +"<div class=\"hot-rank\">热点 #"+h.rank+"</div>"
+      +"<div class=\"hot-em\">"+h.em+"</div>"
+      +"<div class=\"hot-name\">"+h.name+"</div>"
+      +"<div class=\"hot-heat\">"+h.heat+"</div>"
+      +(h.match?"<div class=\"match-badge\">✨ 命中 "+matchNotes.length+" 篇</div>":"")
+      +notesHtml+"</div>";
+  }).join("");
+  document.getElementById("nodeGrid").innerHTML=NODES.map(n=>"<div class=\"node-card\"><div class=\"node-date\">"+n.date+"</div><div class=\"node-name\">"+n.name+"</div><div class=\"node-tip\">"+n.tip+"</div></div>").join("");
 }
 
-function resetFilter(){
-  filterState.fans=[];filterState.scenes=[];filterState.q="";
-  document.getElementById("searchInput").value="";
-  document.querySelectorAll(".ftag[data-g=\"time\"]").forEach(t=>{t.classList.remove("on");if(t.dataset.v==="all")t.classList.add("on");});
-  document.querySelectorAll(".ftag[data-g=\"fans\"]").forEach(t=>t.classList.remove("sel"));
-  document.querySelectorAll(".ftag[data-g=\"scene\"]").forEach(t=>t.classList.remove("sel"));
-  document.querySelectorAll(".ftag[data-g=\"pri\"]").forEach(t=>t.classList.remove("on"));
+// ---- Chat (问懒懒) - return note cards ----
+const CHAT_RS={
+  "🌸 节日送礼":{txt:"节日送礼场景，建议优先投这3篇：投放组合：节日前2周开始，颜值帖60%+教程帖40%，预算¥3000-5000/天，节日当天翻倍加量。",nids:["n02","n07","n06"]},
+  "☕ 下午茶种草":{txt:"下午茶场景推荐2篇作为主力。建议工作日下午2-4点集中投放，日预算¥1500-3000。",nids:["n04","n09"]},
+  "✈️ 五一出游":{txt:"五一出游场景已有热点命中！建议4月25日起集中投放，节前3天预算上调50%，日预算¥2000-4000。",nids:["n11","n01"]},
+  "🆕 新品上新":{txt:"新品上新建议两波投：第一波种草原生感≥80笔记，第二波叠加颜值帖。推荐Pick：",nids:["n01","n02","n09"]},
+  "💪 健康轻食":{txt:"健康场景推荐精准投健身/育儿兴趣人群，¥800-1500/天精准跑，转化成本低。",nids:["n03","n08"]},
+  "🏠 家庭场景":{txt:"家庭场景建议周末集中投放，消费决策快，单篇¥500-1000/天验证效果。",nids:["n08","n04"]}
+};
+function quickChat(q){addBubble(q,true);addTyping();setTimeout(()=>{document.getElementById("typ")&&document.getElementById("typ").remove();const rs=CHAT_RS[q]||{txt:"好的，根据你描述的场景帮你筛选～",nids:[]};addBubble(rs.txt,false,rs.nids);},900);}
+function sendChat(){const inp=document.getElementById("chatInput"),txt=(inp.value||"").trim();if(!txt)return;addBubble(txt,true);inp.value="";addTyping();setTimeout(()=>{document.getElementById("typ")&&document.getElementById("typ").remove();addBubble("收到！根据场景描述，建议先从种草库里Pick原生感和热点分都高的笔记。可以点下方快捷场景精准匹配 💅",false,[]);},900);}
+function addBubble(txt,isUser,nids){
+  const a=document.getElementById("chatArea");
+  const d=document.createElement("div");d.className="brow"+(isUser?" r":"");
+  let noteCards="";
+  if(nids&&nids.length>0){
+    noteCards="<div style=\"display:flex;flex-direction:column;gap:6px;margin-top:8px\">"
+      +nids.map(id=>{
+        const n=NOTES.find(x=>x.id===id);if(!n)return "";
+        const pk=PKD.has(id);
+        return "<div class=\"chat-note-card\">"
+          +"<div class=\"chat-note-thumb\" onclick=\"openDet('"+id+"')\" style=\"cursor:pointer\">"+makeSVG(n,true)+"</div>"
+          +"<div class=\"chat-note-info\" onclick=\"openDet('"+id+"')\" style=\"cursor:pointer\">"
+          +"<div class=\"chat-note-title\">"+n.title.slice(0,20)+"…</div>"
+          +"<div class=\"chat-note-meta\">"+n.spu+" · "+n.ctr+"</div></div>"
+          +"<button class=\"btn-pk-xs"+(pk?" pked":"")+"\" id=\"cpk2-"+id+"\" onclick=\"togglePkChat('"+id+"',event)\">"+(pk?"✓":"Pick")+"</button>"
+          +"</div>";
+      }).join("")+"</div>";
+  }
+  d.innerHTML=isUser
+    ?"<div class=\"bubble r\">"+txt+"</div>"
+    :"<div class=\"bav\">懒</div><div class=\"bubble l\">"+txt+noteCards+"</div>";
+  a.appendChild(d);a.scrollTop=a.scrollHeight;
 }
-function applyFilter(){
-  filterState.fans=Array.from(document.querySelectorAll(".ftag[data-g=\"fans\"].sel")).map(t=>t.dataset.v);
-  filterState.scenes=Array.from(document.querySelectorAll(".ftag[data-g=\"scene\"].sel")).map(t=>t.dataset.v);
-  renderNotes();showToast("筛选已应用 ✨");
-}
+function togglePkChat(id,e){if(e)e.stopPropagation();togglePk(id,e);const b=document.getElementById("cpk2-"+id);if(b){b.className="btn-pk-xs"+(PKD.has(id)?" pked":"");b.textContent=PKD.has(id)?"✓":"Pick";}}
+function addTyping(){const a=document.getElementById("chatArea");const d=document.createElement("div");d.className="brow";d.id="typ";d.innerHTML="<div class=\"bav\">懒</div><div class=\"bubble l\" style=\"color:#aaa\">思考中…</div>";a.appendChild(d);a.scrollTop=a.scrollHeight;}
+document.getElementById("chatInput").addEventListener("keydown",function(e){if(e.key==="Enter")sendChat();});
 
-document.addEventListener("click",function(e){
-  const t=e.target.closest(".ftag");
-  if(!t)return;
-  const g=t.dataset.g;
-  if(g==="time"){document.querySelectorAll(".ftag[data-g=\"time\"]").forEach(x=>x.classList.remove("on"));t.classList.add("on");}
-  else if(g==="pri"){document.querySelectorAll(".ftag[data-g=\"pri\"]").forEach(x=>x.classList.remove("on"));t.classList.add("on");}
-  else if(g==="fans"){t.classList.toggle("sel");}
-  else if(g==="scene"){t.classList.toggle("sel");}
-});
-
-document.getElementById("searchInput").addEventListener("keydown",function(e){
-  if(e.key==="Enter"){filterState.q=this.value.trim();renderNotes();}
-});
-
-function buildRadar(notes){
-  const cx=130,cy=115,r=80,keys=["hot","q","nat","his"],lbls=["热点匹配","内容质量","笔记原生","历史匹配"],cols=["#FF2442","#a18cd1","#43e97b","#f9ca24"];
-  function pt(i,v){const a=(Math.PI*2*i/4)-Math.PI/2,rv=r*v/100;return[cx+rv*Math.cos(a),cy+rv*Math.sin(a)];}
-  let s="<svg width=\"260\" height=\"230\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;margin:0 auto 12px\">";
-  [.25,.5,.75,1].forEach(f=>{const pts=keys.map((_,i)=>pt(i,f*100).join(",")).join(" ");s+="<polygon points=\""+pts+"\" fill=\"none\" stroke=\"#eee\" stroke-width=\"1\"/>";});
-  keys.forEach((_,i)=>{const p=pt(i,100);s+="<line x1=\""+cx+"\" y1=\""+cy+"\" x2=\""+p[0]+"\" y2=\""+p[1]+"\" stroke=\"#eee\" stroke-width=\"1\"/>";});
-  const off=[[0,-14],[18,4],[0,14],[-18,4]];
-  lbls.forEach((l,i)=>{const p=pt(i,100),o=off[i];s+="<text x=\""+(p[0]+o[0])+"\" y=\""+(p[1]+o[1])+"\" text-anchor=\"middle\" font-size=\"10\" fill=\"#999\">"+l+"</text>";});
-  notes.slice(0,3).forEach((n,ni)=>{const pts=keys.map((k,i)=>pt(i,n.sc[k]).join(",")).join(" ");s+="<polygon points=\""+pts+"\" fill=\""+cols[ni]+"\" fill-opacity=\"0.18\" stroke=\""+cols[ni]+"\" stroke-width=\"1.5\"/>";});
-  notes.slice(0,3).forEach((n,ni)=>{s+="<circle cx=\""+(20+ni*80)+"\" cy=\"210\" r=\"5\" fill=\""+cols[ni]+"\"/><text x=\""+(30+ni*80)+"\" y=\"214\" font-size=\"9\" fill=\"#666\">"+n.spu.slice(0,3)+"</text>";});
-  return s+"</svg>";
-}
-
-function openReport(){
-  if(PKD.size===0){showToast("请先 Pick 至少一篇笔记 💅");return;}
-  const tns=Array.from(PKD).map(id=>NOTES.find(n=>n.id===id)).filter(Boolean);
-  document.getElementById("rptSub").textContent="基于已Pick "+tns.length+" 篇笔记";
-  const sc=[["hot","🔥 热点匹配","linear-gradient(90deg,#FF2442,#ff6b8a)"],["q","⭐ 内容质量","linear-gradient(90deg,#a18cd1,#fbc2eb)"],["nat","💚 笔记原生","linear-gradient(90deg,#43e97b,#38f9d7)"],["his","📊 历史匹配","linear-gradient(90deg,#f9ca24,#f0932b)"]];
-  const nhtml=tns.map(n=>"<div class=\"rpt-nb\"><div class=\"rpt-nt\">"+n.spu+" · "+n.title.slice(0,18)+"…</div><div class=\"rpt-sbars\">"+sc.map(([k,l,bg])=>"<div class=\"rpt-sr\"><span class=\"rpt-sl\">"+l+"</span><div class=\"rpt-st\"><div class=\"rpt-sf\" style=\"width:"+n.sc[k]+"%;background:"+bg+"\"></div></div><span class=\"rpt-sn\">"+n.sc[k]+"</span></div>").join("")+"</div><div style=\"display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div><div class=\"rpt-reason\">💬 懒懒说："+n.reason+"（预估CTR "+n.ctr+"）</div></div>").join("");
-  document.getElementById("rptBody").innerHTML="<div style=\"background:#fafafa;border-radius:10px;padding:14px;margin-bottom:16px;border:1.5px solid #f0f0f0\"><div style=\"font-size:13px;font-weight:700;margin-bottom:10px\">📊 四维评分对比雷达图</div>"+buildRadar(tns)+"</div>"+nhtml;
-  const btn=document.getElementById("btnSync");btn.className="btn-sync";btn.textContent="💡 一键同步 · 合作广场后台";
-  document.getElementById("rptMask").classList.add("open");
-}
-function doSync(){const btn=document.getElementById("btnSync");btn.className="btn-sync done";btn.textContent="✅ 已同步 · 前往合作内容管理查看";showToast("已同步到「合作广场 > 合作内容管理 > 我的精选」🎉");}
-
+// ---- Detail modal ----
 function openDet(id){
   const n=NOTES.find(x=>x.id===id);if(!n)return;
   document.getElementById("detTitle").textContent=n.spu+" · "+n.title;
   document.getElementById("detSub").textContent="@"+n.author+" · "+n.fans+"粉 · "+n.date;
-  const sc=[["hot","🔥 热点匹配","linear-gradient(90deg,#FF2442,#ff6b8a)"],["q","⭐ 内容质量","linear-gradient(90deg,#a18cd1,#fbc2eb)"],["nat","💚 笔记原生","linear-gradient(90deg,#43e97b,#38f9d7)"],["his","📊 历史匹配","linear-gradient(90deg,#f9ca24,#f0932b)"]];
-  document.getElementById("detBody").innerHTML="<div style=\"border-radius:10px;overflow:hidden;margin-bottom:14px\">"+makeSVG(n,false)+"</div><div style=\"font-size:13px;font-weight:700;margin-bottom:9px\">四维评分</div><div class=\"rpt-sbars\">"+sc.map(([k,l,bg])=>"<div class=\"rpt-sr\"><span class=\"rpt-sl\">"+l+"</span><div class=\"rpt-st\"><div class=\"rpt-sf\" style=\"width:"+n.sc[k]+"%;background:"+bg+"\"></div></div><span class=\"rpt-sn\">"+n.sc[k]+"</span></div>").join("")+"</div><div style=\"font-size:13px;font-weight:700;margin:11px 0 7px\">内容标签</div><div style=\"display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px\">"+n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div><div class=\"rpt-reason\">💬 懒懒说："+n.reason+"</div>";
+  const sc=[["hot","热点匹配","linear-gradient(90deg,#FF2442,#ff6b8a)"],["q","内容质量","linear-gradient(90deg,#a18cd1,#fbc2eb)"],["nat","笔记原生","linear-gradient(90deg,#43e97b,#38f9d7)"],["his","历史匹配","linear-gradient(90deg,#f9ca24,#f0932b)"]];
+  const pk=PKD.has(id);
+  document.getElementById("detBody").innerHTML=
+    "<div style=\"border-radius:10px;overflow:hidden;margin-bottom:14px\">"+makeSVG(n,false)+"</div>"
+    +"<div style=\"display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px\">"
+    +"<span class=\"tag t-orange\">👥 "+n.crowd+"</span>"
+    +"<span class=\"tag t-green\">🎯 "+n.need+"</span>"
+    +n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div>"
+    +"<div style=\"font-size:13px;font-weight:700;margin-bottom:9px\">四维评分</div>"
+    +"<div class=\"rpt-sbars\">"+sc.map(([k,l,bg])=>"<div class=\"rpt-sr\"><span class=\"rpt-sl-fix\">"+l+"</span><div class=\"rpt-st\"><div class=\"rpt-sf\" style=\"width:"+n.sc[k]+"%;background:"+bg+"\"></div></div><span class=\"rpt-sn\">"+n.sc[k]+"</span></div>").join("")+"</div>"
+    +"<div class=\"rpt-reason\" style=\"margin-top:10px\">💬 懒懒说："+n.reason+"（预估CTR "+n.ctr+"）</div>"
+    +"<div style=\"margin-top:14px;display:flex;gap:8px\">"
+    +"<button class=\"btn-pk"+(pk?" pked":"")+"\" style=\"flex:1\" id=\"dpk-"+id+"\" onclick=\"togglePkDet('"+id+"')\">"+(pk?"已Pick ✓":"Pick 这篇 💅")+"</button></div>";
   document.getElementById("detMask").classList.add("open");
 }
+function togglePkDet(id){togglePk(id,null);const b=document.getElementById("dpk-"+id);if(b){const pk=PKD.has(id);b.className="btn-pk"+(pk?" pked":"");b.textContent=pk?"已Pick ✓":"Pick 这篇 💅";}}
 
-function renderHot(){
-  document.getElementById("hotGrid").innerHTML=HOT_TOPICS.map(h=>"<div class=\"hot-card"+(h.match?" match":"")+"\"><div class=\"hot-rank\">热点 #"+h.rank+"</div><div class=\"hot-em\">"+h.em+"</div><div class=\"hot-name\">"+h.name+"</div><div class=\"hot-heat\">"+h.heat+"</div>"+(h.match?"<div class=\"match-badge\">✨ 已命中笔记</div>":"")+"</div>").join("");
-  document.getElementById("nodeGrid").innerHTML=NODES.map(n=>"<div class=\"node-card\"><div class=\"node-date\">"+n.date+"</div><div class=\"node-name\">"+n.name+"</div><div class=\"node-tip\">"+n.tip+"</div></div>").join("");
+// ---- Report modal ----
+function buildRadar(notes){
+  const W=260,H=200,cx=130,cy=100,r=72;
+  const keys=["hot","q","nat","his"],lbls=["热点匹配","内容质量","笔记原生","历史匹配"],cols=["#FF2442","#a18cd1","#43e97b","#f9ca24"];
+  function pt(i,v){const a=(Math.PI*2*i/4)-Math.PI/2,rv=r*v/100;return[cx+rv*Math.cos(a),cy+rv*Math.sin(a)];}
+  let s="<svg width=\""+W+"\" height=\""+H+"\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;margin:0 auto 8px\">";
+  [.25,.5,.75,1].forEach(f=>{const pts=keys.map((_,i)=>pt(i,f*100).join(",")).join(" ");s+="<polygon points=\""+pts+"\" fill=\"none\" stroke=\"#eee\" stroke-width=\"1\"/>";});
+  keys.forEach((_,i)=>{const p=pt(i,100);s+="<line x1=\""+cx+"\" y1=\""+cy+"\" x2=\""+p[0]+"\" y2=\""+p[1]+"\" stroke=\"#eee\" stroke-width=\"1\"/>";});
+  const loffs=[[0,-14],[20,5],[0,14],[-20,5]];
+  lbls.forEach((l,i)=>{const p=pt(i,100),o=loffs[i];s+="<text x=\""+(p[0]+o[0])+"\" y=\""+(p[1]+o[1])+"\" text-anchor=\"middle\" font-size=\"9\" fill=\"#999\">"+l+"</text>";});
+  notes.slice(0,3).forEach((n,ni)=>{const pts=keys.map((k,i)=>pt(i,n.sc[k]).join(",")).join(" ");s+="<polygon points=\""+pts+"\" fill=\""+cols[ni]+"\" fill-opacity=\"0.18\" stroke=\""+cols[ni]+"\" stroke-width=\"1.5\"/>";});
+  // Legend
+  const legY=H-16;
+  notes.slice(0,3).forEach((n,ni)=>{
+    const x=20+ni*80;
+    s+="<circle cx=\""+x+"\" cy=\""+legY+"\" r=\"4\" fill=\""+cols[ni]+"\"/>"
+     +"<text x=\""+(x+8)+"\" y=\""+(legY+4)+"\" font-size=\"9\" fill=\"#666\">"+n.spu.slice(0,3)+"</text>";
+  });
+  return s+"</svg>";
 }
 
-const CHAT_RS={
-  "🌸 节日送礼":"节日送礼场景，建议优先投这3篇：\n① 玫瑰云朵糕颜值帖（CTR+41%，七夕高峰期冲量强）\n② 礼盒装法教程帖（引流效率高，转化快）\n③ 桂花糯米糕国风礼盒（国风赛道口碑积累）\n\n投放建议：节日前2周开始，颜值帖60%+教程帖40%，预算¥3000-5000/天，节日当天翻倍加量。",
-  "☕ 下午茶种草":"下午茶场景，推荐2篇作主力：\n① 芋泥麻薯下午茶帖（CTR+29%，软糯画面冲击强）\n② 办公室下午茶测评（CTR+33%，打工人共鸣即时转化）\n\n投放建议：工作日下午2-4点集中投放，转化最快，日预算¥1500-3000即可跑出效果。",
-  "✈️ 五一出游":"五一出游场景已有热点命中！推荐：\n① 抹茶流心饼出行神器帖（CTR+31%，命中#五一出游零食）\n② 青梅酥饼情绪帖（原生感强，出游分享场景）\n\n投放建议：4月25日起集中投放，节前3天预算上调50%，日预算¥2000-4000。",
-  "🆕 新品上新":"新品上新建议分两波：\n第一波（上新前3天）：精选原生感≥85的笔记先种草，主打真实体验。\n第二波（上新当天）：叠加颜值帖+教程帖，形成认知叠加。\n\n推荐Pick：青梅酥饼情绪帖（原生感90）+玫瑰云朵糕颜值帖（热点95），组合ROI最优。",
-  "💪 健康轻食":"健康场景推荐：\n① 核桃脆饼热量帖（垂直健身人群，转化精准）\n② 青梅酥饼妈妈零食帖（家庭健康场景，受众广）\n\n建议精准投健身/育儿兴趣人群，预算¥800-1500/天，转化成本可控。",
-  "🏠 家庭场景":"家庭场景推荐：\n① 青梅酥饼全家零食帖（原生感88，家庭代入感强）\n② 芋泥麻薯下午茶帖（亲子场景延伸效果好）\n\n建议周末集中投放，家庭消费决策快，单篇预算¥500-1000/天即可验证效果。"
-};
-function quickChat(q){addBubble(q,true);addTyping();setTimeout(()=>{document.getElementById("typ")&&document.getElementById("typ").remove();addBubble(CHAT_RS[q]||"好的，让我帮你从种草库里找最合适的笔记组合 💅",false);},900);}
-function sendChat(){const inp=document.getElementById("chatInput"),txt=(inp.value||"").trim();if(!txt)return;addBubble(txt,true);inp.value="";addTyping();setTimeout(()=>{document.getElementById("typ")&&document.getElementById("typ").remove();addBubble("收到！根据你描述的场景，建议先Pick种草库中原生感和热点分都高的笔记，结合节点集中投放效果最好。有具体场景可以点下方快捷标签～ 💅",false);},900);}
-function addBubble(txt,isUser){const a=document.getElementById("chatArea");const d=document.createElement("div");d.className="brow"+(isUser?" r":"");d.innerHTML=isUser?"<div class=\"bubble r\">"+txt+"</div>":"<div class=\"bav\">懒</div><div class=\"bubble l\">"+txt+"</div>";a.appendChild(d);a.scrollTop=a.scrollHeight;}
-function addTyping(){const a=document.getElementById("chatArea");const d=document.createElement("div");d.className="brow";d.id="typ";d.innerHTML="<div class=\"bav\">懒</div><div class=\"bubble l\" style=\"color:#aaa\">思考中…</div>";a.appendChild(d);a.scrollTop=a.scrollHeight;}
-document.getElementById("chatInput").addEventListener("keydown",function(e){if(e.key==="Enter")sendChat();});
+const SHARE_BASE="https://aria0730.github.io/hgz-insight-demo/share/";
+
+function openReport(){
+  if(PKD.size===0){showToast("请先 Pick 至少一篇笔记 💅");return;}
+  const tns=Array.from(PKD).map(id=>NOTES.find(n=>n.id===id)).filter(Boolean);
+  document.getElementById("rptSub").textContent="基于已Pick "+tns.length+" 篇 · 山楂饼家";
+  const sc=[["hot","热点匹配","linear-gradient(90deg,#FF2442,#ff6b8a)"],["q","内容质量","linear-gradient(90deg,#a18cd1,#fbc2eb)"],["nat","笔记原生","linear-gradient(90deg,#43e97b,#38f9d7)"],["his","历史匹配","linear-gradient(90deg,#f9ca24,#f0932b)"]];
+  const avgSc={hot:0,q:0,nat:0,his:0};
+  tns.forEach(n=>{avgSc.hot+=n.sc.hot;avgSc.q+=n.sc.q;avgSc.nat+=n.sc.nat;avgSc.his+=n.sc.his;});
+  Object.keys(avgSc).forEach(k=>{avgSc[k]=Math.round(avgSc[k]/tns.length);});
+  const spus=[...new Set(tns.map(n=>n.spu))].join("、");
+  const ctrAvg=Math.round(tns.reduce((s,n)=>s+parseFloat(n.ctr),0)/tns.length);
+  const shareId="SZP-"+Date.now().toString(36).toUpperCase();
+  const shareUrl=SHARE_BASE+shareId;
+
+  const noteHtml=tns.map(n=>"<div class=\"rpt-nb\">"
+    +"<div style=\"display:flex;gap:10px;align-items:flex-start;margin-bottom:8px\">"
+    +"<div style=\"width:46px;height:46px;border-radius:8px;overflow:hidden;flex-shrink:0\">"+makeSVG(n,true)+"</div>"
+    +"<div style=\"flex:1\"><div style=\"font-size:13px;font-weight:700;line-height:1.4\">"+n.spu+"</div>"
+    +"<div style=\"font-size:12px;color:#888;margin-top:2px\">@"+n.author+" · "+n.fans+"粉</div>"
+    +"<div style=\"font-size:11px;color:#aaa;margin-top:1px\">"+n.title.slice(0,24)+"…</div></div></div>"
+    +"<div class=\"rpt-sbars\">"+sc.map(([k,l,bg])=>"<div class=\"rpt-sr\"><span class=\"rpt-sl-fix\">"+l+"</span><div class=\"rpt-st\"><div class=\"rpt-sf\" style=\"width:"+n.sc[k]+"%;background:"+bg+"\"></div></div><span class=\"rpt-sn\">"+n.sc[k]+"</span></div>").join("")+"</div>"
+    +"<div style=\"display:flex;flex-wrap:wrap;gap:4px;margin:7px 0\">"
+    +"<span class=\"tag t-orange\">👥 "+n.crowd+"</span>"
+    +"<span class=\"tag t-green\">🎯 "+n.need+"</span>"
+    +n.tags.map(t=>"<span class=\"tag "+tc(t)+"\">"+t+"</span>").join("")+"</div>"
+    +"<div class=\"rpt-reason\">💬 "+n.reason+"（预估CTR "+n.ctr+"）</div>"
+    +"</div>").join("");
+
+  document.getElementById("rptBody").innerHTML=
+    "<div class=\"rpt-kpi-row\">"
+    +"<div class=\"rpt-kpi\"><div class=\"rpt-kpi-v\">"+tns.length+"篇</div><div class=\"rpt-kpi-l\">精选笔记</div></div>"
+    +"<div class=\"rpt-kpi\"><div class=\"rpt-kpi-v\">+"+ctrAvg+"%</div><div class=\"rpt-kpi-l\">预估平均CTR</div></div>"
+    +"<div class=\"rpt-kpi\"><div class=\"rpt-kpi-v\">"+avgSc.hot+"</div><div class=\"rpt-kpi-l\">热点匹配均分</div></div>"
+    +"<div class=\"rpt-kpi\"><div class=\"rpt-kpi-v\">"+avgSc.q+"</div><div class=\"rpt-kpi-l\">内容质量均分</div></div>"
+    +"</div>"
+    +"<div class=\"rpt-sec\"><div class=\"rpt-sec-title\">📊 四维评分雷达图</div>"+buildRadar(tns)+"</div>"
+    +"<div class=\"rpt-sec\"><div class=\"rpt-sec-title\">🗓️ 投放建议</div>"
+    +"<div class=\"rpt-advice\">"
+    +"<div class=\"adv-row\">📦 <strong>覆盖SKU：</strong>"+spus+"</div>"
+    +"<div class=\"adv-row\">🎯 <strong>核心场景：</strong>"+[...new Set(tns.flatMap(n=>n.tags))].slice(0,4).join("、")+"</div>"
+    +"<div class=\"adv-row\">👥 <strong>目标人群：</strong>"+[...new Set(tns.map(n=>n.crowd))].join("、")+"</div>"
+    +"<div class=\"adv-row\">💡 <strong>投放节奏：</strong>建议5月前集中冲量，节日前3天预算翻倍</div>"
+    +"<div class=\"adv-row\">💰 <strong>预算参考：</strong>日均¥3000-8000，优先投热点分>85笔记</div>"
+    +"<div class=\"adv-row\">📈 <strong>预期效果：</strong>授权成本¥150-250/篇，组合ROI 2.8-4.0x</div>"
+    +"</div></div>"
+    +"<div class=\"rpt-sec\">"
+    +"<div class=\"rpt-sec-title\">📋 精选笔记详情（"+tns.length+"篇）</div>"
+    +noteHtml+"</div>"
+    +"<div class=\"share-box\">"
+    +"<div class=\"share-title\">🔗 客户分享链接</div>"
+    +"<div class=\"share-sub\">将以下链接发给客户，客户可预览笔记并Pick，Pick后自动同步至代理后台，代理直接设置分成并发起授权</div>"
+    +"<div class=\"share-url\" id=\"shareUrlBox\">"+shareUrl+"</div>"
+    +"<div style=\"display:flex;gap:8px;margin-top:10px\">"
+    +"<button class=\"btn-copy\" onclick=\"copyShare('"+shareUrl+"')\">📋 复制链接</button>"
+    +"<button class=\"btn-copy\" style=\"background:#e8f7ee;color:#1e8a3c;border-color:#1e8a3c\" onclick=\"showToast('已打开客户预览页 ✨')\">👀 预览效果</button>"
+    +"</div>"
+    +"<div class=\"share-flow\">"
+    +"<span class=\"sf-step\">① 发链接给客户</span><span class=\"sf-arr\">→</span>"
+    +"<span class=\"sf-step\">② 客户浏览并Pick</span><span class=\"sf-arr\">→</span>"
+    +"<span class=\"sf-step\">③ 自动同步代理后台</span><span class=\"sf-arr\">→</span>"
+    +"<span class=\"sf-step\">④ 设置分成·发起授权</span>"
+    +"</div></div>";
+
+  const btn=document.getElementById("btnSync");btn.className="btn-sync";btn.textContent="💡 一键同步至合作广场后台";
+  document.getElementById("rptMask").classList.add("open");
+}
+function copyShare(url){navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>showToast("链接已复制！发给客户 📋"));}
+function doSync(){const btn=document.getElementById("btnSync");btn.className="btn-sync done";btn.textContent="✅ 已同步 · 前往合作内容管理查看";showToast("已同步到「合作广场 > 合作内容管理 > 我的精选」🎉");}
+
 document.getElementById("bannerLink").addEventListener("click",function(){switchRight("rec");});
 
 renderNotes();renderRec();renderHot();
