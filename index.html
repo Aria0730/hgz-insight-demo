@@ -448,24 +448,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;backg
   </div>
 </div>
 
-
 <div class="mask" id="previewMask" style="align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:16px;width:430px;max-width:95vw;height:84vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.28)">
+  <div style="background:#fff;border-radius:16px;width:430px;max-width:96vw;height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.28)">
     <div style="padding:13px 16px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
       <div>
         <div style="font-size:14px;font-weight:700">👀 客户视角预览</div>
-        <div style="font-size:11px;color:#aaa;margin-top:1px">以下是客户收到分享链接后看到的效果（仅含已Pick笔记）</div>
+        <div style="font-size:11px;color:#aaa;margin-top:1px">客户收到链接后看到的效果（仅含已Pick笔记）</div>
       </div>
       <button class="m-x" onclick="closePreview()">×</button>
     </div>
-    <iframe id="previewFrame" src="" style="flex:1;border:none;display:block" loading="lazy"></iframe>
+    <iframe id="previewFrame" src="" style="flex:1;border:none;width:100%;display:block"></iframe>
     <div style="padding:10px 14px;border-top:1px solid #eee;display:flex;gap:8px;flex-shrink:0">
       <button class="btn-copy" style="flex:1" onclick="copyShareUrl()">📋 复制分享链接</button>
       <button class="btn-copy" style="flex:1;background:#e8f7ee;color:#1e8a3c;border-color:#1e8a3c" onclick="window.open(document.getElementById('previewFrame').src,'_blank')">🔗 新窗口打开</button>
     </div>
   </div>
 </div>
-
 <div class="mask" id="detMask">
   <div class="modal sm">
     <div class="m-hd">
@@ -770,7 +768,28 @@ function buildRadar(notes){
   return s+"</svg>";
 }
 
-const SHARE_BASE="https://aria0730.github.io/hgz-insight-demo/share/";
+const SHARE_BASE="https://aria0730.github.io/hgz-insight-demo/share.html";
+let _shareUrl="";
+function buildShareUrl(fee){
+  const ids=Array.from(PKD).join(",");
+  return SHARE_BASE+"?ids="+encodeURIComponent(ids)+"&fee="+encodeURIComponent(fee||"10");
+}
+function refreshShareUrl(){
+  const inp=document.getElementById("feeInput");
+  const fee=inp?inp.value:"10";
+  const url=buildShareUrl(fee||"10");
+  _shareUrl=url;
+  const box=document.getElementById("shareUrlBox");
+  if(box)box.textContent=url;
+}
+function openPreview(){
+  const url=_shareUrl||buildShareUrl("10");
+  _shareUrl=url;
+  document.getElementById("previewFrame").src=url;
+  document.getElementById("previewMask").classList.add("open");
+}
+function closePreview(){document.getElementById("previewMask").classList.remove("open");}
+function copyShareUrl(){navigator.clipboard&&navigator.clipboard.writeText(_shareUrl||buildShareUrl("10")).then(()=>showToast("分享链接已复制 📋"));}
 
 function openReport(){
   if(PKD.size===0){showToast("请先 Pick 至少一篇笔记 💅");return;}
@@ -782,8 +801,10 @@ function openReport(){
   Object.keys(avgSc).forEach(k=>{avgSc[k]=Math.round(avgSc[k]/tns.length);});
   const spus=[...new Set(tns.map(n=>n.spu))].join("、");
   const ctrAvg=Math.round(tns.reduce((s,n)=>s+parseFloat(n.ctr),0)/tns.length);
-  const shareId="SZP-"+Date.now().toString(36).toUpperCase();
-  const shareUrl=SHARE_BASE+shareId;
+  const feeInp=document.getElementById("feeInput");
+  const feeVal=feeInp?feeInp.value:"10";
+  const shareUrl=buildShareUrl(feeVal||"10");
+  _shareUrl=shareUrl;
 
   const noteHtml=tns.map(n=>"<div class=\"rpt-nb\">"
     +"<div style=\"display:flex;gap:10px;align-items:flex-start;margin-bottom:8px\">"
@@ -821,43 +842,32 @@ function openReport(){
     +noteHtml+"</div>"
     +"<div class=\"share-box\">"
     +"<div class=\"share-title\">🔗 客户分享链接</div>"
-    +"<div class=\"share-sub\">将以下链接发给客户，客户可预览笔记并Pick，Pick后自动同步至代理后台，代理直接设置分成并发起授权</div>"
+    +"<div class=\"share-sub\">客户打开链接后只能看到你已 Pick 的笔记，Pick 后自动同步授权申请</div>"
+    +"<div class=\"fee-input-row\">"
+    +"<span class=\"fee-input-lbl\">💰 授权分成比例（品牌预设）</span>"
+    +"<div class=\"fee-input-wrap\"><input class=\"fee-input\" id=\"feeInput\" type=\"number\" min=\"1\" max=\"50\" value=\"10\" onchange=\"refreshShareUrl()\"> <span class=\"fee-pct\">%</span></div>"
+    +"<span class=\"fee-note\">按实际消耗结算，作者可见</span>"
+    +"</div>"
     +"<div class=\"share-url\" id=\"shareUrlBox\">"+shareUrl+"</div>"
     +"<div style=\"display:flex;gap:8px;margin-top:10px\">"
-    +"<button class=\"btn-copy\" onclick=\"copyShare('"+shareUrl+"')\">📋 复制链接</button>"
-    +"<button class=\"btn-copy\" style=\"background:#e8f7ee;color:#1e8a3c;border-color:#1e8a3c\" onclick=\"showToast('已打开客户预览页 ✨')\">👀 预览效果</button>"
+    +"<button class=\"btn-copy\" onclick=\"copyShareUrl()\">📋 复制链接</button>"
+    +"<button class=\"btn-copy\" style=\"background:#e8f7ee;color:#1e8a3c;border-color:#1e8a3c\" onclick=\"openPreview()\">👀 预览客户视角</button>"
     +"</div>"
     +"<div class=\"share-flow\">"
     +"<span class=\"sf-step\">① 发链接给客户</span><span class=\"sf-arr\">→</span>"
     +"<span class=\"sf-step\">② 客户浏览并Pick</span><span class=\"sf-arr\">→</span>"
-    +"<span class=\"sf-step\">③ 自动同步代理后台</span><span class=\"sf-arr\">→</span>"
-    +"<span class=\"sf-step\">④ 设置分成·发起授权</span>"
+    +"<span class=\"sf-step\">③ 自动同步后台</span><span class=\"sf-arr\">→</span>"
+    +"<span class=\"sf-step\">④ 作者确认授权</span>"
     +"</div></div>";
 
   const btn=document.getElementById("btnSync");btn.className="btn-sync";btn.textContent="💡 一键同步至合作广场后台";
   document.getElementById("rptMask").classList.add("open");
 }
-function copyShare(url){navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>showToast("分享链接已复制 📋"));}
+// copyShare replaced by copyShareUrl
 function doSync(){const btn=document.getElementById("btnSync");btn.className="btn-sync done";btn.textContent="✅ 已同步 · 前往合作内容管理查看";showToast("已同步到「合作广场 > 合作内容管理 > 我的精选」🎉");}
 
 document.getElementById("bannerLink").addEventListener("click",function(){switchRight("rec");});
 
-
-
-function refreshShareUrl(){
-  const fee=(document.getElementById("feeInput")||{}).value||"10";
-  const url=buildShareUrl(fee.trim()||"10");
-  _shareUrl=url;
-  const box=document.getElementById("shareUrlBox");
-  if(box)box.textContent=url;
-}
-function openPreview(){
-  const url=_shareUrl||buildShareUrl("10");
-  document.getElementById("previewFrame").src=url;
-  document.getElementById("previewMask").classList.add("open");
-}
-function closePreview(){document.getElementById("previewMask").classList.remove("open");}
-function copyShareUrl(){navigator.clipboard&&navigator.clipboard.writeText(_shareUrl||buildShareUrl("10")).then(()=>showToast("分享链接已复制 📋"));}
 renderNotes();renderRec();renderHot();
 
 </script>
